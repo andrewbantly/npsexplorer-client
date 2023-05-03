@@ -24,7 +24,24 @@ Working in a small team, we are challenged to develop a beautiful, mobile-first 
 ![Models](./readMedia/erd.png)
 
 ## RESTful Routing Chart
-![Routing chart](./readMedia/app-routes.png)
+| HTTP Verb | Route                       | CRUD Action | Description                             |
+|:--------- |:--------------------------- |:----------- |:--------------------------------------- |
+| GET       | /                           | READ        | Home route                              |
+| GET       | /search?q=                  | READ        | Search Query                            |
+| GET       | /parks/:parkname            | READ        | Goes to the parks details page          |
+| POST      | /parks/:parkname            | POST        | Favorites a Park                        |
+| DELETE    | /parks/:parkname            | Destroy     | Removes park from favorites list        |
+| GET       | /users/register             | READ        | Lands the user on the registration page |
+| POST      | /users/register             | CREATE      | Creates a new user                      |
+| GET       | /users/login                | READ        | Show login page                         |
+| POST      | /users/login                | CREATE      | Login                                   |
+| GET       | /users/profile              | READ        | Show user profile page                  |
+| PUT       | /users/profile              | UPDATE      | Update profile                          |
+| POST      | /experiences/:parkname | CREATE      | Post an experience                      |
+| GET       | /experiences/:parkname | READ        | Display experience page                 |
+| PUT       | /experiences/:parkname | UPDATE      | Update experience                       |
+| DELETE    | /experience/:parkname  | DESTROY     | Delete Experience                       |
+| GET       | /destinations               | READ        | Shows Favorite List                     |
 
 ## Wireframes
 Signup

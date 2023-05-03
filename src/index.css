@@ -23,3 +23,47 @@ code {
   text-decoration: none;
   color: black
 }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.searchBar {
+  margin: 1rem;
+}
+
+.searchBar input {
+  text-align: center;
+}
+
+.activityBar {
+  border-top: .2rem solid black;
+  border-bottom: .2rem solid black;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+
+.activityIcon {
+  margin: .5rem
+}
+
+.parkImage {
+  width: 20rem
+}
+
+.parkText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  margin: 1rem
+}
+
+.parkContainer {
+  border:  solid black;
+  margin: 1rem;
+  width: 20rem;
+}

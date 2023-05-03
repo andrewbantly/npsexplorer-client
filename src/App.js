@@ -32,32 +32,36 @@ function App() {
           element={<Home />}
           />
           <Route 
-          path='/destinations'
-          element={<Destinations />}
+          path='/search/results'
+          element={<SearchResults />}
           />
           <Route 
-          path='/users/experiences/:name'
-          element={<ExperienceView />}
+          path='/parks/:parkname'
+          element={<ParkDetails />}
           />
           <Route 
-          path='/users/experiences/:name/edit'
-          element={<ExperienceEdit />}
+          path='/users/register'
+          element={<SignUp />}
           />
           <Route 
           path='/users/login'
           element={<Login />}
           />
           <Route 
-          path='/users/signup'
-          element={<SignUp />}
+          path='/users/profile'
+          element={<Profile />}
           />
           <Route 
-          path='/parks/:name'
-          element={<ParkDetails />}
+          path='/users/experiences/:parkname'
+          element={<ExperienceView />}
           />
           <Route 
-          path='/users/signup'
-          element={<SignUp />}
+          path='/users/experiences/:parkname/edit'
+          element={<ExperienceEdit />}
+          />
+          <Route 
+          path='/destinations'
+          element={<Destinations />}
           />
         </Routes>
         <Footer />

@@ -18,14 +18,17 @@ import ParkDetails from "./components/pages/ParkDetails"
 import Profile from "./components/pages/Profile"
 import SearchResults from "./components/pages/SearchResults"
 import Footer from './components/partials/Footer';
+import Layout from './components/partials/Layout'
 
 
 function App() {
 
 
   return (
-    <div className="App">
+  <div className="App">
+    <div className="content">
       <Router>
+        <Layout>
         <Routes>
           <Route 
           path='/'
@@ -64,9 +67,10 @@ function App() {
           element={<Destinations />}
           />
         </Routes>
-        <Footer />
+        </Layout>
       </Router>
       
+    </div>
     </div>
   );
 }

@@ -51,7 +51,7 @@ code {
 }
 
 .parkImage {
-  width: 20rem
+  width: 18rem
 }
 
 .parkText {
@@ -65,5 +65,26 @@ code {
 .parkContainer {
   border:  solid black;
   margin: 1rem;
-  width: 20rem;
+  width: 18rem;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f8f9fa; 
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.footer > footer {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.main-content {
+  padding: 20px; 
+  margin-bottom: 60px;
+  overflow-y: auto;
+  height: calc(100vh - 60px)
 }

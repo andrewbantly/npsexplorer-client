@@ -21,7 +21,7 @@ Working in a small team, we are challenged to develop a beautiful, mobile-first 
 ![Example](./readMedia/NPS-API-example.png)
 
 ## Entity Relational Diagram
-![User schema](./readMedia/User-collection-schema.png)
+![Models](./readMedia/erd.png)
 
 ## RESTful Routing Chart
 ![Routing chart](./readMedia/app-routes.png)
@@ -80,7 +80,7 @@ Edit experience
 * As a user I want to know about trailheads in and around a national park
 * As a user I want to see parks and activities that are curated for me
 * As a user I want to see a carousel of images of a specific park
-* As a user I want to like a national park
+* As a user I want to like national parks
 
 ## Goals
 ### Functionality MVP
@@ -89,7 +89,7 @@ Edit experience
 * Populate information from a third-party API
 * Be able to CRUD to the database
 * Create a database that stores user information
-* Render images and experiences from the user database
+* Render single image either uploaded by user or default image from API
 
 
 ### Functionality Stretch

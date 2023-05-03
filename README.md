@@ -1,70 +1,109 @@
-# Getting Started with Create React App
+# npsExplorer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Discover and explore the beauty of national parks with **npsExplorer**. Learn about park details, activities, history, and view stunning images as you create your personalized destination itinerary of parks across the country!
 
-## Available Scripts
+Working in a small team, we are challenged to develop a beautiful, mobile-first app that uses a NoSQL back end and React front end. 
 
-In the project directory, you can run:
+![Zion National Park](https://www.nps.gov/common/uploads/structured_data/68BFC1AC-BF96-629F-89D261D78F181C64.jpg)
+*Image of Zion National Park sourced from National Park Service API*
 
-### `npm start`
+## Tech Stack
+* JavaScript 
+* React
+* Mongoose
+* MongoDB
+* Express
+* Node.js
+* External API
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## National Park Service API
+[API documentation](https://www.nps.gov/subjects/developer/api-documentation.htm)
+![Example](./readMedia/NPS-API-example.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Entity Relational Diagram
+![User schema](./readMedia/User-collection-schema.png)
 
-### `npm test`
+## RESTful Routing Chart
+![Routing chart](./readMedia/app-routes.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Wireframes
+Signup
+![Signup](./readMedia/Wireframe-sign-up.png)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Login
+![Login](./readMedia/Wireframe-login.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Home
+![Home](./readMedia/Wireframe-home.png)
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Search
+![Search](./readMedia/Wireframe-search.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Park details
+![Park details](./readMedia/Wireframe-park-details.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+Destinations
+![Destinations](./readMedia/Wireframe-destinations.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+User profile
+![User profile](./readMedia/Wireframe-user-profile.png)
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+User experiences
+![User experiences](./readMedia/Wireframe-view-experience.png)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Edit experience
+![Edit experience](./readMedia/Wireframe-edit-experience.png)
 
-### Making a Progressive Web App
+## User Stories
+### MVP
+* As a user I want to search national parks
+* As a user I want to see I want to see basic information (hours of operation, activities, location) about a specific national park
+* As a user I want to add a national park to my personal "destinations" list
+* As a user I want to catalog experiences I've had at a national park
+* As a user I want to see pictures of national parks
+* As a user I want to see and upload personal pictures at national parks
+* As a user when I click on a destination I see details page 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+### Stretch
+* As a user I want to see nearby national parks from a location
+* As a userI want to see additional information (such as camping, amenities, alerts, historical) at a specific park
+* As a userI want to see a webcam of a specific park
+* As a user I want to know about trailheads in and around a national park
+* As a user I want to see parks and activities that are curated for me
+* As a user I want to see a carousel of images of a specific park
+* As a user I want to like a national park
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Goals
+### Functionality MVP
+* Functional and responsive without bugs
+* Send appropriate webpage status
+* Populate information from a third-party API
+* Be able to CRUD to the database
+* Create a database that stores user information
+* Render images and experiences from the user database
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Functionality Stretch
+* Generate a user-friendly response on actions
+* Curated user experience that populates activities and parks based on user data
+* Integrate IP location / Google Maps API to show longitude and latitude of national park
+* Give a list of trails nearby
+* Integrate weather api so that the user can have live updates on weather
 
-### `npm run build` fails to minify
+### Design MVP
+* App is attractive, comfortably spaced, information is digestable, and intuitive to use
+*  Mobile-first layout
+* Stylized font, color, and tiles scheme
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Design Stretch
+* Tablet and desktop layout
+* Incorporate 1+ front-end framework

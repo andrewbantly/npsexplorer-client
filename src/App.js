@@ -78,7 +78,7 @@ function App() {
           />
           <Route 
           path='/users/profile'
-          element={<Profile />}
+          element={<Profile handleLogout={handleLogout} currentUser={currentUser} setCurrentUser={setCurrentUser}/>}
           />
           <Route 
           path='/users/experiences/:parkname'

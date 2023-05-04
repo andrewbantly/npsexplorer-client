@@ -1,11 +1,14 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+import SearchResults from './SearchResults'
 
 
 export default function Home(){
 
     const [parksInfo, setParksInfo] = useState([])
+    const [foundParks, setFoundParks] = useState([])
+    const navigate = useNavigate()
 
 
     //  Pings the api and stores the response data in the parksInfo State
@@ -22,7 +25,7 @@ export default function Home(){
     const Park = () => {
 
         // maps the array into a new array with a length of 10
-        const parkElements = Array.from({ length: 10 }, () => {
+        const parkElements = Array.from({ length: 25 }, () => {
             // uses math.random to generate a random number between 0-49 everytime the function loops, then renders a tile with the random number as a index array number
           const random = Math.floor(Math.random() * 469);
           return (
@@ -43,16 +46,36 @@ export default function Home(){
       
         return <>{parkElements}</>;
       };
-        
-      
-      const foundPark = parksInfo
-    
+     
+      const handleSearch = (e) => {
+  e.preventDefault();
+  const input = e.target.value;
+  const searchPark = parksInfo.filter((park) =>
+    park.fullName.toLowerCase().includes(input.toLowerCase())
+  );
+  setFoundParks(searchPark);
+  console.log(foundParks);
+};
+
+// useEffect to watch for changes in the foundParks state
+// useEffect(() => {
+//   if (foundParks.length > 0) {
+//     navigate("/search/results");
+//   }
+// }, [foundParks]);
+
 
     return(
         <div className='container'>
         <div className='searchBar'>
-            <form>
-                <input id='name' placeholder='Search for park' ></input>
+        <form>
+            <input
+                id='name'
+                placeholder='Search for park'
+                // value={search}
+                onChange={handleSearch}
+            />
+            <button type='submit'>Search</button>
             </form>
         </div>
         <div className='activityBar'>
@@ -73,6 +96,7 @@ export default function Home(){
             </div>
         </div>
         <Park />
+        <SearchResults foundParks={foundParks}/>
         </div>
     )
 }

@@ -1,7 +1,9 @@
-export default function SearchResults(){
+export default function SearchResults(props){
+
+
     return(
         <>
-        Here is the results of your search
+        <p>Your at the right place to see results</p>
         </>
     )
 }

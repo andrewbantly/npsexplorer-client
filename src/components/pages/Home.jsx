@@ -60,9 +60,10 @@ export default function Home(){
         console.log(foundParks);
     };
 
-    // when the usewr clicks the search button this sends the user to the search results page along with an object that we use to reference and render a response
+    // when the usewr clicks the search button this sends the user to the search results page along with an object that we use to reference and render a response. to use this on the next page we need to install the useLocation hook. Note state IS NOT taco
     const handleClick = () => {
         if (foundParks.length > 0) {
+            // foundParks is object literal {foundParks : foundParks}
         navigate("/search/results", { state: { foundParks } });
         }
     };

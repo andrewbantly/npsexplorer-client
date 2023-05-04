@@ -17,8 +17,8 @@ export default function ParkDetails() {
         })
     },[])
 
-    const foundPark = parksInfo[id]
-    console.log(foundPark)
+    const foundActivities = parksInfo[id]
+    
 
     return(
         <>

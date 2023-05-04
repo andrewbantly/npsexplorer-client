@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 import {Link, useNavigate} from 'react-router-dom'
-import SearchResults from './SearchResults'
+
 
 
 export default function Home(){
@@ -34,8 +34,9 @@ export default function Home(){
                 <img src={parksInfo[random]?.images[0].url} className="parkImage" alt={parksInfo[random]?.fullName} />
               </div>
               <div className="parkText">
+                {/* theres a bunch of ? conditionals this is so that it does not error out if the state has not loaded yet */}
                 <h3>{parksInfo[random]?.fullName}</h3>
-                <p>{parksInfo[random]?.addresses[0].city}, {parksInfo[random]?.addresses[0].stateCode}</p>
+                <p>{parksInfo[random]?.addresses[0]?.city}, {parksInfo[random]?.addresses[0]?.stateCode}</p>
                 <p>Activities: {parksInfo[random]?.activities[0]?.name}, {parksInfo[random]?.activities[1]?.name}, {parksInfo[random]?.activities[2]?.name}, {parksInfo[random]?.activities[3]?.name}, {parksInfo[random]?.activities[4]?.name}</p>
                 <p>More Info...</p>
                 
@@ -44,25 +45,27 @@ export default function Home(){
           );
         });
       
-        return <>{parkElements}</>;
-      };
-     
-      const handleSearch = (e) => {
-  e.preventDefault();
-  const input = e.target.value;
-  const searchPark = parksInfo.filter((park) =>
-    park.fullName.toLowerCase().includes(input.toLowerCase())
-  );
-  setFoundParks(searchPark);
-  console.log(foundParks);
-};
+            return <>{parkElements}</>;
+        };
+        
 
-// useEffect to watch for changes in the foundParks state
-// useEffect(() => {
-//   if (foundParks.length > 0) {
-//     navigate("/search/results");
-//   }
-// }, [foundParks]);
+        //this piece watches for the user input on the form, and searches the state for parks related to the search, it stores the results in found search 
+    const handleSearch = (e) => {
+        e.preventDefault();
+        const input = e.target.value;
+        const searchPark = parksInfo.filter((park) =>
+            park.fullName.toLowerCase().includes(input.toLowerCase())
+        );
+        setFoundParks(searchPark);
+        console.log(foundParks);
+    };
+
+    // when the usewr clicks the search button this sends the user to the search results page along with an object that we use to reference and render a response
+    const handleClick = () => {
+        if (foundParks.length > 0) {
+        navigate("/search/results", { state: { foundParks } });
+        }
+    };
 
 
     return(
@@ -75,7 +78,7 @@ export default function Home(){
                 // value={search}
                 onChange={handleSearch}
             />
-            <button type='submit'>Search</button>
+            <button onClick={handleClick}>Search</button>
             </form>
         </div>
         <div className='activityBar'>
@@ -96,7 +99,6 @@ export default function Home(){
             </div>
         </div>
         <Park />
-        <SearchResults foundParks={foundParks}/>
         </div>
     )
 }

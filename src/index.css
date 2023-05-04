@@ -73,18 +73,15 @@ code {
   bottom: 0;
   width: 100%;
   background-color: #f8f9fa; 
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2); 
 }
 
 .footer > footer {
   display: flex;
   justify-content: space-around;
-  padding: 10px;
 }
 
 .main-content {
-  padding: 20px; 
-  margin-bottom: 60px;
-  overflow-y: auto;
-  height: calc(100vh - 60px)
+  margin-bottom: 4rem;
+ 
 }

@@ -14,7 +14,20 @@ const Container = styled.div`
   width: 100%;
   min-height: 100vh;
   background-color: #f7f7f7;
+
+  // Media query for 360 x 740
+  @media (min-width: 360px) and (min-height: 740px) {
+  }
+
+  // Media query for 820 x 1180
+  @media (min-width: 820px) and (min-height: 1180px) {
+  }
+
+  // Media query for full desktop view
+  @media (min-width: 1200px) {
+  }
 `;
+
 
 const Title = styled.h1`
   font-size: 32px;
@@ -70,13 +83,35 @@ const SubmitButton = styled.button`
 `;
 
 const Image = styled.img`
-  position: fixed;
+  position: absolute;
   top: 0;
-  left: 0;
-  z-index: 9999; 
-  width: 100px; 
-  height: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  width: 300px;
+  height: 300px;
+
+  @media screen and (max-width: 60rem) {
+    width: 300px;
+    height: 250px;
+  }
+
+  @media screen and (max-width: 53rem) {
+    width: 260px;
+    height: 200px;
+  }
+
+  @media screen and (max-width: 27rem) {
+    width: 150px;
+    height: 150px;
+  }
 `;
+
+const ContentWrapper = styled.div`
+  margin-top: 150px;
+`;
+
+
 
 export default function Login({ currentUser, setCurrentUser }) {
     const [email, setEmail] = useState('');
@@ -119,6 +154,7 @@ export default function Login({ currentUser, setCurrentUser }) {
 
             <Title>Login to Your Account:</Title>
 
+            <ContentWrapper>
             <ErrorMessage>{msg}</ErrorMessage>
 
             <Form onSubmit={handleSubmit}>
@@ -141,6 +177,7 @@ export default function Login({ currentUser, setCurrentUser }) {
 
                 <SubmitButton type='submit'>Login</SubmitButton>
             </Form>
+            </ContentWrapper>
         </Container>
     )
 }

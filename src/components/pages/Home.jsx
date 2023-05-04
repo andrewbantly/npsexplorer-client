@@ -32,7 +32,10 @@ export default function Home(){
               </div>
               <div className="parkText">
                 <h3>{parksInfo[random]?.fullName}</h3>
-                <p>{parksInfo[random]?.description}</p>
+                <p>{parksInfo[random]?.addresses[0].city}, {parksInfo[random]?.addresses[0].stateCode}</p>
+                <p>Activities: {parksInfo[random]?.activities[0]?.name}, {parksInfo[random]?.activities[1]?.name}, {parksInfo[random]?.activities[2]?.name}, {parksInfo[random]?.activities[3]?.name}, {parksInfo[random]?.activities[4]?.name}</p>
+                <p>More Info...</p>
+                
               </div>
             </div></Link>
           );

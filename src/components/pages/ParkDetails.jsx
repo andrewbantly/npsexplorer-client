@@ -17,8 +17,8 @@ export default function ParkDetails() {
         })
     },[])
 
-    const foundPark = parksInfo[id]
-    console.log(foundPark)
+    const foundActivities = parksInfo[id]
+    
 
     return(
         <>
@@ -30,6 +30,8 @@ export default function ParkDetails() {
               </div>
               <div className="parkText">
                 <p>{parksInfo[id]?.description}</p>
+                <p>{parksInfo[id]?.operatingHours[0]?.description}</p>
+                <p>{parksInfo[id]?.entranceFees[0]?.description}</p>
               </div>
             </div>
         </div>

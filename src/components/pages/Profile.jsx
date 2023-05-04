@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import ExperienceView from "./ExperienceView"
 
 export default function Profile({ currentUser, handleLogout }) {
     // state for the secret message (aka user privilaged data)
@@ -48,24 +49,38 @@ export default function Profile({ currentUser, handleLogout }) {
     }, [handleLogout, navigate]) // only fire on the first render of this component
 
     const experiences = experiencesList.data?.map((experience, i) => {
-        return(
-            <Link to={"/users/experiences/:parkname"}>
-            <p key={`experience-${i}`}>{experience.location}</p>
-            </Link>
+        return (
+            <div>
+                <p onClick={() => setShowExperience(true)} key={`experience-${i}`}>{experience.location}</p>
+            </div>
         )
     })
 
+    const profileView = () => {
+        return (
+            <div>
+                <h1>Hello, {currentUser?.name}</h1>
+
+                <p>your email is {currentUser?.email}</p>
+
+                <h2>Here is the secret message that is only availible to users of User App:</h2>
+
+                <h3>{msg}</h3>
+                {experiences}
+            </div>
+        )
+    }
+    const showExperienceView = {
+        return ( 
+            <ExperienceView />
+        )
+    }
+
+
     return (
         <div>
-            <h1>Hello, {currentUser?.name}</h1>
 
-            <p>your email is {currentUser?.email}</p>
-
-            <h2>Here is the secret message that is only availible to users of User App:</h2>
-
-            <h3>{msg}</h3>
-
-            {experiences}
+            {showExperience ? showExperienceView : profileView}
 
         </div>
     )

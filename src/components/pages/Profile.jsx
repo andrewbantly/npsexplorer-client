@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 export default function Profile({ currentUser, handleLogout }) {
@@ -7,9 +7,8 @@ export default function Profile({ currentUser, handleLogout }) {
     const [msg, setMsg] = useState('')
 
     const [experiencesList, setExperiencesList] = useState([])
+    const [showExperience, setShowExperience] = useState(false);
     const navigate = useNavigate()
-
-    const [detailedexperiencesList, setDetailedExperiencesList] = useState([])
 
     // useEffect for getting the user data and checking auth
     useEffect(() => {
@@ -26,19 +25,12 @@ export default function Profile({ currentUser, handleLogout }) {
                 // hit the auth locked endpoint
                 const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/auth-locked`, options)
 
-                const userExperiencesApi = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${currentUser.name}`, options)
+                const findExperiences = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${currentUser._id}`, options)
                 // example POST with auth headers (options are always last argument)
                 // await axios.post(url, requestBody (form data), options)
                 // set the secret user message in state
                 setMsg(response.data.msg)
-                setExperiencesList(userExperiencesApi.data.msg)
-
-                const experiences = experiencesList.map(async (experience, i) => {
-
-                    const experiencesApi = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${currentUser.name}/${experience}`, options)
-                    setDetailedExperiencesList([...detailedexperiencesList, experiencesApi])
-                })
-
+                setExperiencesList(findExperiences)
             } catch (err) {
                 // if the error is a 401 -- that means that auth failed
                 console.warn(err)
@@ -55,7 +47,13 @@ export default function Profile({ currentUser, handleLogout }) {
         fetchData()
     }, [handleLogout, navigate]) // only fire on the first render of this component
 
-    console.log(detailedexperiencesList)
+    const experiences = experiencesList.data?.map((experience, i) => {
+        return(
+            <Link to={"/users/experiences/:parkname"}>
+            <p key={`experience-${i}`}>{experience.location}</p>
+            </Link>
+        )
+    })
 
     return (
         <div>
@@ -66,6 +64,8 @@ export default function Profile({ currentUser, handleLogout }) {
             <h2>Here is the secret message that is only availible to users of User App:</h2>
 
             <h3>{msg}</h3>
+
+            {experiences}
 
         </div>
     )

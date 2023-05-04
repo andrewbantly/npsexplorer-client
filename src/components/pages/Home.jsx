@@ -10,7 +10,7 @@ export default function Home(){
 
     //  Pings the api and stores the response data in the parksInfo State
     useEffect(() =>{
-        axios.get(`https://developer.nps.gov/api/v1/parks?api_key=${process.env.REACT_APP_NPS_API_KEY}`)
+        axios.get(`https://developer.nps.gov/api/v1/parks?limit=469&api_key=${process.env.REACT_APP_NPS_API_KEY}`)
         .then(response => {
             console.log(response.data)
             setParksInfo(response.data.data)
@@ -24,7 +24,7 @@ export default function Home(){
         // maps the array into a new array with a length of 10
         const parkElements = Array.from({ length: 10 }, () => {
             // uses math.random to generate a random number between 0-49 everytime the function loops, then renders a tile with the random number as a index array number
-          const random = Math.floor(Math.random() * 50);
+          const random = Math.floor(Math.random() * 469);
           return (
             <Link to={`/parks/${parksInfo[random]?.fullName}/${random}`}><div className="parkContainer" key={parksInfo[random]?.id}>
               <div>
@@ -45,6 +45,7 @@ export default function Home(){
       };
         
       
+      const foundPark = parksInfo
     
 
     return(

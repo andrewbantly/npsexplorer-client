@@ -10,7 +10,7 @@ export default function ParkDetails() {
 
     //  Pings the api and stores the response data in the parksInfo State
     useEffect(() =>{
-        axios.get(`https://developer.nps.gov/api/v1/parks?api_key=${process.env.REACT_APP_NPS_API_KEY}`)
+        axios.get(`https://developer.nps.gov/api/v1/parks?limit=469&api_key=${process.env.REACT_APP_NPS_API_KEY}`)
         .then(response => {
             console.log(response.data)
             setParksInfo(response.data.data)

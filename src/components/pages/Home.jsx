@@ -26,7 +26,7 @@ export default function Home(){
             // uses math.random to generate a random number between 0-49 everytime the function loops, then renders a tile with the random number as a index array number
           const random = Math.floor(Math.random() * 50);
           return (
-            <div className="parkContainer" key={parksInfo[random]?.id}>
+            <Link to={`/parks/${parksInfo[random]?.fullName}/${random}`}><div className="parkContainer" key={parksInfo[random]?.id}>
               <div>
                 <img src={parksInfo[random]?.images[0].url} className="parkImage" alt={parksInfo[random]?.fullName} />
               </div>
@@ -34,7 +34,7 @@ export default function Home(){
                 <h3>{parksInfo[random]?.fullName}</h3>
                 <p>{parksInfo[random]?.description}</p>
               </div>
-            </div>
+            </div></Link>
           );
         });
       

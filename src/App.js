@@ -39,7 +39,7 @@ function App() {
           element={<SearchResults />}
           />
           <Route 
-          path='/parks/:parkname'
+          path='/parks/:parkname/:id'
           element={<ParkDetails />}
           />
           <Route 

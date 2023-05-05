@@ -80,11 +80,10 @@ function App() {
     }
 
   }
-  const handleRemoveDestination = (destinationId) => {
-    setUserDestinations(userDestinations.filter((destination) => destination !== destinationId));
-  };
+
   // ON CLICK ADD TO DESTINATIONS (page details, )
   const handleAddDestinationClick = async (park) => {
+    console.log(park)
     const parkId = { parkId: park.id };
     const token = localStorage.getItem('jwt');
     const options = {
@@ -147,10 +146,10 @@ function App() {
               />
               <Route
                 path='/destinations'
-                element={<Destinations parksInfo={parksInfo} 
-                userDestinations={userDestinations} 
-                handleRemoveDestination={handleRemoveDestination}
-                handleAddExperienceClick={handleAddExperienceClick}
+                element={<Destinations parksInfo={parksInfo}
+                  userDestinations={userDestinations}
+                  handleAddExperienceClick={handleAddExperienceClick}
+                  setUserDestinations={setUserDestinations}
                 />}
               />
             </Routes>

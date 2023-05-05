@@ -100,14 +100,6 @@ function App() {
           element={<Profile handleLogout={handleLogout} currentUser={currentUser} setCurrentUser={setCurrentUser}/>}
           />
           <Route 
-          path='/users/experiences/:parkname'
-          element={<ExperienceView />}
-          />
-          <Route 
-          path='/users/experiences/:parkname/edit'
-          element={<ExperienceEdit />}
-          />
-          <Route 
           path='/destinations'
           element={<Destinations />}
           />

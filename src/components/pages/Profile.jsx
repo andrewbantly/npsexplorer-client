@@ -101,7 +101,6 @@ export default function Profile({ currentUser, handleLogout }) {
         )
     })
 
-
     const profileView = (
 
         <div>
@@ -113,10 +112,6 @@ export default function Profile({ currentUser, handleLogout }) {
 
             ></img>
 
-            <input type="hidden" role="uploadcare-uploader" data-public-key="e667ec242e718125294d" data-tabs="file facebook gphotos instagram" />
-
-
-            <button onClick={() => handleLogout()}>Logout</button>
             <h1>Hello, {currentUser?.name}</h1>
             <h2>Look at all the places you've been!</h2>
             {experiences}

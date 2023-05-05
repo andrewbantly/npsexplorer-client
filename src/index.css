@@ -44,7 +44,7 @@ code {
   display: flex;
   justify-content: center;
   width: 100vw;
-  height: 10rem
+  height: 3rem
 }
 
 .activityIcon {
@@ -91,4 +91,11 @@ code {
 
 .carousel {
   max-width: 100vw
+}
+
+.imageCarousel {
+  display: flex;
+  align-content: center;
+  width: 18rem;
+
 }

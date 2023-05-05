@@ -104,7 +104,6 @@ const handleActivity = (activityName) => {
               </div>
               <div className="parkText">
                 <h3>{park?.fullName}</h3>
-                <h3>{originalIndex}</h3>
                 <p>
                   {park?.addresses[0]?.city}, {park?.addresses[0]?.stateCode}
                 </p>

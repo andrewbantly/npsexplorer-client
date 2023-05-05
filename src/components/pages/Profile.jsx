@@ -25,8 +25,11 @@ export default function Profile({ currentUser, handleLogout }) {
                 }
             }
 
-            const deleteExperience = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${currentUser._id}`, options)
-            setExperiencesList(findExperiences)
+            const deleteExperience = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${experience._id}`, options);
+
+            const updatedExperiences = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${currentUser._id}`, options)
+            setExperiencesList(updatedExperiences)
+            setShowExperience(false)
         } catch (err) {
             console.warn(err)
                 if (err.response) {

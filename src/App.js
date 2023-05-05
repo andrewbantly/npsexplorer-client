@@ -22,12 +22,17 @@ import Profile from "./components/pages/Profile"
 import SearchResults from "./components/pages/SearchResults"
 import Footer from './components/partials/Footer';
 import Layout from './components/partials/Layout'
+import { set } from 'mongoose';
 
 
 function App() {
   // the currently logged in user will be stored up here in state
-	const [currentUser, setCurrentUser] = useState(null)
-  const [parksInfo, setParksInfo] = useState([])
+  const [currentUser, setCurrentUser] = useState(null)
+  const [parksInfo, setParksInfo] = useState([]);
+  const [userDestinations, setUserDestinations] = useState([])
+  const [userExperiences, setUserExperiences] = useState([])
+
+
 
   //  Pings the api and stores the response data in the parksInfo State
   useEffect(() => {
@@ -46,68 +51,96 @@ function App() {
     fetchData();
   }, []);
 
-	// useEffect -- if the user navigates away form the page, we will log them back in
-	useEffect(() => {
-		// check to see if token is in storage
-		const token = localStorage.getItem('jwt')
-		if (token) {
-			// if so, we will decode it and set the user in app state
-			setCurrentUser(jwt_decode(token))
-		} else {
-			setCurrentUser(null)
-		}
-	}, []) // happen only once
+  // pings mongoDB to set state of usersDestinations
 
-	// event handler to log the user out when needed
-	const handleLogout = () => {
-		// check to see if a token exists in local storage
-		if (localStorage.getItem('jwt')) {
-			// if so, delete it
-			localStorage.removeItem('jwt')
-			// set the user in the App state to be null
-			setCurrentUser(null)
-		}
-	}
+  useEffect( async () => {
+    try {
+      // get the token from local storage
+      const token = localStorage.getItem('jwt')
+      // make the auth headers
+      const options = {
+        headers: {
+          'Authorization': token
+        }
+      }
+    const foundDestinations = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations`, options)
+    setUserDestinations(foundDestinations.data)
+
+    } catch (error) {
+      console.log(error)
+    }
+  }, [])
+
+
+  // useEffect -- if the user navigates away form the page, we will log them back in
+  useEffect(() => {
+    // check to see if token is in storage
+    const token = localStorage.getItem('jwt')
+    if (token) {
+      // if so, we will decode it and set the user in app state
+      setCurrentUser(jwt_decode(token))
+    } else {
+      setCurrentUser(null)
+    }
+  }, []) // happen only once
+
+  // event handler to log the user out when needed
+  const handleLogout = () => {
+    // check to see if a token exists in local storage
+    if (localStorage.getItem('jwt')) {
+      // if so, delete it
+      localStorage.removeItem('jwt')
+      // set the user in the App state to be null
+      setCurrentUser(null)
+    }
+  }
+  // ON CLICK ADD TO DESTINATIONS (page details, )
+  const handleAddDestinationClick = (park) => {
+    setUserDestinations([...userDestinations, park.id])
+  }
+
+  // ONCLICK ADD TO EXPERIENCES 
+const 
+
 
   return (
-  <div className="App">
-    <div className="content">
-      <Router>
-        <Layout>
-        <Routes>
-          <Route 
-          path='/'
-          element={<Home parksInfo={parksInfo}/>}
-          />
-          <Route 
-          path='/search/results'
-          element={<SearchResults parksInfo={parksInfo}/>}
-          />
-          <Route 
-          path='/parks/:parkname/:id'
-          element={<ParkDetails parksInfo={parksInfo}/>}
-          />
-          <Route 
-          path='/users/register'
-          element={<SignUp currentUser={currentUser} setCurrentUser={setCurrentUser}/>}
-          />
-          <Route 
-          path='/users/login'
-          element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser}/>}
-          />
-          <Route 
-          path='/users/profile'
-          element={<Profile handleLogout={handleLogout} currentUser={currentUser} setCurrentUser={setCurrentUser}/>}
-          />
-          <Route 
-          path='/destinations'
-          element={<Destinations />}
-          />
-        </Routes>
-        </Layout>
-      </Router>
-      
-    </div>
+    <div className="App">
+      <div className="content">
+        <Router>
+          <Layout>
+            <Routes>
+              <Route
+                path='/'
+                element={<Home parksInfo={parksInfo} />}
+              />
+              <Route
+                path='/parks/:parkname/:id'
+                element={<ParkDetails
+                  parksInfo={parksInfo}
+                  handleAddDestinationClick={handleAddDestinationClick}
+                />}
+              />
+              <Route
+                path='/users/register'
+                element={<SignUp currentUser={currentUser} setCurrentUser={setCurrentUser} />}
+              />
+              <Route
+                path='/users/login'
+                element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} />}
+              />
+              <Route
+                path='/users/profile'
+                element={<Profile handleLogout={handleLogout} currentUser={currentUser} setCurrentUser={setCurrentUser} />}
+              />
+              <Route
+                path='/destinations'
+                element={<Destinations />}
+              />
+            </Routes>
+          </Layout>
+        </Router>
+
+      </div>
     </div>
   );
 }

@@ -16,6 +16,7 @@ export default function ParkDetails(props) {
         <div className='container'>
         <h2>{parksInfo[id]?.fullName}</h2>
         <div className="parkContainer" key={parksInfo[id]?.id}>
+          <button onClick={() => props.handleAddDestinationClick(parksInfo[id])}>AddDestinations</button>
               <div>
                 <img src={parksInfo[id]?.images[0].url} className="parkImage" alt={parksInfo[id]?.fullName} />
               </div>

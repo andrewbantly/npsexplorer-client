@@ -1,31 +1,28 @@
-import {useParams} from 'react-router-dom'
-import {useState, useEffect} from 'react'
-import axios from 'axios'
-
+import { useParams } from 'react-router-dom'
 
 export default function ParkDetails(props) {
+  const { parksInfo } = props
+  const { name, id } = useParams()
 
-    const {parksInfo} = props
-    const { name , id } = useParams()
+  const foundActivities = parksInfo[id]
 
-    const foundActivities = parksInfo[id]
-    
-
-    return(
-        <>
-        <div className='container'>
+  return (
+    <>
+      <div className='container'>
         <h2>{parksInfo[id]?.fullName}</h2>
         <div className="parkContainer" key={parksInfo[id]?.id}>
-              <div>
-                <img src={parksInfo[id]?.images[0].url} className="parkImage" alt={parksInfo[id]?.fullName} />
-              </div>
-              <div className="parkText">
-                <p>{parksInfo[id]?.description}</p>
-                <p>{parksInfo[id]?.operatingHours[0]?.description}</p>
-                <p>{parksInfo[id]?.entranceFees[0]?.description}</p>
-              </div>
-            </div>
+          <button onClick={() => props.handleAddDestinationClick(parksInfo[id])}>AddDestinations</button>
+          <button onClick={() => props.handleAddExperienceClick(parksInfo[id])}>AddExperience</button>
+          <div>
+            <img src={parksInfo[id]?.images[0].url} className="parkImage" alt={parksInfo[id]?.fullName} />
+          </div>
+          <div className="parkText">
+            <p>{parksInfo[id]?.description}</p>
+            <p>{parksInfo[id]?.operatingHours[0]?.description}</p>
+            <p>{parksInfo[id]?.entranceFees[0]?.description}</p>
+          </div>
         </div>
-        </>
-    )
+      </div>
+    </>
+  )
 }

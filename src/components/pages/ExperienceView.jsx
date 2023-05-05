@@ -3,7 +3,6 @@ import ExperienceEdit from "./ExperienceEdit";
 import axios from "axios"
 
 export default function ExperienceView(props) {
-    console.log("this should be an exp: ", props.experienceView)
     const [experienceDetails, setExperienceDetails] = useState(props.experienceView)
     const [showEditForm, setShowEditForm] = useState(false);
 
@@ -12,9 +11,7 @@ export default function ExperienceView(props) {
         console.log("the experience form has been edited")
         console.log(form)
         try {
-            // get the token from local storage
             const token = localStorage.getItem('jwt')
-            // make the auth headers
             const options = {
                 headers: {
                     'Authorization': token

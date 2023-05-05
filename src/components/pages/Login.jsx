@@ -14,19 +14,28 @@ const Container = styled.div`
   width: 100%;
   min-height: 100vh;
   background-color: #f7f7f7;
+  padding: 1rem;
+  box-sizing: border-box;
 
-  // Media query for 360 x 740
-  @media (min-width: 360px) and (min-height: 740px) {
+  @media screen and (max-width: 60rem) {
+    padding: 1rem;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   }
 
-  // Media query for 820 x 1180
-  @media (min-width: 820px) and (min-height: 1180px) {
+  @media screen and (max-width: 53rem) {
+    padding: 1.5rem;
+    background-color: #f5f5f5;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
   }
 
-  // Media query for full desktop view
-  @media (min-width: 1200px) {
+  @media screen and (max-width: 27rem) {
+    padding: 2rem;
+    background-color: #f2f2f2;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   }
 `;
+
 
 
 const Title = styled.h1`
@@ -90,22 +99,29 @@ const Image = styled.img`
   z-index: 9999;
   width: 300px;
   height: 300px;
+  object-fit: cover;
+  border-radius: 0 0 50% 50% / 5%;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 
   @media screen and (max-width: 60rem) {
-    width: 300px;
-    height: 250px;
+    width: 320px;
+    height: 320px;
+    border-radius: 0 0 50% 50% / 6%;
   }
 
   @media screen and (max-width: 53rem) {
     width: 260px;
-    height: 200px;
+    height: 260px;
+    border-radius: 0 0 50% 50% / 8%;
   }
 
   @media screen and (max-width: 27rem) {
     width: 150px;
     height: 150px;
+    border-radius: 0 0 50% 50% / 10%;
   }
 `;
+
 
 const ContentWrapper = styled.div`
   margin-top: 150px;

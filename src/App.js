@@ -8,19 +8,14 @@ import { useState, useEffect } from 'react'
 import jwt_decode from 'jwt-decode'
 import axios from "axios"
 
-import logo from './logo.svg';
 import './App.css';
 
 import Destinations from "./components/pages/Destinations"
-import ExperienceEdit from "./components/pages/ExperienceEdit"
-import ExperienceView from "./components/pages/ExperienceView"
 import Home from "./components/pages/Home"
 import Login from "./components/pages/Login"
 import SignUp from "./components/pages/SignUp"
 import ParkDetails from "./components/pages/ParkDetails"
 import Profile from "./components/pages/Profile"
-import SearchResults from "./components/pages/SearchResults"
-import Footer from './components/partials/Footer';
 import Layout from './components/partials/Layout'
 import { set } from 'mongoose';
 
@@ -30,9 +25,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [parksInfo, setParksInfo] = useState([]);
   const [userDestinations, setUserDestinations] = useState([])
-  const [userExperiences, setUserExperiences] = useState([])
-
-
 
   //  Pings the api and stores the response data in the parksInfo State
   useEffect(() => {
@@ -51,38 +43,31 @@ function App() {
     fetchData();
   }, []);
 
-  // pings mongoDB to set state of usersDestinations
+  // if the user navigates away form the page, we will log them back in
+  useEffect(() => {
+    const token = localStorage.getItem('jwt')
+    if (token) {
+      setCurrentUser(jwt_decode(token))
+    } else {
+      setCurrentUser(null)
+    }
+  }, [])
 
-  useEffect( async () => {
+  // pings mongoDB to set state of usersDestinations
+  useEffect(async () => {
     try {
-      // get the token from local storage
       const token = localStorage.getItem('jwt')
-      // make the auth headers
       const options = {
         headers: {
           'Authorization': token
         }
       }
-    const foundDestinations = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations`, options)
-    setUserDestinations(foundDestinations.data)
-
+      const foundDestinations = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations`, options)
+      setUserDestinations(foundDestinations.data)
     } catch (error) {
       console.log(error)
     }
   }, [])
-
-
-  // useEffect -- if the user navigates away form the page, we will log them back in
-  useEffect(() => {
-    // check to see if token is in storage
-    const token = localStorage.getItem('jwt')
-    if (token) {
-      // if so, we will decode it and set the user in app state
-      setCurrentUser(jwt_decode(token))
-    } else {
-      setCurrentUser(null)
-    }
-  }, []) // happen only once
 
   // event handler to log the user out when needed
   const handleLogout = () => {
@@ -95,13 +80,35 @@ function App() {
     }
   }
   // ON CLICK ADD TO DESTINATIONS (page details, )
-  const handleAddDestinationClick = (park) => {
-    setUserDestinations([...userDestinations, park.id])
+  const handleAddDestinationClick = async (park) => {
+    const parkId = { parkId: park.id };
+    const token = localStorage.getItem('jwt');
+    const options = {
+      headers: {
+        'Authorization': token
+      }
+    }
+    await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations`, parkId, options);
+    const updatedDestinations = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations`, options);
+    setUserDestinations(updatedDestinations.data)
   }
 
   // ONCLICK ADD TO EXPERIENCES 
-const 
-
+  const handleAddExperienceClick = async (nationalPark) => {
+    const newExperience = {
+      park: {
+        location: nationalPark.fullName,
+        image: nationalPark.images[0].url
+      }
+    }
+    const token = localStorage.getItem('jwt');
+    const options = {
+      headers: {
+        'Authorization': token
+      }
+    }
+    await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${currentUser._id}`, newExperience, options);
+  }
 
   return (
     <div className="App">
@@ -118,6 +125,7 @@ const
                 element={<ParkDetails
                   parksInfo={parksInfo}
                   handleAddDestinationClick={handleAddDestinationClick}
+                  handleAddExperienceClick={handleAddExperienceClick}
                 />}
               />
               <Route
@@ -130,7 +138,8 @@ const
               />
               <Route
                 path='/users/profile'
-                element={<Profile handleLogout={handleLogout} currentUser={currentUser} setCurrentUser={setCurrentUser} />}
+                element={<Profile handleLogout={handleLogout} currentUser={currentUser} setCurrentUser={setCurrentUser}
+                />}
               />
               <Route
                 path='/destinations'

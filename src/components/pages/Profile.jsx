@@ -1,16 +1,25 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import ExperienceView from "./ExperienceView"
 
 export default function Profile({ currentUser, handleLogout }) {
     // state for the secret message (aka user privilaged data)
     const [msg, setMsg] = useState('')
 
-    const [experiencesList, setExperiencesList] = useState([])
+    const [experiencesList, setExperiencesList] = useState([]);
     const [showExperience, setShowExperience] = useState(false);
+    const [experienceView, setExperiencesView] = useState({});
     const navigate = useNavigate()
 
     // useEffect for getting the user data and checking auth
+
+    const handleClick = experience => {
+        console.log(experience)
+        setExperiencesView(experience)
+        setShowExperience(true)
+    }
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -48,24 +57,41 @@ export default function Profile({ currentUser, handleLogout }) {
     }, [handleLogout, navigate]) // only fire on the first render of this component
 
     const experiences = experiencesList.data?.map((experience, i) => {
-        return(
-            <Link to={"/users/experiences/:parkname"}>
-            <p key={`experience-${i}`}>{experience.location}</p>
-            </Link>
+        return (
+            <div>
+                <p onClick={() => handleClick(experience)} key={`experience-${i}`}>{experience.location}</p>
+            </div>
         )
     })
 
+    const profileView = (
+
+            <div>
+                <h1>Hello, {currentUser?.name}</h1>
+
+                <p>your email is {currentUser?.email}</p>
+
+                <h2>Here is the secret message that is only availible to users of User App:</h2>
+
+                <h3>{msg}</h3>
+                {experiences}
+            </div>
+        )
+    
+    const showExperienceView = (
+            <ExperienceView 
+            experienceView={experienceView}
+            setShowExperience={setShowExperience}
+            setExperiencesView={setExperiencesView}
+            currentUser={currentUser}
+            />
+    )
+
+
     return (
         <div>
-            <h1>Hello, {currentUser?.name}</h1>
 
-            <p>your email is {currentUser?.email}</p>
-
-            <h2>Here is the secret message that is only availible to users of User App:</h2>
-
-            <h3>{msg}</h3>
-
-            {experiences}
+            {showExperience ? showExperienceView : profileView}
 
         </div>
     )

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const DestinationsPage = () => {
+const DestinationsPage = (props) => {
   const [destinations, setDestinations] = useState([]);
   const [message, setMessage] = useState('');
   const [selectedDestination, setSelectedDestination] = useState(null);
+  const parksInfo = props.parksInfo;
+  const userDestinations = props.userDestinations;
 
   useEffect(() => {
     const fetchDestinations = async () => {
@@ -48,6 +50,7 @@ const DestinationsPage = () => {
   
   
   const fetchDestinationById = (destinationId) => {
+    console.log("=>", destinationId)
     const foundDestination = destinations.find(
       (destination) => destination._id === destinationId
     );

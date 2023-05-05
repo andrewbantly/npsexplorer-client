@@ -143,7 +143,7 @@ function App() {
               />
               <Route
                 path='/destinations'
-                element={<Destinations />}
+                element={<Destinations parksInfo={parksInfo} userDestinations={userDestinations}/>}
               />
             </Routes>
           </Layout>

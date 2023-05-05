@@ -10,9 +10,32 @@ export default function Profile({ currentUser, handleLogout }) {
     const navigate = useNavigate()
 
     const handleClick = experience => {
-        console.log(experience)
         setExperiencesView(experience)
         setShowExperience(true)
+    }
+
+    const handleDeleteClick = async (experience) => {
+        console.log(experience)
+        console.log("delete button clicked")
+        try {
+            const token = localStorage.getItem('jwt')
+            const options = {
+                headers: {
+                    'Authorization': token
+                }
+            }
+
+            const deleteExperience = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${currentUser._id}`, options)
+            setExperiencesList(findExperiences)
+        } catch (err) {
+            console.warn(err)
+                if (err.response) {
+                    if (err.response.status === 401) {
+                        handleLogout()
+                        navigate('/users/login')
+                    }
+                }
+        }
     }
 
     useEffect(() => {
@@ -64,6 +87,7 @@ export default function Profile({ currentUser, handleLogout }) {
             setShowExperience={setShowExperience}
             setExperiencesView={setExperiencesView}
             currentUser={currentUser}
+            handleDeleteClick={handleDeleteClick}
         />
     )
 

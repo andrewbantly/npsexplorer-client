@@ -37,6 +37,7 @@ export default function ExperienceView(props) {
             <p>{experienceDetails.description}</p>
             <button onClick={() => props.setShowExperience(false)}>Back</button>
             <button onClick={() => setShowEditForm(true)} >Edit</button>
+            <button onClick={() => props.handleDeleteClick(experienceDetails)}>Delete</button>
         </>
     )
 

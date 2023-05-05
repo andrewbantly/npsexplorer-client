@@ -8,8 +8,6 @@ export default function ExperienceView(props) {
 
     const handleSubmit = async (e, form) => {
         e.preventDefault()
-        console.log("the experience form has been edited")
-        console.log(form)
         try {
             const token = localStorage.getItem('jwt')
             const options = {
@@ -17,11 +15,15 @@ export default function ExperienceView(props) {
                     'Authorization': token
                 }
             }
+            // update experience 
             await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${experienceDetails._id}`, form, options);
 
-            const updatedExperience = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/experience/${experienceDetails._id}`, options)
-            console.log(updatedExperience)
+            const updatedExperience = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/experience/${experienceDetails._id}`, options);
             setExperienceDetails(updatedExperience.data[0])
+
+            const updatedExperiencesList = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${props.currentUser._id}`, options)
+            props.setExperiencesList(updatedExperiencesList.data)
+
             setShowEditForm(false)
         } catch (err) {
             console.warn(err)
@@ -33,10 +35,15 @@ export default function ExperienceView(props) {
     const showExperience = (
         <>
             <h1>{experienceDetails.location}</h1>
-            <img src={experienceDetails.image} />
+            <img src={experienceDetails.image}
+                style={{
+                    height: "200px"
+                }}
+            />
             <p>{experienceDetails.description}</p>
             <button onClick={() => props.setShowExperience(false)}>Back</button>
             <button onClick={() => setShowEditForm(true)} >Edit</button>
+            <button onClick={() => props.handleDeleteClick(experienceDetails)}>Delete</button>
         </>
     )
 

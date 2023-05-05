@@ -47,7 +47,9 @@ code {
 }
 
 .activityIcon {
-  margin: .5rem
+  margin: .5rem;
+  border: solid red;
+  width: auto
 }
 
 .parkImage {
@@ -84,4 +86,8 @@ code {
 .main-content {
   margin-bottom: 4rem;
  
+}
+
+.carousel {
+  max-width: 100vw
 }

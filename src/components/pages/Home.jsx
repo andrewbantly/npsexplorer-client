@@ -1,70 +1,150 @@
-import {useState, useEffect} from 'react'
-import axios from 'axios'
-import {Link, useNavigate} from 'react-router-dom'
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
+export default function Home(props) {
+  const { parksInfo } = props;
+//   const [foundParks, setFoundParks] = useState([]);
+  const [displayedParks, setDisplayedParks] = useState([]);
+//   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!parksInfo || parksInfo.length === 0) return;
+  
+    // creates a random array from parks info with a max length of 24
+    const generateRandomParks = () => {
+      return Array.from({ length: 25 }, () => {
+        const random = Math.floor(Math.random() * 469);
+        return parksInfo[random];
+      });
+    };
+
+    setDisplayedParks(generateRandomParks());
+
+    // we use parks info array here to have use effect run only once on load. the reason why parksInfo is in there is because incase the state is not ready we can load something
+  }, [parksInfo]);
 
 
 
-export default function Home(props){
+  //this piece watches for the user input on the form, and searches the state for parks related to the search, when it finds the stores the park into acc along with its original index 
 
-    const {parksInfo} = props
-    console.log(parksInfo)
-    const [foundParks, setFoundParks] = useState([])
-    const navigate = useNavigate()
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const input = e.target.value;
+    const searchPark = parksInfo.reduce((acc, park, index) => {
+      if (park.fullName.toLowerCase().includes(input.toLowerCase())) {
+        acc.push({ park, originalIndex: index });
+      }
+      return acc;
+    }, []);
+    // setFoundParks(searchPark);
+    setDisplayedParks(searchPark.map(({ park }) => park)); 
+  };
+  
+  // when the usewr clicks the search button this sends the user to the search results page along with an object that we use to reference and render a response. to use this on the next page we need to install the useLocation hook. Note state IS NOT taco
 
-    // creates a functional component
-    const Park = () => {
+//   const handleClick = () => {
+//     if (foundParks.length > 0) {
+//       navigate("/search/results", { state: { foundParks } });
+//     }
+//   };
+    
 
-        // maps the array into a new array with a length of 10
-        const parkElements = Array.from({ length: 25 }, () => {
-            // uses math.random to generate a random number between 0-49 everytime the function loops, then renders a tile with the random number as a index array number
-          const random = Math.floor(Math.random() * 469);
-          return (
-            <Link to={`/parks/${parksInfo[random]?.fullName}/${random}`}><div className="parkContainer" key={parksInfo[random]?.id}>
+const handleActivity = (activityName) => {
+    // Filter the parks that have the specified activity
+    const searchPark = parksInfo.filter((park) => {
+      // Check if the park has the activity in its activities array
+      return park.activities.some((activity) =>
+        activity.name.toLowerCase().includes(activityName.toLowerCase())
+      );
+    });
+  
+    // Update the displayed parks with the filtered parks
+    setDisplayedParks(searchPark);
+  };
+
+  const handleLocation = (stateCode) => {
+    // Filter the parks that have the specified state code
+    const searchPark = parksInfo.filter((park) => {
+      // Check if the park has the state code in its addresses array
+      return park.addresses.some((address) =>
+        address.stateCode.toLowerCase() === stateCode.toLowerCase()
+      );
+    });
+  
+    // Update the displayed parks with the filtered parks
+    setDisplayedParks(searchPark);
+  };
+
+
+    const renderDisplayedParks = () => {
+        return displayedParks.map((park, index) => (
+          <Link to={`/parks/${park?.fullName}/${index}`} key={`${park?.id}-${index}`}>
+            <div className="parkContainer">
               <div>
-                <img src={parksInfo[random]?.images[0].url} className="parkImage" alt={parksInfo[random]?.fullName} />
+                <img
+                  src={park?.images[0].url}
+                  className="parkImage"
+                  alt={park?.fullName}
+                />
               </div>
               <div className="parkText">
-                {/* theres a bunch of ? conditionals this is so that it does not error out if the state has not loaded yet */}
-                <h3>{parksInfo[random]?.fullName}</h3>
-                <p>{parksInfo[random]?.addresses[0]?.city}, {parksInfo[random]?.addresses[0]?.stateCode}</p>
-                <p>Activities: {parksInfo[random]?.activities[0]?.name}, {parksInfo[random]?.activities[1]?.name}, {parksInfo[random]?.activities[2]?.name}, {parksInfo[random]?.activities[3]?.name}, {parksInfo[random]?.activities[4]?.name}</p>
+                <h3>{park?.fullName}</h3>
+                <p>
+                  {park?.addresses[0]?.city}, {park?.addresses[0]?.stateCode}
+                </p>
+                <p>
+                  Activities: {park?.activities[0]?.name},{" "}
+                  {park?.activities[1]?.name}, {park?.activities[2]?.name},{" "}
+                  {park?.activities[3]?.name}, {park?.activities[4]?.name}
+                </p>
                 <p>More Info...</p>
-                
               </div>
-            </div></Link>
-          );
-        });
+            </div>
+          </Link>
+        ));
+      };
       
-            return <>{parkElements}</>;
-        };
-        
 
-        //this piece watches for the user input on the form, and searches the state for parks related to the search, when it finds the stores the park into acc along with its original index 
-        const handleSearch = (e) => {
-            e.preventDefault();
-            const input = e.target.value;
-            const searchPark = parksInfo.reduce((acc, park, index) => {
-              if (park.fullName.toLowerCase().includes(input.toLowerCase())) {
-                acc.push({ park, originalIndex: index });
-              }
-              return acc;
-            }, []);
-            setFoundParks(searchPark);
-            console.log(foundParks);
-          };
-
-    // when the usewr clicks the search button this sends the user to the search results page along with an object that we use to reference and render a response. to use this on the next page we need to install the useLocation hook. Note state IS NOT taco
-    const handleClick = () => {
-        if (foundParks.length > 0) {
-            // foundParks is object literal {foundParks : foundParks}
-        navigate("/search/results", { state: { foundParks } });
+      const responsive = {
+        desktop: {
+          breakpoint: { max: 3000, min: 1024 },
+          items: 23,
+          slidesToSlide: 3 // optional, default to 1.
+        },
+        tablet: {
+          breakpoint: { max: 1024, min: 464 },
+          items: 2,
+          slidesToSlide: 2 // optional, default to 1.
+        },
+        mobile: {
+          breakpoint: { max: 464, min: 0 },
+          items: 1,
+          slidesToSlide: 1 // optional, default to 1.
         }
-    };
+      };
+     
+   
 
 
     return(
         <div className='container'>
         <div className='searchBar'>
+        <Carousel responsive={responsive} centerMode={true} arrows={true} containerClass='carousel'>
+        <div className="activityIcon">
+            Hiking
+            </div>
+            <div className="activityIcon">
+                <p>Swim</p>
+            </div>
+            <div className="activityIcon">
+                <p>Ski</p>
+            </div>
+            <div className="activityIcon">
+                <p>Camp</p>
+            </div>
+      </Carousel>
         <form>
             <input
                 id='name'
@@ -72,13 +152,16 @@ export default function Home(props){
                 // value={search}
                 onChange={handleSearch}
             />
-            <button onClick={handleClick}>Search</button>
+            {/* <button onClick={handleClick}>Search</button> leaving this here now in case we want it back*/}
             </form>
         </div>
+        <button className="activityIcon" onClick={() => handleLocation('CA')}>
+  <p>CA</p>
+</button>
         <div className='activityBar'>
-            <div className="activityIcon">
-                <p>Beach</p>
-            </div>
+        <button className="activityIcon" onClick={() => handleActivity('Astronomy')}>
+  <p>Astronomy</p>
+</button>
             <div className="activityIcon">
                 <p>Hiking</p>
             </div>
@@ -92,7 +175,7 @@ export default function Home(props){
                 <p>Camp</p>
             </div>
         </div>
-        <Park />
+        {renderDisplayedParks()} 
         </div>
     )
 }

@@ -78,7 +78,11 @@ function App() {
       // set the user in the App state to be null
       setCurrentUser(null)
     }
+
   }
+  const handleRemoveDestination = (destinationId) => {
+    setUserDestinations(userDestinations.filter((destination) => destination !== destinationId));
+  };
   // ON CLICK ADD TO DESTINATIONS (page details, )
   const handleAddDestinationClick = async (park) => {
     const parkId = { parkId: park.id };
@@ -143,7 +147,11 @@ function App() {
               />
               <Route
                 path='/destinations'
-                element={<Destinations parksInfo={parksInfo} userDestinations={userDestinations}/>}
+                element={<Destinations parksInfo={parksInfo} 
+                userDestinations={userDestinations} 
+                handleRemoveDestination={handleRemoveDestination}
+                handleAddExperienceClick={handleAddExperienceClick}
+                />}
               />
             </Routes>
           </Layout>

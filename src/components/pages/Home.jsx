@@ -3,6 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
+import activities from "../../activites";
+import usStateCodes from "../../usStatesArray";
+
 export default function Home(props) {
   const { parksInfo } = props;
 //   const [foundParks, setFoundParks] = useState([]);
@@ -39,8 +42,9 @@ useEffect(() => {
       return acc;
     }, []);
     // setFoundParks(searchPark);
-    setDisplayedParks(searchPark.map(({ park }) => park)); 
+    setDisplayedParks(searchPark); // Updated this line
   };
+  
   
   // when the usewr clicks the search button this sends the user to the search results page along with an object that we use to reference and render a response. to use this on the next page we need to install the useLocation hook. Note state IS NOT taco
 
@@ -67,6 +71,7 @@ const handleActivity = (activityName) => {
   };
 
   const handleLocation = (stateCode) => {
+    console.log("handleLocation called with stateCode:", stateCode);
     // Filter the parks that have the specified state code
     const searchPark = parksInfo
       .map((park, index) => ({ park, originalIndex: index })) // Add originalIndex here
@@ -84,6 +89,9 @@ const handleActivity = (activityName) => {
 
   
     const renderDisplayedParks = () => {
+        if (displayedParks.length === 0) {
+            return <p>No parks found matching your search criteria.</p>;
+          }
         return displayedParks.map(({ park, originalIndex }) => (
             <Link to={`/parks/${park?.fullName}/${originalIndex}`} key={`${park?.id}-${originalIndex}`}>
               <div className="parkContainer">
@@ -96,7 +104,6 @@ const handleActivity = (activityName) => {
               </div>
               <div className="parkText">
                 <h3>{park?.fullName}</h3>
-                <h3>{originalIndex}</h3>
                 <p>
                   {park?.addresses[0]?.city}, {park?.addresses[0]?.stateCode}
                 </p>
@@ -111,12 +118,40 @@ const handleActivity = (activityName) => {
           </Link>
         ));
       };
+
+    
+      const usState = usStateCodes.map((code, i) => {
+        return (
+          <div className="activityIcon" key={'code' + i}>
+            <button
+              onClick={() => handleLocation(`${code}`)}
+              disabled={!parksInfo || parksInfo.length === 0}
+            >
+              {code}
+            </button>
+          </div>
+        );
+      });
+
+      const listActivities = activities.map((act, i) => {
+        return (
+          <div className="activityIcon" key={'act' + i}>
+            <button
+              onClick={() => handleActivity(`${act}`)}
+              disabled={!parksInfo || parksInfo.length === 0}
+            >
+              {act}
+            </button>
+          </div>
+        );
+      });
+  
       
 
       const responsive = {
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
-          items: 23,
+          items: 50,
           slidesToSlide: 3 // optional, default to 1.
         },
         tablet: {
@@ -134,54 +169,41 @@ const handleActivity = (activityName) => {
    
 
 
-    return(
-        <div className='container'>
-        <div className='searchBar'>
-        <Carousel responsive={responsive} centerMode={true} arrows={true} containerClass='carousel'>
-        <div className="activityIcon">
-            Hiking
-            </div>
-            <div className="activityIcon">
-                <p>Swim</p>
-            </div>
-            <div className="activityIcon">
-                <p>Ski</p>
-            </div>
-            <div className="activityIcon">
-                <p>Camp</p>
-            </div>
-      </Carousel>
-        <form>
-            <input
-                id='name'
-                placeholder='Search for park'
-                // value={search}
+      return (
+        <div className="container">
+          {/* Carousel for states */}
+          <div className="searchBar">
+          <form>
+              <input
+                id="name"
+                placeholder="Search for park"
                 onChange={handleSearch}
-            />
-            {/* <button onClick={handleClick}>Search</button> leaving this here now in case we want it back*/}
+              />
             </form>
+            <Carousel
+              responsive={responsive}
+              centerMode={true}
+              arrows={true}
+              containerClass="carousel"
+              >
+              {usState}
+            </Carousel>
+    
+          {/* Carousel for activities */}
+          <div>
+            <Carousel
+              responsive={responsive}
+              centerMode={true}
+              arrows={true}
+              containerClass="carousel"
+              >
+              {listActivities}
+            </Carousel>
+          </div>
+                </div>
+    
+    
+          {renderDisplayedParks()}
         </div>
-        <button className="activityIcon" onClick={() => handleLocation('CA')}>
-  <p>CA</p>
-</button>
-        <div className='activityBar'>
-        <button className="activityIcon" onClick={() => handleActivity('Astronomy')}>
-  <p>Astronomy</p>
-</button>
-            <div className="activityIcon">
-                <p>Hiking</p>
-            </div>
-            <div className="activityIcon">
-                <p>Swim</p>
-            </div>
-            <div className="activityIcon">
-                <p>Ski</p>
-            </div>
-            <div className="activityIcon">
-                <p>Camp</p>
-            </div>
-        </div>
-        {renderDisplayedParks()} 
-        </div>
-    )
-}
+      );
+    }

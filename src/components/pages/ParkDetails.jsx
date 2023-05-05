@@ -3,19 +3,10 @@ import {useState, useEffect} from 'react'
 import axios from 'axios'
 
 
-export default function ParkDetails() {
+export default function ParkDetails(props) {
 
-    const [parksInfo, setParksInfo] = useState([])
+    const {parksInfo} = props
     const { name , id } = useParams()
-
-    //  Pings the api and stores the response data in the parksInfo State
-    useEffect(() =>{
-        axios.get(`https://developer.nps.gov/api/v1/parks?limit=469&api_key=${process.env.REACT_APP_NPS_API_KEY}`)
-        .then(response => {
-            console.log(response.data)
-            setParksInfo(response.data.data)
-        })
-    },[])
 
     const foundActivities = parksInfo[id]
     

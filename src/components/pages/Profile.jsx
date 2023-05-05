@@ -91,6 +91,7 @@ export default function Profile({ currentUser, handleLogout }) {
             setExperiencesView={setExperiencesView}
             currentUser={currentUser}
             handleDeleteClick={handleDeleteClick}
+            setExperiencesList={setExperiencesList}
         />
     )
 

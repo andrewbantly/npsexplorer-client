@@ -7,11 +7,19 @@ export default function Profile({ currentUser, handleLogout }) {
     // state for the secret message (aka user privilaged data)
     const [msg, setMsg] = useState('')
 
-    const [experiencesList, setExperiencesList] = useState([])
+    const [experiencesList, setExperiencesList] = useState([]);
     const [showExperience, setShowExperience] = useState(false);
+    const [experienceView, setExperiencesView] = useState({});
     const navigate = useNavigate()
 
     // useEffect for getting the user data and checking auth
+
+    const handleClick = experience => {
+        console.log(experience)
+        setExperiencesView(experience)
+        setShowExperience(true)
+    }
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -51,13 +59,13 @@ export default function Profile({ currentUser, handleLogout }) {
     const experiences = experiencesList.data?.map((experience, i) => {
         return (
             <div>
-                <p onClick={() => setShowExperience(true)} key={`experience-${i}`}>{experience.location}</p>
+                <p onClick={() => handleClick(experience)} key={`experience-${i}`}>{experience.location}</p>
             </div>
         )
     })
 
-    const profileView = () => {
-        return (
+    const profileView = (
+
             <div>
                 <h1>Hello, {currentUser?.name}</h1>
 
@@ -69,12 +77,15 @@ export default function Profile({ currentUser, handleLogout }) {
                 {experiences}
             </div>
         )
-    }
-    const showExperienceView = {
-        return ( 
-            <ExperienceView />
-        )
-    }
+    
+    const showExperienceView = (
+            <ExperienceView 
+            experienceView={experienceView}
+            setShowExperience={setShowExperience}
+            setExperiencesView={setExperiencesView}
+            currentUser={currentUser}
+            />
+    )
 
 
     return (

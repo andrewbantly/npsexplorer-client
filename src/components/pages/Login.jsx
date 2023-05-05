@@ -14,7 +14,29 @@ const Container = styled.div`
   width: 100%;
   min-height: 100vh;
   background-color: #f7f7f7;
+  padding: 1rem;
+  box-sizing: border-box;
+
+  @media screen and (max-width: 60rem) {
+    padding: 1rem;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  @media screen and (max-width: 53rem) {
+    padding: 1.5rem;
+    background-color: #f5f5f5;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+  }
+
+  @media screen and (max-width: 27rem) {
+    padding: 2rem;
+    background-color: #f2f2f2;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  }
 `;
+
+
 
 const Title = styled.h1`
   font-size: 32px;
@@ -70,13 +92,42 @@ const SubmitButton = styled.button`
 `;
 
 const Image = styled.img`
-  position: fixed;
+  position: absolute;
   top: 0;
-  left: 0;
-  z-index: 9999; 
-  width: 100px; 
-  height: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 0 0 50% 50% / 5%;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+
+  @media screen and (max-width: 60rem) {
+    width: 320px;
+    height: 320px;
+    border-radius: 0 0 50% 50% / 6%;
+  }
+
+  @media screen and (max-width: 53rem) {
+    width: 260px;
+    height: 260px;
+    border-radius: 0 0 50% 50% / 8%;
+  }
+
+  @media screen and (max-width: 27rem) {
+    width: 150px;
+    height: 150px;
+    border-radius: 0 0 50% 50% / 10%;
+  }
 `;
+
+
+const ContentWrapper = styled.div`
+  margin-top: 150px;
+`;
+
+
 
 export default function Login({ currentUser, setCurrentUser }) {
     const [email, setEmail] = useState('');
@@ -119,6 +170,7 @@ export default function Login({ currentUser, setCurrentUser }) {
 
             <Title>Login to Your Account:</Title>
 
+            <ContentWrapper>
             <ErrorMessage>{msg}</ErrorMessage>
 
             <Form onSubmit={handleSubmit}>
@@ -141,6 +193,7 @@ export default function Login({ currentUser, setCurrentUser }) {
 
                 <SubmitButton type='submit'>Login</SubmitButton>
             </Form>
+            </ContentWrapper>
         </Container>
     )
 }

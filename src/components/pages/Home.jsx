@@ -9,19 +9,19 @@ export default function Home(props) {
   const [displayedParks, setDisplayedParks] = useState([]);
 //   const navigate = useNavigate();
 
-  useEffect(() => {
+useEffect(() => {
     if (!parksInfo || parksInfo.length === 0) return;
   
     // creates a random array from parks info with a max length of 24
     const generateRandomParks = () => {
       return Array.from({ length: 25 }, () => {
         const random = Math.floor(Math.random() * 469);
-        return parksInfo[random];
+        return { park: parksInfo[random], originalIndex: random };
       });
     };
-
+  
     setDisplayedParks(generateRandomParks());
-
+  
     // we use parks info array here to have use effect run only once on load. the reason why parksInfo is in there is because incase the state is not ready we can load something
   }, [parksInfo]);
 
@@ -53,12 +53,14 @@ export default function Home(props) {
 
 const handleActivity = (activityName) => {
     // Filter the parks that have the specified activity
-    const searchPark = parksInfo.filter((park) => {
-      // Check if the park has the activity in its activities array
-      return park.activities.some((activity) =>
-        activity.name.toLowerCase().includes(activityName.toLowerCase())
-      );
-    });
+    const searchPark = parksInfo
+      .map((park, index) => ({ park, originalIndex: index })) // Add originalIndex here
+      .filter(({ park }) => {
+        // Check if the park has the activity in its activities array
+        return park.activities.some((activity) =>
+          activity.name.toLowerCase().includes(activityName.toLowerCase())
+        );
+      });
   
     // Update the displayed parks with the filtered parks
     setDisplayedParks(searchPark);
@@ -66,31 +68,35 @@ const handleActivity = (activityName) => {
 
   const handleLocation = (stateCode) => {
     // Filter the parks that have the specified state code
-    const searchPark = parksInfo.filter((park) => {
-      // Check if the park has the state code in its addresses array
-      return park.addresses.some((address) =>
-        address.stateCode.toLowerCase() === stateCode.toLowerCase()
-      );
-    });
+    const searchPark = parksInfo
+      .map((park, index) => ({ park, originalIndex: index })) // Add originalIndex here
+      .filter(({ park }) => {
+        // Check if the park has the state code in its addresses array
+        return park.addresses.some((address) =>
+          address.stateCode.toLowerCase() === stateCode.toLowerCase()
+        );
+      });
   
     // Update the displayed parks with the filtered parks
     setDisplayedParks(searchPark);
   };
 
 
+  
     const renderDisplayedParks = () => {
-        return displayedParks.map((park, index) => (
-          <Link to={`/parks/${park?.fullName}/${index}`} key={`${park?.id}-${index}`}>
-            <div className="parkContainer">
+        return displayedParks.map(({ park, originalIndex }) => (
+            <Link to={`/parks/${park?.fullName}/${originalIndex}`} key={`${park?.id}-${originalIndex}`}>
+              <div className="parkContainer">
               <div>
                 <img
                   src={park?.images[0].url}
                   className="parkImage"
                   alt={park?.fullName}
-                />
+                  />
               </div>
               <div className="parkText">
                 <h3>{park?.fullName}</h3>
+                <h3>{originalIndex}</h3>
                 <p>
                   {park?.addresses[0]?.city}, {park?.addresses[0]?.stateCode}
                 </p>

@@ -89,6 +89,9 @@ const handleActivity = (activityName) => {
 
   
     const renderDisplayedParks = () => {
+        if (displayedParks.length === 0) {
+            return <p>No parks found matching your search criteria.</p>;
+          }
         return displayedParks.map(({ park, originalIndex }) => (
             <Link to={`/parks/${park?.fullName}/${originalIndex}`} key={`${park?.id}-${originalIndex}`}>
               <div className="parkContainer">

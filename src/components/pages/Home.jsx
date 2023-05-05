@@ -4,22 +4,12 @@ import {Link, useNavigate} from 'react-router-dom'
 
 
 
-export default function Home(){
+export default function Home(props){
 
-    const [parksInfo, setParksInfo] = useState([])
+    const {parksInfo} = props
+    console.log(parksInfo)
     const [foundParks, setFoundParks] = useState([])
     const navigate = useNavigate()
-
-
-    //  Pings the api and stores the response data in the parksInfo State
-    useEffect(() =>{
-        axios.get(`https://developer.nps.gov/api/v1/parks?limit=469&api_key=${process.env.REACT_APP_NPS_API_KEY}`)
-        .then(response => {
-            console.log(response.data)
-            setParksInfo(response.data.data)
-        })
-    },[])
-
 
     // creates a functional component
     const Park = () => {
@@ -49,16 +39,19 @@ export default function Home(){
         };
         
 
-        //this piece watches for the user input on the form, and searches the state for parks related to the search, it stores the results in found search 
-    const handleSearch = (e) => {
-        e.preventDefault();
-        const input = e.target.value;
-        const searchPark = parksInfo.filter((park) =>
-            park.fullName.toLowerCase().includes(input.toLowerCase())
-        );
-        setFoundParks(searchPark);
-        console.log(foundParks);
-    };
+        //this piece watches for the user input on the form, and searches the state for parks related to the search, when it finds the stores the park into acc along with its original index 
+        const handleSearch = (e) => {
+            e.preventDefault();
+            const input = e.target.value;
+            const searchPark = parksInfo.reduce((acc, park, index) => {
+              if (park.fullName.toLowerCase().includes(input.toLowerCase())) {
+                acc.push({ park, originalIndex: index });
+              }
+              return acc;
+            }, []);
+            setFoundParks(searchPark);
+            console.log(foundParks);
+          };
 
     // when the usewr clicks the search button this sends the user to the search results page along with an object that we use to reference and render a response. to use this on the next page we need to install the useLocation hook. Note state IS NOT taco
     const handleClick = () => {

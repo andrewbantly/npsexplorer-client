@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import ExperienceView from "./ExperienceView"
@@ -14,7 +14,7 @@ export default function Profile({ currentUser, handleLogout }) {
     const [experienceView, setExperiencesView] = useState({});
     const [userImage, setUserImage] = useState(currentUser?.image) // IMPORT AVATAR FROM PUBLIC
     const navigate = useNavigate()
-   
+
 
     const handlePictureUpload = e => {
         console.log(e.target)
@@ -25,10 +25,10 @@ export default function Profile({ currentUser, handleLogout }) {
     const initUploadcareWidget = () => {
         const widget = uploadcare.Widget('#uploadcare-uploader');
         widget.onUploadComplete(fileInfo => {
-          console.log('File uploaded:', fileInfo.cdnUrl);
-          setUserImage(fileInfo.cdnUrl);
+            console.log('File uploaded:', fileInfo.cdnUrl);
+            setUserImage(fileInfo.cdnUrl);
         });
-      };
+    };
 
     const handleClick = experience => {
         setExperiencesView(experience)
@@ -66,7 +66,7 @@ export default function Profile({ currentUser, handleLogout }) {
         // this mounts the widget and waits for a timeout incase it doesnt load on mount
         setTimeout(() => {
             initUploadcareWidget();
-          }, 0);
+        }, 0);
         const fetchData = async () => {
             try {
                 const token = localStorage.getItem('jwt')
@@ -111,7 +111,8 @@ export default function Profile({ currentUser, handleLogout }) {
                 }}
 
             ></img>
-
+            <input type="hidden" role="uploadcare-uploader" data-public-key="e667ec242e718125294d" data-tabs="file facebook gphotos instagram" />
+            <button onClick={() => handleLogout()}>Logout</button>
             <h1>Hello, {currentUser?.name}</h1>
             <h2>Look at all the places you've been!</h2>
             {experiences}
@@ -134,12 +135,12 @@ export default function Profile({ currentUser, handleLogout }) {
 
             {showExperience ? showExperienceView : profileView}
             <input
-        id="uploadcare-uploader"
-        type="hidden"
-        role="uploadcare-uploader"
-        data-public-key="e667ec242e718125294d"
-        data-tabs="file facebook gphotos instagram"
-      />
+                id="uploadcare-uploader"
+                type="hidden"
+                role="uploadcare-uploader"
+                data-public-key="e667ec242e718125294d"
+                data-tabs="file facebook gphotos instagram"
+            />
         </div>
     )
 }

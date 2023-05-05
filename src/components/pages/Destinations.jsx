@@ -3,36 +3,12 @@ import axios from 'axios';
 import { Link } from "react-router-dom"
 
 const DestinationsPage = (props) => {
-    const [destinations, setDestinations] = useState([]);
     const [message, setMessage] = useState('');
-    const [selectedDestination, setSelectedDestination] = useState(null);
     const { parksInfo,
          userDestinations, 
          handleRemoveDestination, 
-         handleAddExperienceClick } = props
-
-    useEffect(() => {
-        const fetchDestinations = async () => {
-            try {
-                const token = localStorage.getItem('jwt');
-                const options = {
-                    headers: {
-                        'Authorization': token,
-                    },
-                };
-                const response = await axios.get(
-                    `${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations`,
-                    options
-                );
-
-                setDestinations(response.data);
-            } catch (error) {
-                setMessage('Error fetching destinations');
-            }
-        };
-
-        fetchDestinations();
-    }, []);
+         handleAddExperienceClick,
+         setUserDestinations} = props
 
     const removeDestination = async (destinationId) => {
         try {
@@ -43,33 +19,21 @@ const DestinationsPage = (props) => {
                 },
             };
             await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations/${destinationId}`, options);
+
+            const foundDestinations = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations`, options)
+            setUserDestinations(foundDestinations.data)
+
             setMessage('Destination removed from favorites');
-            setDestinations(destinations.filter((destination) => destination._id !== destinationId));
         } catch (error) {
             setMessage('Error removing destination from favorites');
-        }
-        props.handleRemoveDestination(destinationId)
-    };
-
-
-    const fetchDestinationById = (destinationId) => {
-        const foundDestination = destinations.find(
-            (destination) => destination.id === destinationId
-        );
-
-        if (foundDestination) {
-            setSelectedDestination(foundDestination);
-        } else {
-            console.log('Destination not found');
         }
     };
 
     const findParkById = (destinationId) => {
-        // console.log('destinationId in findParkById:', destinationId);
         return parksInfo.find((park) => park.id === destinationId);
     };
 
-    const userSearch = userDestinations.map((destination, index) => {
+    const userDestinationsList = userDestinations.map((destination, index) => {
         const park = findParkById(destination);
         return (
             <div className='parkContainer'>
@@ -105,8 +69,6 @@ const DestinationsPage = (props) => {
                             {park?.activities[1]?.name}, {park?.activities[2]?.name},{" "}
                             {park?.activities[3]?.name}, {park?.activities[4]?.name}
                         </p>
-
-
                     </div>
                 </Link >
             </div>
@@ -118,7 +80,7 @@ const DestinationsPage = (props) => {
 
             <h2>User Destinations</h2>
             <ul>
-                {userSearch}
+                {userDestinationsList}
             </ul>
 
         </div>

@@ -7,26 +7,46 @@ import ExperienceView from "./ExperienceView"
 import 'uploadcare-widget/uploadcare.lang.en.min.js';
 import uploadcare from 'uploadcare-widget';
 
-
 export default function Profile({ currentUser, handleLogout }) {
     const [experiencesList, setExperiencesList] = useState([]);
     const [showExperience, setShowExperience] = useState(false);
     const [experienceView, setExperiencesView] = useState({});
-    const [userImage, setUserImage] = useState(currentUser?.image) // IMPORT AVATAR FROM PUBLIC
+    const [header, setHeader] = useState(true);
+    const [userImage, setUserImage] = useState(require("../../media/defaultAvatar.png")) // IMPORT AVATAR FROM SRC/MEDIA dir
     const navigate = useNavigate()
 
-
-    const handlePictureUpload = e => {
-        console.log(e.target)
-    }
-
+    // If has an existing profile image, load it 
+    useEffect(
+        async () => {
+            const token = localStorage.getItem('jwt')
+            const options = {
+                headers: {
+                    'Authorization': token
+                }
+            }
+            const userPhoto = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/auth-locked`, options)
+            if (userPhoto.data.msg) {
+                setUserImage(userPhoto.data.msg)
+            }
+        }, []);
 
     // edited the upload care function to be a named function and binds it to the event listener, so when the file is uploaded the event is triggered and the file is passed.  The fileInfo.cdnUrl contains the uploaded file's URL. and the image is set to the state
     const initUploadcareWidget = () => {
         const widget = uploadcare.Widget('#uploadcare-uploader');
-        widget.onUploadComplete(fileInfo => {
+        widget.onUploadComplete(async (fileInfo) => {
             console.log('File uploaded:', fileInfo.cdnUrl);
-            setUserImage(fileInfo.cdnUrl);
+            const userPhoto = {
+                image: fileInfo.cdnUrl
+            }
+            const token = localStorage.getItem('jwt')
+            const options = {
+                headers: {
+                    'Authorization': token
+                }
+            }
+            const updateUserPhoto = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/auth-locked`, userPhoto, options)
+            const updatedUserPhoto = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/auth-locked`, options)
+            setUserImage(updatedUserPhoto.data.msg);
         });
     };
 
@@ -45,11 +65,14 @@ export default function Profile({ currentUser, handleLogout }) {
                     'Authorization': token
                 }
             }
-
             const deleteExperience = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${experience._id}`, options);
 
             const updatedExperiences = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${currentUser._id}`, options)
+            console.log("found exps: ", updatedExperiences.data.length)
             setExperiencesList(updatedExperiences)
+            if (updatedExperiences.data.length === 0) {
+                setHeader(true)
+            } 
             setShowExperience(false)
         } catch (err) {
             console.warn(err)
@@ -76,9 +99,11 @@ export default function Profile({ currentUser, handleLogout }) {
                     }
                 }
                 const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/auth-locked`, options)
-                console.log("response: ", response)
 
                 const findExperiences = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${currentUser._id}`, options)
+                if (findExperiences.data.length > 0) {
+                    setHeader(false)
+                } 
                 setExperiencesList(findExperiences)
             } catch (err) {
                 console.warn(err)
@@ -93,28 +118,38 @@ export default function Profile({ currentUser, handleLogout }) {
         fetchData()
     }, [handleLogout, navigate])
 
+    const experiencesExistHeader = (            
+    <h2>Look at all the places you've been!</h2>
+    )
+    const experiencesDontExistHeader = (            
+    <h2>Go visit some national parks and journal your experiences!</h2>
+    )
     const experiences = experiencesList.data?.map((experience, i) => {
         return (
-            <div>
-                <p onClick={() => handleClick(experience)} key={`experience-${i}`}>{experience.location}</p>
+            <div onClick={() => handleClick(experience)} key={`experience-${i}`}>
+                <p>{experience.location}</p>
+                <img src={experience.image}
+                     style={{
+                        height: "75px"
+                    }}
+                ></img>
             </div>
         )
     })
 
-    const profileView = (
 
+    const profileView = (
         <div>
-            <img src={require("../../media/defaultAvatar.png")}
+            <img src={userImage}
                 style={{
                     height: "100px",
                     borderRadius: "50%"
                 }}
 
             ></img>
-            <input type="hidden" role="uploadcare-uploader" data-public-key="e667ec242e718125294d" data-tabs="file facebook gphotos instagram" />
             <button onClick={() => handleLogout()}>Logout</button>
             <h1>Hello, {currentUser?.name}</h1>
-            <h2>Look at all the places you've been!</h2>
+            {header ? experiencesDontExistHeader : experiencesExistHeader}
             {experiences}
         </div>
     )
@@ -132,7 +167,6 @@ export default function Profile({ currentUser, handleLogout }) {
 
     return (
         <div>
-
             {showExperience ? showExperienceView : profileView}
             <input
                 id="uploadcare-uploader"

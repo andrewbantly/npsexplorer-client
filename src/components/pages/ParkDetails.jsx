@@ -34,10 +34,10 @@ export default function ParkDetails(props) {
           <div>
             <Carousel
            responsive={responsive}
-           centerMode={true}
+           centerMode={false}
            arrows={true}
            containerClass="carousel"
-           className="park-details-carousel"
+        //    className="park-details-carousel"
            autoPlay={true}
            infinite={true}
             >

@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import debounce from 'lodash.debounce'
 
 import activities from "../../activites";
 import usStateCodes from "../../usStatesArray";
+
 
 export default function Home(props) {
   const { parksInfo } = props;
@@ -45,7 +47,7 @@ useEffect(() => {
     setDisplayedParks(searchPark); // Updated this line
   };
   
-  
+  const debouncedHandleSearch = debounce(handleSearch, 300);
   // when the usewr clicks the search button this sends the user to the search results page along with an object that we use to reference and render a response. to use this on the next page we need to install the useLocation hook. Note state IS NOT taco
 
 //   const handleClick = () => {
@@ -70,6 +72,8 @@ const handleActivity = (activityName) => {
     setDisplayedParks(searchPark);
   };
 
+
+
   const handleLocation = (stateCode) => {
     console.log("handleLocation called with stateCode:", stateCode);
     // Filter the parks that have the specified state code
@@ -87,8 +91,15 @@ const handleActivity = (activityName) => {
   };
 
 
+  const debouncedHandleLocation = debounce(handleLocation, 300);
+  const debouncedHandleActivity = debounce(handleActivity, 300);
+
   
+
     const renderDisplayedParks = () => {
+        if (!parksInfo || parksInfo.length === 0) {
+            return <div>Loading...</div>;
+          }
         if (displayedParks.length === 0) {
             return <p>No parks found matching your search criteria.</p>;
           }
@@ -124,7 +135,7 @@ const handleActivity = (activityName) => {
         return (
           <div className="activityIcon" key={'code' + i}>
             <button
-              onClick={() => handleLocation(`${code}`)}
+              onClick={() => debouncedHandleLocation(`${code}`)}
               disabled={!parksInfo || parksInfo.length === 0}
             >
               {code}
@@ -137,7 +148,7 @@ const handleActivity = (activityName) => {
         return (
           <div className="activityIcon" key={'act' + i}>
             <button
-              onClick={() => handleActivity(`${act}`)}
+              onClick={() => debouncedHandleActivity(`${act}`)}
               disabled={!parksInfo || parksInfo.length === 0}
             >
               {act}
@@ -177,7 +188,7 @@ const handleActivity = (activityName) => {
               <input
                 id="name"
                 placeholder="Search for park"
-                onChange={handleSearch}
+                onChange={debouncedHandleSearch}
               />
             </form>
             <Carousel

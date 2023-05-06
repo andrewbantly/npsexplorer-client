@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import ExperienceView from "./ExperienceView"
+import ExperienceView from "./ExperienceView";
+import profile from "../../styles/profile.css"
 
 // imported the default widget that they give you on page
 import 'uploadcare-widget/uploadcare.lang.en.min.js';
@@ -32,7 +33,7 @@ export default function Profile({ currentUser, handleLogout }) {
 
     // edited the upload care function to be a named function and binds it to the event listener, so when the file is uploaded the event is triggered and the file is passed.  The fileInfo.cdnUrl contains the uploaded file's URL. and the image is set to the state
     const initUploadcareWidget = () => {
-        const widget = uploadcare.Widget('#uploadcare-uploader');
+        const widget = uploadcare.SingleWidget('#uploadcare-uploader');
         widget.onUploadComplete(async (fileInfo) => {
             console.log('File uploaded:', fileInfo.cdnUrl);
             const userPhoto = {
@@ -72,7 +73,7 @@ export default function Profile({ currentUser, handleLogout }) {
             setExperiencesList(updatedExperiences)
             if (updatedExperiences.data.length === 0) {
                 setHeader(true)
-            } 
+            }
             setShowExperience(false)
         } catch (err) {
             console.warn(err)
@@ -103,7 +104,7 @@ export default function Profile({ currentUser, handleLogout }) {
                 const findExperiences = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${currentUser._id}`, options)
                 if (findExperiences.data.length > 0) {
                     setHeader(false)
-                } 
+                }
                 setExperiencesList(findExperiences)
             } catch (err) {
                 console.warn(err)
@@ -118,39 +119,59 @@ export default function Profile({ currentUser, handleLogout }) {
         fetchData()
     }, [handleLogout, navigate])
 
-    const experiencesExistHeader = (            
-    <h2>Look at all the places you've been!</h2>
+    const experiencesExistHeader = (
+        <div className='experienceHeader'>
+            <h2 className='leftAligin experienceHeaderText noMargin'>Past adventures</h2>
+        </div>
     )
-    const experiencesDontExistHeader = (            
-    <h2>Go visit some national parks and journal your experiences!</h2>
+    const experiencesDontExistHeader = (
+        <div className='experienceHeader'>
+            <h2 className='leftAligin experienceHeaderText noMargin'>Go visit some national parks and journal your experiences!</h2>
+        </div>
     )
     const experiences = experiencesList.data?.map((experience, i) => {
         return (
-            <div onClick={() => handleClick(experience)} key={`experience-${i}`}>
-                <p>{experience.location}</p>
-                <img src={experience.image}
-                     style={{
-                        height: "75px"
-                    }}
-                ></img>
+            <div onClick={() => handleClick(experience)} key={`experience-${i}`}
+            className='experienceCard'>
+                <div className='experienceImgContainer'>
+                <img className='experienceImg' src={experience.image}/>
+                </div>
+                <p className='experienceText noMargin'>{experience.location}</p>
             </div>
         )
     })
 
 
     const profileView = (
-        <div>
-            <img src={userImage}
-                style={{
-                    height: "100px",
-                    borderRadius: "50%"
-                }}
+        <div className='profileView'>
+            <div onClick={() => handleLogout()} className='logoutContainer'>
+                <p className='logoutText'>Logout</p>
+                <img src={require("../../media/logout.png")}
+                    className='logoutImg'></img>
+            </div>
+            <div className='profileHeader'>
+                <div className='profileHeaderLeft'>
+                    <img src={userImage}
+                        style={{
+                            height: "100px",
+                            borderRadius: "50%"
+                        }}
 
-            ></img>
-            <button onClick={() => handleLogout()}>Logout</button>
-            <h1>Hello, {currentUser?.name}</h1>
-            {header ? experiencesDontExistHeader : experiencesExistHeader}
-            {experiences}
+                    ></img>
+                    <h1 className='profileName'>{currentUser?.name}</h1>
+                </div>
+                <div className='profileHeaderRight'>
+                    <h3 className='noMargin leftAligin'>3</h3>
+                    <p className='noMargin'>Destinations</p>
+                    <hr className='lineBreak'></hr>
+                    <h3 className='noMargin leftAligin'>5</h3>
+                    <p className='noMargin'>Experiences</p>
+                </div>
+            </div>
+            <div>
+                {header ? experiencesDontExistHeader : experiencesExistHeader}
+                {experiences}
+            </div>
         </div>
     )
 

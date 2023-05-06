@@ -104,26 +104,31 @@ const handleActivity = (activityName) => {
             return <p>No parks found matching your search criteria.</p>;
           }
         return displayedParks.map(({ park, originalIndex }) => (
-            <Link to={`/parks/${park?.fullName}/${originalIndex}`} key={`${park?.id}-${originalIndex}`}>
-              <div className="parkContainer">
-              <div>
+            <Link to={`/parks/${park?.fullName}/${originalIndex}`} key={`${park?.id}-${originalIndex}`} className='parkLink'>
+              <div className="parkContainer"
+                style={{
+                backgroundImage: `url(${park?.images[0].url})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+             }}>
+              {/* <div>
                 <img
                   src={park?.images[0].url}
                   className="parkImage"
                   alt={park?.fullName}
                   />
-              </div>
+              </div> */}
               <div className="parkText">
-                <h3>{park?.fullName}</h3>
-                <p>
+                <p className='parkName'>{park?.fullName}</p>
+                <p className='parkLocation'>
                   {park?.addresses[0]?.city}, {park?.addresses[0]?.stateCode}
                 </p>
-                <p>
+                {/* <p>
                   Activities: {park?.activities[0]?.name},{" "}
                   {park?.activities[1]?.name}, {park?.activities[2]?.name},{" "}
                   {park?.activities[3]?.name}, {park?.activities[4]?.name}
                 </p>
-                <p>More Info...</p>
+                <p>More Info...</p> */}
               </div>
             </div>
           </Link>
@@ -204,15 +209,16 @@ const handleActivity = (activityName) => {
           <div className="searchBar">
           <form>
               <input
+                className="searchInput"
                 id="name"
-                placeholder="Search for park"
+                placeholder="Search for a park or sort by state/activity"
                 onChange={debouncedHandleSearch}
               />
             </form>
             <Carousel
               responsive={responsiveStates}
               centerMode={true}
-              arrows={true}
+              arrows={false}
               containerClass="carousel"
               >
               {usState}
@@ -223,7 +229,7 @@ const handleActivity = (activityName) => {
             <Carousel
               responsive={responsiveActivities}
               centerMode={true}
-              arrows={true}
+              arrows={false}
               containerClass="carousel"
               >
               {listActivities}

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import styled from 'styled-components';
 
 
@@ -192,6 +192,7 @@ export default function Login({ currentUser, setCurrentUser }) {
                 />
 
                 <SubmitButton type='submit'>Login</SubmitButton>
+                <Link className="login" to='/users/register'>New? Register here</Link>
             </Form>
             </ContentWrapper>
         </Container>

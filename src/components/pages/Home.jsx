@@ -47,7 +47,7 @@ useEffect(() => {
     setDisplayedParks(searchPark); // Updated this line
   };
   
-  const debouncedHandleSearch = debounce(handleSearch, 300);
+  const debouncedHandleSearch = debounce(handleSearch, 400);
   // when the usewr clicks the search button this sends the user to the search results page along with an object that we use to reference and render a response. to use this on the next page we need to install the useLocation hook. Note state IS NOT taco
 
 //   const handleClick = () => {
@@ -91,8 +91,8 @@ const handleActivity = (activityName) => {
   };
 
 
-  const debouncedHandleLocation = debounce(handleLocation, 300);
-  const debouncedHandleActivity = debounce(handleActivity, 300);
+  const debouncedHandleLocation = debounce(handleLocation, 400);
+  const debouncedHandleActivity = debounce(handleActivity, 400);
 
   
 
@@ -159,15 +159,33 @@ const handleActivity = (activityName) => {
   
       
 
-      const responsive = {
+      const responsiveStates = {
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
-          items: 50,
+          items: 1,
           slidesToSlide: 3 // optional, default to 1.
         },
         tablet: {
           breakpoint: { max: 1024, min: 464 },
-          items: 2,
+          items: 10,
+          slidesToSlide: 2 // optional, default to 1.
+        },
+        mobile: {
+          breakpoint: { max: 464, min: 0 },
+          items: 6,
+          slidesToSlide: 1 // optional, default to 1.
+        }
+      };
+
+      const responsiveActivities = {
+        desktop: {
+          breakpoint: { max: 3000, min: 1024 },
+          items: 1,
+          slidesToSlide: 3 // optional, default to 1.
+        },
+        tablet: {
+          breakpoint: { max: 1024, min: 464 },
+          items: 8,
           slidesToSlide: 2 // optional, default to 1.
         },
         mobile: {
@@ -192,7 +210,7 @@ const handleActivity = (activityName) => {
               />
             </form>
             <Carousel
-              responsive={responsive}
+              responsive={responsiveStates}
               centerMode={true}
               arrows={true}
               containerClass="carousel"
@@ -203,7 +221,7 @@ const handleActivity = (activityName) => {
           {/* Carousel for activities */}
           <div>
             <Carousel
-              responsive={responsive}
+              responsive={responsiveActivities}
               centerMode={true}
               arrows={true}
               containerClass="carousel"

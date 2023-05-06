@@ -48,9 +48,7 @@ code {
 }
 
 .activityIcon {
-  margin: .5rem;
-  border: solid red;
-  width: auto
+  margin: .5rem
 }
 
 .parkImage {
@@ -98,5 +96,9 @@ code {
   align-content: center;
   width: 25rem;
 
+}
+
+.login {
+  margin: .5rem
 }
 

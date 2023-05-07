@@ -35,7 +35,7 @@ const DestinationsPage = (props) => {
 
             setMessage(`${park.fullName} was removed from favorites`);
         } catch (error) {
-            setMessage('Error removing destination from favorites');
+            setMessage(`Error removing ${park.fullName} from favorites`);
         }
     };
     

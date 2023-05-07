@@ -31,7 +31,10 @@ code {
 }
 
 .searchBar {
+  display: flex;
+  flex-direction: column;
   margin: .5rem 1rem 0 1rem;
+  width: 100vw;
 }
 
 .searchBar input {
@@ -59,8 +62,36 @@ code {
   height: 1rem
 }
 
+.carousel {
+  max-width: 95vw;
+  margin: 0 2.5vw 0 2.5vw
+}
+
+.imageCarousel {
+  display: flex;
+  align-content: center;
+  width: 100%;
+
+}
+
+.stateButton {
+  border: none;
+  background-color: #656D4A;
+  color: white;
+  font-weight: 500;
+  width: 2rem;
+  margin: .5
+}
+
 .parkImage {
   width: 18rem
+}
+
+.parkBox {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100vw
 }
 
 .parkText {
@@ -141,27 +172,11 @@ code {
  
 }
 
-.carousel {
-  max-width: 18rem
-}
-
-.imageCarousel {
-  display: flex;
-  align-content: center;
-  width: 100%;
-
-}
 
 .login {
   margin: .5rem
 }
 
-.stateButton {
-  border: none;
-  background-color: #656D4A;
-  color: white;
-  font-weight: 500;
-}
 
 /* Styling for details */
 
@@ -182,4 +197,17 @@ code {
 .parkDetailText {
   text-align: left;
   width: 90vw;
+}
+
+
+/* media queries for the parks home page */
+
+@media (min-width: 391) {
+
+  .container {
+    border: solid blue;
+    flex-direction: row;
+  
+  }
+
 }

@@ -204,40 +204,21 @@ const removeDestination = async (destinationId) => {
       const responsiveStates = {
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
-          items: 1,
+          items: 40,
           slidesToSlide: 3 // optional, default to 1.
         },
         tablet: {
           breakpoint: { max: 1024, min: 464 },
-          items: 10,
+          items: 20,
           slidesToSlide: 2 // optional, default to 1.
         },
         mobile: {
           breakpoint: { max: 464, min: 0 },
-          items: 6,
+          items: 10,
           slidesToSlide: 1 // optional, default to 1.
         }
       };
 
-      const responsiveActivities = {
-        desktop: {
-          breakpoint: { max: 3000, min: 1024 },
-          items: 1,
-          slidesToSlide: 3 // optional, default to 1.
-        },
-        tablet: {
-          breakpoint: { max: 1024, min: 464 },
-          items: 8,
-          slidesToSlide: 2 // optional, default to 1.
-        },
-        mobile: {
-          breakpoint: { max: 464, min: 0 },
-          items: 1,
-          slidesToSlide: 1 // optional, default to 1.
-        }
-      };
-     
-   
 
 
       return (
@@ -257,6 +238,7 @@ const removeDestination = async (destinationId) => {
               centerMode={true}
               arrows={false}
               containerClass="carousel"
+              infinite={true}
               >
               {usState}
             </Carousel>
@@ -264,18 +246,19 @@ const removeDestination = async (destinationId) => {
           {/* Carousel for activities */}
           <div>
             <Carousel
-              responsive={responsiveActivities}
+              responsive={responsiveStates}
               centerMode={true}
               arrows={false}
               containerClass="carousel"
+              infinite={true}
               >
               {listActivities}
             </Carousel>
           </div>
-                </div>
-    
-    
+        </div>
+        <div className="parkBox">
           {renderDisplayedParks()}
+        </div>  
         </div>
       );
     }

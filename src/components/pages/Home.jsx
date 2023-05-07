@@ -3,21 +3,26 @@ import { Link, useNavigate } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import debounce from 'lodash.debounce'
+import axios from "axios"
 
 import activities from "../../activites";
 import usStateCodes from "../../usStatesArray";
 
 
 export default function Home(props) {
-  const { parksInfo } = props;
-  const {handleAddDestinationClick} = props;
+  const [message, setMessage] = useState('');
+  const { parksInfo, 
+          handleAddDestinationClick,
+          userDestinations,
+          setUserDestinations,
+          removeDestination } = props;
+
 //   const [foundParks, setFoundParks] = useState([]);
   const [displayedParks, setDisplayedParks] = useState([]);
 //   const navigate = useNavigate();
 
 useEffect(() => {
     if (!parksInfo || parksInfo.length === 0) return;
-  
     // creates a random array from parks info with a max length of 24
     const generateRandomParks = () => {
       return Array.from({ length: 25 }, () => {
@@ -88,6 +93,30 @@ const handleActivity = (activityName) => {
   const debouncedHandleLocation = debounce(handleLocation, 400);
   const debouncedHandleActivity = debounce(handleActivity, 400);
 
+//   remove destination piece. will keep it here till we merge tomorrow
+
+// const removeDestination = async (destinationId) => {
+//     try {
+//         const token = localStorage.getItem('jwt');
+//         const options = {
+//             headers: {
+//                 'Authorization': token,
+//             },
+//         };
+//         await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations/${destinationId}`, options);
+//         console.log(destinationId)
+//         const foundDestinations = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations`, options)
+//         setUserDestinations(foundDestinations.data)
+
+//         setMessage('Destination removed from favorites');
+//     } catch (error) {
+//         setMessage('Error removing destination from favorites');
+//     }
+// };
+
+    const compareId = (parkId) => {
+        return userDestinations.find((id) => id === parkId)
+    }
   
 
     const renderDisplayedParks = () => {
@@ -116,9 +145,13 @@ const handleActivity = (activityName) => {
                   />
               </div> */}
               <div>
+            {(!compareId(park.id))?  
               <button 
               onClick={() => handleAddDestinationClick(park)} className="tileAddDestination">         
-              </button>
+              </button> :
+              <button 
+              onClick={() => removeDestination(park.id)} className="tileRemoveDestination">         
+              </button>}
               </div>
               <div className="parkText">
                 <p className='parkName'>{park?.fullName}</p>

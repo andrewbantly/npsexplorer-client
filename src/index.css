@@ -113,6 +113,15 @@ code {
   width: 1.5rem;
   margin: .3rem .3rem;
 }
+.tileRemoveDestination {
+  border: none;
+  background-image: url('https://ucarecdn.com/70eb6013-f9b9-4377-9c48-4ded6a690e9f/');
+  background-size: cover;
+  background-color: rgba(255, 255, 255, 0);
+  height: 1.5rem;
+  width: 1.5rem;
+  margin: .3rem .3rem;
+}
 
 .footer {
   position: fixed;

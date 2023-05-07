@@ -84,6 +84,7 @@ function App() {
   // ON CLICK ADD TO DESTINATIONS (page details, )
   const handleAddDestinationClick = async (park) => {
     console.log(park)
+    console.log(currentUser)
     const parkId = { parkId: park.id };
     const token = localStorage.getItem('jwt');
     const options = {

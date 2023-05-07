@@ -142,6 +142,7 @@ const handleActivity = (activityName) => {
             <button
               onClick={() => debouncedHandleLocation(`${code}`)}
               disabled={!parksInfo || parksInfo.length === 0}
+              className='stateButton'
             >
               {code}
             </button>
@@ -153,10 +154,10 @@ const handleActivity = (activityName) => {
         return (
           <div className="activityIcon" key={'act' + i}>
             <button
-              onClick={() => debouncedHandleActivity(`${act}`)}
+              onClick={() => debouncedHandleActivity(`${act.key}`)}
               disabled={!parksInfo || parksInfo.length === 0}
             >
-              {act}
+              <img src={act.img} />
             </button>
           </div>
         );

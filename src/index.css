@@ -31,7 +31,7 @@ code {
 }
 
 .searchBar {
-  margin: 1rem;
+  margin: .5rem 1rem 0 1rem;
 }
 
 .searchBar input {
@@ -52,7 +52,11 @@ code {
 }
 
 .activityIcon {
-  margin: .2rem
+  margin: .5rem
+}
+
+.activityIcon img {
+  height: 1rem
 }
 
 .parkImage {
@@ -66,20 +70,20 @@ code {
   justify-content: flex-end;
   text-align: left;
   width: 100%;
-  background-color: rgba(0, 0, 0, .7);
+  background-color: rgba(0, 0, 0, .5);
   border-bottom-left-radius: 7% 35%;
   border-bottom-right-radius: 7% 35%;
 }
 
 .parkName {
-  margin: .2rem .5rem 0 .5rem; 
-  font-size: 1rem; 
+  margin: .2rem .5rem 0 .7rem; 
+  font-size: .8rem; 
   color: white;
-  font-weight: bold;
+  font-weight: 500;
 }
 .parkLocation {
-  margin: 0 .5rem .3rem .5rem; 
-  font-size: .8rem; 
+  margin: 0 .5rem .3rem .7rem; 
+  font-size: .7rem; 
   color: white;
 }
 
@@ -123,7 +127,7 @@ code {
 .imageCarousel {
   display: flex;
   align-content: center;
-  width: 25rem;
+  width: 100%;
 
 }
 
@@ -131,3 +135,30 @@ code {
   margin: .5rem
 }
 
+.stateButton {
+  border: none;
+  background-color: #656D4A;
+  color: white;
+  font-weight: 500;
+}
+
+/* Styling for details */
+
+.parkDetails {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.carouselImage {
+  width: 28rem;
+}
+
+.detailCarousel {
+  width: 90vw;
+}
+
+.parkDetailText {
+  text-align: left;
+  width: 90vw;
+}

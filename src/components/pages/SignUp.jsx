@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 export default function SignUp({ currentUser, setCurrentUser }) {
 	// state for the controlled form
@@ -83,6 +83,7 @@ export default function SignUp({ currentUser, setCurrentUser }) {
 
 				<button type="submit">Register</button>
 			</form>
+			<Link className="login" to='/users/login'>Have an account?</Link>
 		</div>
 	)
 }

@@ -26,37 +26,48 @@ export default function ParkDetails(props) {
 
   return (
     <>
-      <div className='container'>
+      <div className='parkDetailsContainer'>
+        <div className='infoContainer'>
+        <div className='detailsHeader'>
+        <div className='detailName'>   
         <h2>{parksInfo[id]?.fullName}</h2>
-        <div className="parkContainer" key={parksInfo[id]?.id}>
-          <button onClick={() => props.handleAddDestinationClick(parksInfo[id])}>AddDestinations</button>
-          <button onClick={() => props.handleAddExperienceClick(parksInfo[id])}>AddExperience</button>
+        <p>
+            {parksInfo[id]?.addresses[0]?.city}, {parksInfo[id]?.addresses[0]?.stateCode}
+        </p>
+        </div>
+        <div className='selectorBox'>
+          <button onClick={() => props.handleAddDestinationClick(parksInfo[id])}className="tileAddDestination"></button>
+          <button onClick={() => props.handleAddExperienceClick(parksInfo[id])}className="tileAddExperience"></button>
+          </div>
+        </div>  
+        <div className="parkDetails" key={parksInfo[id]?.id}>
           <div>
             <Carousel
            responsive={responsive}
-           centerMode={true}
-           arrows={true}
-           containerClass="carousel"
-           className="park-details-carousel"
+           centerMode={false}
+           arrows={false}
+           containerClass="detailCarousel"
+        //    className="park-details-carousel"
            autoPlay={true}
            infinite={true}
             >
             <div className='imageCarousel'>
-            <img src={parksInfo[id]?.images[0].url} className="parkImage carouselImage" alt={parksInfo[id]?.fullName} />
+            <img src={parksInfo[id]?.images[0].url} className="carouselImage" alt={parksInfo[id]?.fullName} />
             </div>
             <div className='imageCarousel'>
-            <img src={parksInfo[id]?.images[1].url} className="parkImage carouselImage" alt={parksInfo[id]?.fullName} />
+            <img src={parksInfo[id]?.images[1].url} className="carouselImage" alt={parksInfo[id]?.fullName} />
             </div>
             <div className='imageCarousel'>
-            <img src={parksInfo[id]?.images[2].url} className="parkImage carouselImage" alt={parksInfo[id]?.fullName} />
+            <img src={parksInfo[id]?.images[2].url} className="carouselImage" alt={parksInfo[id]?.fullName} />
             </div>
             </Carousel>
           </div>
-          <div className="parkText">
+          <div className="parkDetailText">
             <p>{parksInfo[id]?.description}</p>
             <p>{parksInfo[id]?.operatingHours[0]?.description}</p>
             <p>{parksInfo[id]?.entranceFees[0]?.description}</p>
           </div>
+        </div>
         </div>
       </div>
     </>

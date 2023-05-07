@@ -31,11 +31,18 @@ code {
 }
 
 .searchBar {
-  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  margin: .5rem 1rem 0 1rem;
+  width: 100vw;
 }
 
 .searchBar input {
   text-align: center;
+}
+
+.searchInput {
+  width:18rem
 }
 
 .activityBar {
@@ -48,27 +55,113 @@ code {
 }
 
 .activityIcon {
-  margin: .5rem;
-  border: solid red;
-  width: auto
+  margin: .5rem
+}
+
+.activityIcon img {
+  height: 1rem
+}
+
+.carousel {
+  max-width: 95vw;
+  margin: 0 2.5vw 0 2.5vw
+}
+
+.imageCarousel {
+  display: flex;
+  align-content: center;
+  width: 100%;
+
+}
+
+.stateButton {
+  border: none;
+  background-color: #656D4A;
+  color: white;
+  font-weight: 500;
+  width: 2rem;
+  margin: .5
 }
 
 .parkImage {
   width: 18rem
 }
 
+.parkBox {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100vw
+}
+
 .parkText {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: flex-end;
   text-align: left;
-  margin: 1rem
+  width: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  border-bottom-left-radius: 7% 35%;
+  border-bottom-right-radius: 7% 35%;
+}
+
+.parkName {
+  margin: .2rem .5rem 0 .7rem; 
+  font-size: .8rem; 
+  color: white;
+  font-weight: 500;
+}
+.parkLocation {
+  margin: 0 .5rem .3rem .7rem; 
+  font-size: .7rem; 
+  color: white;
+}
+
+.parkLink {
+  text-decoration: none;
 }
 
 .parkContainer {
-  border:  solid black;
-  margin: 1rem;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  display: flex;
+  border:  none;
+  margin: .25rem;
+  padding: 0;
   width: 18rem;
+  height: 11rem;
+  border-radius: 6%/10%;
+}
+
+.tileAddDestination {
+  border: none;
+  background-image: url('https://ucarecdn.com/ba670d08-4776-4edc-9528-7db89f14bda8/');
+  background-size: cover;
+  background-color: rgba(255, 255, 255, 0);
+  height: 1.5rem;
+  width: 1.5rem;
+  margin: .3rem .3rem;
+}
+.tileRemoveDestination {
+  border: none;
+  background-image: url('https://ucarecdn.com/70eb6013-f9b9-4377-9c48-4ded6a690e9f/');
+  background-size: cover;
+  background-color: rgba(255, 255, 255, 0);
+  height: 1.5rem;
+  width: 1.5rem;
+  margin: .3rem .3rem;
+}
+
+.tileAddExperience{
+  border: none;
+  background-image: url('https://ucarecdn.com/e8ede673-cced-4a2a-a020-941e395828ff/');
+  background-size: cover;
+  background-color: rgba(255, 255, 255, 0);
+  height: 1.5rem;
+  width: 1.5rem;
+  margin: .3rem .3rem;
 }
 
 .footer {
@@ -89,13 +182,94 @@ code {
  
 }
 
-.carousel {
-  max-width: 100vw
+
+.login {
+  margin: .5rem
 }
 
-.imageCarousel {
+
+/* Styling for details */
+
+.parkDetailsContainer {
   display: flex;
-  align-content: center;
-  width: 18rem;
+  justify-content: center;
+  background-color: #B6AD90;
+  height: 100vh;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  align-items: center;
+  background-color: white;
+  border-top-left-radius: 10%;
+  border-top-right-radius: 10%;
+  margin-top: 1rem;
+}
+
+.detailsHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.detailsHeader h2,
+.detailsHeader p,
+.detailsHeader button {
+  margin: .2rem
+}
+
+.detailName {
+  padding: .2rem 1rem;
+  background-color: #656D4A;
+  color: white;
+  border-radius: 5%/30%;
+}
+
+
+.selectorBox {
+  display: flex;
+  margin: .5rem;
+  padding: 0;
+}
+
+.selectorBox button {
+  margin: 0 1rem;
+}
+
+
+
+.parkDetails {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.carouselImage {
+  max-height: 30rem
+}
+
+.detailCarousel {
+  width: 50vw;
+}
+
+.parkDetailText {
+  text-align: left;
+  margin: 1rem;
+}
+
+
+/* media queries for the parks home page */
+
+@media (min-width: 391) {
+
+  .container {
+    border: solid blue;
+    flex-direction: row;
+  
+  }
 
 }

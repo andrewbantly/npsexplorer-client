@@ -1,20 +1,29 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import debounce from 'lodash.debounce'
+import axios from "axios"
 
 import activities from "../../activites";
 import usStateCodes from "../../usStatesArray";
 
+
 export default function Home(props) {
-  const { parksInfo } = props;
+  const [message, setMessage] = useState('');
+  const { parksInfo, 
+          handleAddDestinationClick,
+          userDestinations,
+          setUserDestinations,
+          removeDestination 
+        } = props;
+
 //   const [foundParks, setFoundParks] = useState([]);
   const [displayedParks, setDisplayedParks] = useState([]);
 //   const navigate = useNavigate();
 
 useEffect(() => {
     if (!parksInfo || parksInfo.length === 0) return;
-  
     // creates a random array from parks info with a max length of 24
     const generateRandomParks = () => {
       return Array.from({ length: 25 }, () => {
@@ -45,15 +54,8 @@ useEffect(() => {
     setDisplayedParks(searchPark); // Updated this line
   };
   
-  
+  const debouncedHandleSearch = debounce(handleSearch, 400);
   // when the usewr clicks the search button this sends the user to the search results page along with an object that we use to reference and render a response. to use this on the next page we need to install the useLocation hook. Note state IS NOT taco
-
-//   const handleClick = () => {
-//     if (foundParks.length > 0) {
-//       navigate("/search/results", { state: { foundParks } });
-//     }
-//   };
-    
 
 const handleActivity = (activityName) => {
     // Filter the parks that have the specified activity
@@ -69,6 +71,8 @@ const handleActivity = (activityName) => {
     // Update the displayed parks with the filtered parks
     setDisplayedParks(searchPark);
   };
+
+
 
   const handleLocation = (stateCode) => {
     console.log("handleLocation called with stateCode:", stateCode);
@@ -87,32 +91,47 @@ const handleActivity = (activityName) => {
   };
 
 
+  const debouncedHandleLocation = debounce(handleLocation, 400);
+  const debouncedHandleActivity = debounce(handleActivity, 400);
+
+
+    const compareId = (parkId) => {
+        return userDestinations.find((id) => id === parkId)
+    }
   
+
     const renderDisplayedParks = () => {
+        if (!parksInfo || parksInfo.length === 0) {
+            return <div>Loading...</div>;
+          }
         if (displayedParks.length === 0) {
             return <p>No parks found matching your search criteria.</p>;
           }
         return displayedParks.map(({ park, originalIndex }) => (
-            <Link to={`/parks/${park?.fullName}/${originalIndex}`} key={`${park?.id}-${originalIndex}`}>
-              <div className="parkContainer">
+            <Link 
+            to={`/parks/${park?.fullName}/${originalIndex}`} 
+            key={`${park?.id}-${originalIndex}`} 
+            className='parkLink'>
+                <div className="parkContainer"
+                style={{
+                backgroundImage: `url(${park?.images[0].url})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+             }}>
               <div>
-                <img
-                  src={park?.images[0].url}
-                  className="parkImage"
-                  alt={park?.fullName}
-                  />
+            {(!compareId(park.id))?  
+              <button 
+              onClick={() => handleAddDestinationClick(park)} className="tileAddDestination">         
+              </button> :
+              <button 
+              onClick={() => removeDestination(park.id)} className="tileRemoveDestination">         
+              </button>}
               </div>
               <div className="parkText">
-                <h3>{park?.fullName}</h3>
-                <p>
+                <p className='parkName'>{park?.fullName}</p>
+                <p className='parkLocation'>
                   {park?.addresses[0]?.city}, {park?.addresses[0]?.stateCode}
                 </p>
-                <p>
-                  Activities: {park?.activities[0]?.name},{" "}
-                  {park?.activities[1]?.name}, {park?.activities[2]?.name},{" "}
-                  {park?.activities[3]?.name}, {park?.activities[4]?.name}
-                </p>
-                <p>More Info...</p>
               </div>
             </div>
           </Link>
@@ -124,8 +143,9 @@ const handleActivity = (activityName) => {
         return (
           <div className="activityIcon" key={'code' + i}>
             <button
-              onClick={() => handleLocation(`${code}`)}
+              onClick={() => debouncedHandleLocation(`${code}`)}
               disabled={!parksInfo || parksInfo.length === 0}
+              className='stateButton'
             >
               {code}
             </button>
@@ -137,10 +157,10 @@ const handleActivity = (activityName) => {
         return (
           <div className="activityIcon" key={'act' + i}>
             <button
-              onClick={() => handleActivity(`${act}`)}
+              onClick={() => debouncedHandleActivity(`${act.key}`)}
               disabled={!parksInfo || parksInfo.length === 0}
             >
-              {act}
+              <img src={act.img} />
             </button>
           </div>
         );
@@ -148,25 +168,24 @@ const handleActivity = (activityName) => {
   
       
 
-      const responsive = {
+      const responsiveStates = {
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
-          items: 50,
+          items: 40,
           slidesToSlide: 3 // optional, default to 1.
         },
         tablet: {
           breakpoint: { max: 1024, min: 464 },
-          items: 2,
+          items: 20,
           slidesToSlide: 2 // optional, default to 1.
         },
         mobile: {
           breakpoint: { max: 464, min: 0 },
-          items: 1,
+          items: 10,
           slidesToSlide: 1 // optional, default to 1.
         }
       };
-     
-   
+
 
 
       return (
@@ -175,16 +194,18 @@ const handleActivity = (activityName) => {
           <div className="searchBar">
           <form>
               <input
+                className="searchInput"
                 id="name"
-                placeholder="Search for park"
-                onChange={handleSearch}
+                placeholder="Search for a park or sort by state/activity"
+                onChange={debouncedHandleSearch}
               />
             </form>
             <Carousel
-              responsive={responsive}
+              responsive={responsiveStates}
               centerMode={true}
-              arrows={true}
+              arrows={false}
               containerClass="carousel"
+              infinite={true}
               >
               {usState}
             </Carousel>
@@ -192,18 +213,19 @@ const handleActivity = (activityName) => {
           {/* Carousel for activities */}
           <div>
             <Carousel
-              responsive={responsive}
+              responsive={responsiveStates}
               centerMode={true}
-              arrows={true}
+              arrows={false}
               containerClass="carousel"
+              infinite={true}
               >
               {listActivities}
             </Carousel>
           </div>
-                </div>
-    
-    
+        </div>
+        <div className="parkBox">
           {renderDisplayedParks()}
+        </div>  
         </div>
       );
     }

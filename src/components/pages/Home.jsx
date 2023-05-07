@@ -15,7 +15,8 @@ export default function Home(props) {
           handleAddDestinationClick,
           userDestinations,
           setUserDestinations,
-          removeDestination } = props;
+          //removeDestination 
+        } = props;
 
 //   const [foundParks, setFoundParks] = useState([]);
   const [displayedParks, setDisplayedParks] = useState([]);
@@ -93,26 +94,26 @@ const handleActivity = (activityName) => {
   const debouncedHandleLocation = debounce(handleLocation, 400);
   const debouncedHandleActivity = debounce(handleActivity, 400);
 
-//   remove destination piece. will keep it here till we merge tomorrow
+  //remove destination piece. will keep it here till we merge tomorrow
 
-// const removeDestination = async (destinationId) => {
-//     try {
-//         const token = localStorage.getItem('jwt');
-//         const options = {
-//             headers: {
-//                 'Authorization': token,
-//             },
-//         };
-//         await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations/${destinationId}`, options);
-//         console.log(destinationId)
-//         const foundDestinations = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations`, options)
-//         setUserDestinations(foundDestinations.data)
+const removeDestination = async (destinationId) => {
+    try {
+        const token = localStorage.getItem('jwt');
+        const options = {
+            headers: {
+                'Authorization': token,
+            },
+        };
+        await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations/${destinationId}`, options);
+        console.log(destinationId)
+        const foundDestinations = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations`, options)
+        setUserDestinations(foundDestinations.data)
 
-//         setMessage('Destination removed from favorites');
-//     } catch (error) {
-//         setMessage('Error removing destination from favorites');
-//     }
-// };
+        setMessage('Destination removed from favorites');
+    } catch (error) {
+        setMessage('Error removing destination from favorites');
+    }
+};
 
     const compareId = (parkId) => {
         return userDestinations.find((id) => id === parkId)

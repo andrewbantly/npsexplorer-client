@@ -10,6 +10,7 @@ import usStateCodes from "../../usStatesArray";
 
 export default function Home(props) {
   const { parksInfo } = props;
+  const {handleAddDestinationClick} = props;
 //   const [foundParks, setFoundParks] = useState([]);
   const [displayedParks, setDisplayedParks] = useState([]);
 //   const navigate = useNavigate();
@@ -49,13 +50,6 @@ useEffect(() => {
   
   const debouncedHandleSearch = debounce(handleSearch, 400);
   // when the usewr clicks the search button this sends the user to the search results page along with an object that we use to reference and render a response. to use this on the next page we need to install the useLocation hook. Note state IS NOT taco
-
-//   const handleClick = () => {
-//     if (foundParks.length > 0) {
-//       navigate("/search/results", { state: { foundParks } });
-//     }
-//   };
-    
 
 const handleActivity = (activityName) => {
     // Filter the parks that have the specified activity
@@ -104,8 +98,11 @@ const handleActivity = (activityName) => {
             return <p>No parks found matching your search criteria.</p>;
           }
         return displayedParks.map(({ park, originalIndex }) => (
-            <Link to={`/parks/${park?.fullName}/${originalIndex}`} key={`${park?.id}-${originalIndex}`} className='parkLink'>
-              <div className="parkContainer"
+            <Link 
+            to={`/parks/${park?.fullName}/${originalIndex}`} 
+            key={`${park?.id}-${originalIndex}`} 
+            className='parkLink'>
+                <div className="parkContainer"
                 style={{
                 backgroundImage: `url(${park?.images[0].url})`,
                 backgroundSize: 'cover',
@@ -118,6 +115,11 @@ const handleActivity = (activityName) => {
                   alt={park?.fullName}
                   />
               </div> */}
+              <div>
+              <button 
+              onClick={() => handleAddDestinationClick(park)} className="tileAddDestination">         
+              </button>
+              </div>
               <div className="parkText">
                 <p className='parkName'>{park?.fullName}</p>
                 <p className='parkLocation'>

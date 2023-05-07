@@ -122,7 +122,9 @@ function App() {
             <Routes>
               <Route
                 path='/'
-                element={<Home parksInfo={parksInfo} />}
+                element={<Home parksInfo={parksInfo} 
+                handleAddDestinationClick={handleAddDestinationClick}
+                />}
               />
               <Route
                 path='/parks/:parkname/:id'

@@ -25,6 +25,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [parksInfo, setParksInfo] = useState([]);
   const [userDestinations, setUserDestinations] = useState([])
+  const [message, setMessage] = useState('');
 
   //  Pings the api and stores the response data in the parksInfo State
   useEffect(() => {
@@ -113,6 +114,25 @@ function App() {
     await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${currentUser._id}`, newExperience, options);
   }
 
+  const removeDestination = async (destinationId) => {
+    try {
+        const token = localStorage.getItem('jwt');
+        const options = {
+            headers: {
+                'Authorization': token,
+            },
+        };
+        await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations/${destinationId}`, options);
+        console.log(destinationId)
+        const foundDestinations = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations`, options)
+        setUserDestinations(foundDestinations.data)
+
+        setMessage('Destination removed from favorites');
+    } catch (error) {
+        setMessage('Error removing destination from favorites');
+    }
+};
+
   return (
     <div className="App">
       <div className="content">
@@ -124,6 +144,7 @@ function App() {
                 element={<Home parksInfo={parksInfo} 
                 handleAddDestinationClick={handleAddDestinationClick}
                 userDestinations={userDestinations}
+                removeDestination={removeDestination}
                 />}
               />
               <Route

@@ -15,7 +15,7 @@ export default function Home(props) {
           handleAddDestinationClick,
           userDestinations,
           setUserDestinations,
-          //removeDestination 
+          removeDestination 
         } = props;
 
 //   const [foundParks, setFoundParks] = useState([]);
@@ -94,26 +94,6 @@ const handleActivity = (activityName) => {
   const debouncedHandleLocation = debounce(handleLocation, 400);
   const debouncedHandleActivity = debounce(handleActivity, 400);
 
-  //remove destination piece. will keep it here till we merge tomorrow
-
-const removeDestination = async (destinationId) => {
-    try {
-        const token = localStorage.getItem('jwt');
-        const options = {
-            headers: {
-                'Authorization': token,
-            },
-        };
-        await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations/${destinationId}`, options);
-        console.log(destinationId)
-        const foundDestinations = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations`, options)
-        setUserDestinations(foundDestinations.data)
-
-        setMessage('Destination removed from favorites');
-    } catch (error) {
-        setMessage('Error removing destination from favorites');
-    }
-};
 
     const compareId = (parkId) => {
         return userDestinations.find((id) => id === parkId)
@@ -138,13 +118,6 @@ const removeDestination = async (destinationId) => {
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
              }}>
-              {/* <div>
-                <img
-                  src={park?.images[0].url}
-                  className="parkImage"
-                  alt={park?.fullName}
-                  />
-              </div> */}
               <div>
             {(!compareId(park.id))?  
               <button 
@@ -159,12 +132,6 @@ const removeDestination = async (destinationId) => {
                 <p className='parkLocation'>
                   {park?.addresses[0]?.city}, {park?.addresses[0]?.stateCode}
                 </p>
-                {/* <p>
-                  Activities: {park?.activities[0]?.name},{" "}
-                  {park?.activities[1]?.name}, {park?.activities[2]?.name},{" "}
-                  {park?.activities[3]?.name}, {park?.activities[4]?.name}
-                </p>
-                <p>More Info...</p> */}
               </div>
             </div>
           </Link>

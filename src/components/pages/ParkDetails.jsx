@@ -26,14 +26,21 @@ export default function ParkDetails(props) {
 
   return (
     <>
-      <div className='container'>
+      <div className='parkDetailsContainer'>
+        <div className='infoContainer'>
+        <div className='detailsHeader'>
+        <div className='detailName'>   
         <h2>{parksInfo[id]?.fullName}</h2>
         <p>
             {parksInfo[id]?.addresses[0]?.city}, {parksInfo[id]?.addresses[0]?.stateCode}
         </p>
+        </div>
+        <div className='selectorBox'>
+          <button onClick={() => props.handleAddDestinationClick(parksInfo[id])}className="tileAddDestination"></button>
+          <button onClick={() => props.handleAddExperienceClick(parksInfo[id])}className="tileAddExperience"></button>
+          </div>
+        </div>  
         <div className="parkDetails" key={parksInfo[id]?.id}>
-          <button onClick={() => props.handleAddDestinationClick(parksInfo[id])}>AddDestinations</button>
-          <button onClick={() => props.handleAddExperienceClick(parksInfo[id])}>AddExperience</button>
           <div>
             <Carousel
            responsive={responsive}
@@ -60,6 +67,7 @@ export default function ParkDetails(props) {
             <p>{parksInfo[id]?.operatingHours[0]?.description}</p>
             <p>{parksInfo[id]?.entranceFees[0]?.description}</p>
           </div>
+        </div>
         </div>
       </div>
     </>

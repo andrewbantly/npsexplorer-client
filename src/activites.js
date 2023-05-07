@@ -1,6 +1,6 @@
 const activities = [{
     key : "Arts and Culture",
-    img : "https://ucarecdn.com/48ce5d34-f8f0-4e35-a4f7-e68c7057cb4c/"
+    img : "https://ucarecdn.com/48ce5d34-f8f0-4e35-a4f7-e68c7057cb4c/"}
     // "Astronomy",
     // "Auto and ATV",
     // "Biking",
@@ -40,6 +40,6 @@ const activities = [{
     // "Tubing",
     // "Water Skiing",
     // "Wildlife Watching"
-  }]
+  ]
 
   export default activities

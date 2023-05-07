@@ -154,6 +154,16 @@ code {
   margin: .3rem .3rem;
 }
 
+.tileAddExperience{
+  border: none;
+  background-image: url('https://ucarecdn.com/e8ede673-cced-4a2a-a020-941e395828ff/');
+  background-size: cover;
+  background-color: rgba(255, 255, 255, 0);
+  height: 1.5rem;
+  width: 1.5rem;
+  margin: .3rem .3rem;
+}
+
 .footer {
   position: fixed;
   bottom: 0;
@@ -180,6 +190,58 @@ code {
 
 /* Styling for details */
 
+.parkDetailsContainer {
+  display: flex;
+  justify-content: center;
+  background-color: #B6AD90;
+  height: 100vh;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  align-items: center;
+  background-color: white;
+  border-top-left-radius: 10%;
+  border-top-right-radius: 10%;
+  margin-top: 1rem;
+}
+
+.detailsHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.detailsHeader h2,
+.detailsHeader p,
+.detailsHeader button {
+  margin: .2rem
+}
+
+.detailName {
+  padding: .2rem 1rem;
+  background-color: #656D4A;
+  color: white;
+  border-radius: 5%/30%;
+}
+
+
+.selectorBox {
+  display: flex;
+  margin: .5rem;
+  padding: 0;
+}
+
+.selectorBox button {
+  margin: 0 1rem;
+}
+
+
+
 .parkDetails {
   display: flex;
   align-items: center;
@@ -187,16 +249,16 @@ code {
 }
 
 .carouselImage {
-  width: 28rem;
+  max-height: 30rem
 }
 
 .detailCarousel {
-  width: 90vw;
+  width: 50vw;
 }
 
 .parkDetailText {
   text-align: left;
-  width: 90vw;
+  margin: 1rem;
 }
 
 

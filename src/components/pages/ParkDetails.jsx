@@ -52,7 +52,7 @@ export default function ParkDetails(props) {
         </p>
         </div>
         <div className='selectorBox'>
-          {(!compareId(parksInfo[id].id))? 
+          {(!compareId(parksInfo[id]?.id))? 
           <button onClick={() => {checkLoginStatusAndRedirect()
           if(currentUser) {props.handleAddDestinationClick(parksInfo[id])}
           }} className="tileAddDestination"></button> :

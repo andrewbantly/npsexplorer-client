@@ -1,13 +1,17 @@
 body {
-    background-color: rgb(214, 214, 214);
+    background-color: rgb(164, 172, 134, 0.9);
+    font-family: 'Baloo 2', sans-serif;
+    /* font-family: 'Itim', cursive; */
+    /* font-family: 'Lilita One', cursive; */
 }
 
 .profileHeader {
     display: flex;
     margin: 2rem 2rem;
-    background-color: rgb(235, 235, 235);
+    background-color: rgb(101, 109, 74);
     border-radius: 10px;
-    box-shadow: 0 0 3px black;
+    border: 2px solid rgb(13, 16, 10);
+    box-shadow: 0 0 3px rgb(13, 16, 10);
     align-items: center;
 }
 
@@ -17,10 +21,23 @@ body {
 
 .profileName {
     margin: 0 1rem;
+    color: rgb(194, 197, 170)
 }
 
 .profileHeaderRight {
     margin: 1rem;
+}
+
+.profileImg {
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid rgb(164, 172, 134);
+}
+
+.vistType {
+    /* color: rgb(51, 61, 41); */
+    color: rgb(194, 197, 170)
+    /* color: rgb(164, 172, 134) */
 }
 
 .noMargin {
@@ -32,7 +49,7 @@ body {
 }
 
 .lineBreak {
-    border: 1px solid rgb(160, 160, 160);
+    border: 1px solid rgb(51, 61, 41, 0.7);
     border-radius: 3px;
 }
 
@@ -45,14 +62,15 @@ body {
 }
 
 .logoutImg {
-    height: 20px;
-    opacity: 0.5;
+    height: 1.2rem;
+    opacity: 0.7;
 }
 
 .logoutText {
-    color: rgba(38, 48, 80, 0.5);
+    color: rgba(51, 61, 41, 0.8);
     margin: 0;
     font-size: 0.5rem;
+    font-weight: 600;
 }
 
 .experienceHeader {
@@ -61,21 +79,26 @@ body {
 
 .experienceHeaderText {
     font-size: 1rem;
+    color: rgb(51, 61, 41);
 }
 
 .experienceCard {
     margin: 1rem 2rem;
-    background-color: rgb(235, 235, 235);
+    /* background-color: rgb(200, 194, 172); */
+    background-color: rgb(182, 173, 144);
     border-radius: 10px;
-    box-shadow: 0 0 3px black;
+    border: 1.5px solid rgb(51, 61, 41);
+    box-shadow: 0 0 3px rgb(51, 61, 41);
     display: flex;
+    align-items: center;
 }
 
 .experienceText {
     color: rgb(1, 29, 4);
-    margin: 1.5rem 0.5rem 0 0;
+    font-weight: 600;
+    margin: 0 auto;
     width: 70%;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
 }
 
 .experienceImgContainer {
@@ -84,6 +107,7 @@ body {
     margin: 0.5rem;
     border-radius: 10px;
     box-shadow: 0 0 1px black;
+    border: 0.5px solid rgb(1, 29, 4);
     overflow: hidden;
 }
 
@@ -92,7 +116,6 @@ body {
 }
 
 .uploadcare--widget__button {
-    background-color: green;
-    content: "upload";
-    color: black
+    background-color: rgb(101, 109, 74);
+    color: rgb(194, 197, 170)
 }

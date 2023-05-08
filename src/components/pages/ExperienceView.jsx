@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ExperienceEdit from "./ExperienceEdit";
 import axios from "axios"
+import experienceView from "../../styles/experienceView.css"
 
 export default function ExperienceView(props) {
     const [experienceDetails, setExperienceDetails] = useState(props.experienceView)
@@ -23,7 +24,7 @@ export default function ExperienceView(props) {
 
             const updatedExperiencesList = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${props.currentUser._id}`, options)
             props.setExperiencesList(updatedExperiencesList.data)
-
+            
             setShowEditForm(false)
         } catch (err) {
             console.warn(err)
@@ -34,16 +35,23 @@ export default function ExperienceView(props) {
 
     const showExperience = (
         <>
-            <h1>{experienceDetails.location}</h1>
-            <img src={experienceDetails.image}
-                style={{
-                    height: "200px"
-                }}
+            <div onClick={() => props.setShowExperience(false)} className="backButton">
+                <img src={require("../../media/backButton.png")}
+                    className='backButtonImg'></img>
+            </div>
+            <h1 className="experienceViewHeader">{experienceDetails.location}</h1>
+            <img className="experienceViewImg" src={experienceDetails.image}
             />
-            <p>{experienceDetails.description}</p>
-            <button onClick={() => props.setShowExperience(false)}>Back</button>
-            <button onClick={() => setShowEditForm(true)} >Edit</button>
-            <button onClick={() => props.handleDeleteClick(experienceDetails)}>Delete</button>
+            <p className="experienceViewDescription">{experienceDetails.description}</p>
+            <div className="experienceViewButtonsContainer">
+                <div className="editButton" onClick={() => setShowEditForm(true)}>
+                    <img className="editButtonImg" src={require("../../media/edit.png")}></img>
+                </div>
+                <div className="deleteButton" onClick={() => props.handleDeleteClick(experienceDetails)}>
+                    <img src={require("../../media/delete.png")}
+                        className='deleteButtonImg'></img>
+                </div>
+            </div>
         </>
     )
 

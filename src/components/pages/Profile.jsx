@@ -12,6 +12,8 @@ export default function Profile({ currentUser, handleLogout }) {
     const [experiencesList, setExperiencesList] = useState([]);
     const [showExperience, setShowExperience] = useState(false);
     const [experienceView, setExperiencesView] = useState({});
+    const [experiencesCount, setExperiencesCount] = useState(0);
+    const [destinationsCount, setDestinationsCount] =useState(0);
     const [header, setHeader] = useState(true);
     const [userImage, setUserImage] = useState(require("../../media/defaultAvatar.png")) // IMPORT AVATAR FROM SRC/MEDIA dir
     const navigate = useNavigate()
@@ -71,6 +73,7 @@ export default function Profile({ currentUser, handleLogout }) {
             const updatedExperiences = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${currentUser._id}`, options)
             console.log("found exps: ", updatedExperiences.data.length)
             setExperiencesList(updatedExperiences)
+            setExperiencesCount(updatedExperiences.data.length)
             if (updatedExperiences.data.length === 0) {
                 setHeader(true)
             }
@@ -106,6 +109,11 @@ export default function Profile({ currentUser, handleLogout }) {
                     setHeader(false)
                 }
                 setExperiencesList(findExperiences)
+                setExperiencesCount(findExperiences.data.length)
+
+
+                const findDestinations = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations`, options)
+                setDestinationsCount(findDestinations.data.length)
             } catch (err) {
                 console.warn(err)
                 if (err.response) {
@@ -151,21 +159,15 @@ export default function Profile({ currentUser, handleLogout }) {
             </div>
             <div className='profileHeader'>
                 <div className='profileHeaderLeft'>
-                    <img src={userImage}
-                        style={{
-                            height: "100px",
-                            borderRadius: "50%"
-                        }}
-
-                    ></img>
+                    <img src={userImage} className='profileImg'></img>
                     <h1 className='profileName'>{currentUser?.name}</h1>
                 </div>
                 <div className='profileHeaderRight'>
-                    <h3 className='noMargin leftAligin'>3</h3>
-                    <p className='noMargin'>Destinations</p>
+                    <h3 className='noMargin leftAligin vistType'>{destinationsCount}</h3>
+                    <p className='noMargin vistType'>Destinations</p>
                     <hr className='lineBreak'></hr>
-                    <h3 className='noMargin leftAligin'>5</h3>
-                    <p className='noMargin'>Experiences</p>
+                    <h3 className='noMargin leftAligin vistType'>{experiencesCount}</h3>
+                    <p className='noMargin vistType'>Experiences</p>
                 </div>
             </div>
             <div>

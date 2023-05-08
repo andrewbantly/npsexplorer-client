@@ -73,7 +73,9 @@ export default function ParkDetails(props) {
            containerClass="detailCarousel"
         //    className="park-details-carousel"
            autoPlay={true}
+           interval={6000}
            infinite={true}
+           transitionDuration={1500}
             >
             <div className='imageCarousel'>
             <img src={parksInfo[id]?.images[0].url} className="carouselImage" alt={parksInfo[id]?.fullName} />

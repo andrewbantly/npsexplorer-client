@@ -70,8 +70,8 @@ code {
 .imageCarousel {
   display: flex;
   align-content: center;
+  justify-content: center;
   width: 100%;
-
 }
 
 .stateButton {
@@ -84,7 +84,7 @@ code {
 }
 
 .parkImage {
-  width: 18rem
+  width: 18rem;
 }
 
 .parkBox {
@@ -260,7 +260,9 @@ code {
 }
 
 .carouselImage {
-  max-height: 30rem
+  display: flex;
+  justify-items: flex-end;
+  max-height: 30rem;
 }
 
 .detailCarousel {

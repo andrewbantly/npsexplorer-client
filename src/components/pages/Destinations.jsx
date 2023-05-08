@@ -28,7 +28,6 @@ const DestinationsTitle = styled.h2`
   text-align: center;
 `;
 
-
 const ButtonsContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -41,7 +40,6 @@ const ButtonsContainer = styled.div`
   }
 `;
 
-
 const RemoveButton = styled.button`
   border: none;
   background-color: transparent;
@@ -51,7 +49,6 @@ const RemoveButton = styled.button`
   margin: 0;
   margin-right: 16px; 
   cursor: pointer;
-  
 
   &::before {
     content: "";
@@ -64,7 +61,6 @@ const RemoveButton = styled.button`
     background-size: contain;
   }
 `;
-
 
 const ExperienceButton = styled.button`
   border: none;

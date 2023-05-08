@@ -5,7 +5,6 @@ import { useNavigate, Link } from 'react-router-dom'
 import styled from 'styled-components';
 
 
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -37,7 +36,6 @@ const Container = styled.div`
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   }
 `;
-
 
 const Title = styled.h1`
   font-size: 35px;
@@ -95,7 +93,6 @@ const SubmitButton = styled.button`
   }
 `;
 
-
 const ContentWrapper = styled.div`
   // margin-top: 2rem;
   background-color: rgba(255, 255, 255, .9);
@@ -104,7 +101,6 @@ const ContentWrapper = styled.div`
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.9);
 `;
 
-
 const RegisterLink = styled(Link)`
   color: rgb(101, 109, 74);
   text-decoration: none;
@@ -112,7 +108,6 @@ const RegisterLink = styled(Link)`
     text-decoration: underline;
   }
 `;
-
 
 
 export default function Login({ currentUser, setCurrentUser }) {

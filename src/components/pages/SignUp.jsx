@@ -27,7 +27,6 @@ const Title = styled.h1`
   top: 1rem;
 `;
 
-
 const ErrorMessage = styled.p`
 color: #ff5a5f;
 margin-bottom: 16px;
@@ -82,7 +81,6 @@ const ContentWrapper = styled.div`
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.9);
 `;
 
-
 const LoginLink = styled(Link)`
   color: rgb(101, 109, 74);
   text-decoration: none;
@@ -90,7 +88,6 @@ const LoginLink = styled(Link)`
     text-decoration: underline;
   }
 `;
-
 
 
 export default function SignUp({ currentUser, setCurrentUser }) {
@@ -139,6 +136,7 @@ export default function SignUp({ currentUser, setCurrentUser }) {
 
 	return (
 		<Container>
+			
 			<Title>Register</Title>
 
 			<ContentWrapper>

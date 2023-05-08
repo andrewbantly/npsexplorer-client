@@ -22,6 +22,10 @@ export default function ParkDetails(props) {
         return userDestinations.find((id) => id === parkId)
     }
 
+  const activityNames = parksInfo[id]?.activities.map(activity => activity.name).join(', ')
+
+  
+
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -43,10 +47,9 @@ export default function ParkDetails(props) {
   return (
     <>
       <div className='parkDetailsContainer'>
-        <div className='infoContainer'>
         <div className='detailsHeader'>
         <div className='detailName'>   
-        <h2>{parksInfo[id]?.fullName}</h2>
+        <p className='parkTitle'>{parksInfo[id]?.fullName}</p>
         <p>
             {parksInfo[id]?.addresses[0]?.city}, {parksInfo[id]?.addresses[0]?.stateCode}
         </p>
@@ -63,9 +66,8 @@ export default function ParkDetails(props) {
           if(currentUser) {props.handleAddExperienceClick(parksInfo[id])}
           }}className="tileAddExperience"></button>
           </div>
-        </div>  
-        <div className="parkDetails" key={parksInfo[id]?.id}>
-          <div>
+        </div>
+        <div className='carouselContainer'>  
             <Carousel
            responsive={responsive}
            centerMode={false}
@@ -77,23 +79,26 @@ export default function ParkDetails(props) {
            infinite={true}
            transitionDuration={1500}
             >
-            <div className='imageCarousel'>
+            <div className='carouselImageContainer'>
             <img src={parksInfo[id]?.images[0].url} className="carouselImage" alt={parksInfo[id]?.fullName} />
             </div>
-            <div className='imageCarousel'>
+            <div className='carouselImageContainer'>
             <img src={parksInfo[id]?.images[1].url} className="carouselImage" alt={parksInfo[id]?.fullName} />
             </div>
-            <div className='imageCarousel'>
+            <div className='carouselImageContainer'>
             <img src={parksInfo[id]?.images[2].url} className="carouselImage" alt={parksInfo[id]?.fullName} />
             </div>
             </Carousel>
           </div>
+          <div className="parkDetails" key={parksInfo[id]?.id}>
           <div className="parkDetailText">
+            <h4>Activities:</h4>
+            <p>{activityNames}</p>
+            <h4>Description:</h4>
             <p>{parksInfo[id]?.description}</p>
             <p>{parksInfo[id]?.operatingHours[0]?.description}</p>
             <p>{parksInfo[id]?.entranceFees[0]?.description}</p>
           </div>
-        </div>
         </div>
       </div>
     </>

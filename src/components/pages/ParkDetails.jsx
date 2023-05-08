@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom'
+import {useState} from 'react'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -9,6 +10,7 @@ export default function ParkDetails(props) {
           userDestinations } = props
   const { name, id } = useParams()
   const navigate = useNavigate()
+  const [showText, setShowText] = useState(false);
 
   const checkLoginStatusAndRedirect = () => {
     console.log(currentUser)
@@ -24,7 +26,16 @@ export default function ParkDetails(props) {
 
   const activityNames = parksInfo[id]?.activities.map(activity => activity.name).join(', ')
 
-  
+  const handleClick = () => {
+    checkLoginStatusAndRedirect();
+    if (currentUser) {
+      props.handleAddExperienceClick(parksInfo[id]);
+      setShowText(true);
+      setTimeout(() => {
+        setShowText(false);
+      }, 3000);
+    }
+  };
 
   const responsive = {
     desktop: {
@@ -62,11 +73,11 @@ export default function ParkDetails(props) {
           <button 
               onClick={() => removeDestination(parksInfo[id].id)} className="tileRemoveDestination">         
               </button>}
-          <button onClick={() => {checkLoginStatusAndRedirect()
-          if(currentUser) {props.handleAddExperienceClick(parksInfo[id])}
-          }}className="tileAddExperience"></button>
+              <button onClick={handleClick} className="tileAddExperience">
+          </button>
           </div>
-        </div>
+          {showText && <p>Experience added</p>}
+          </div>
         <div className='carouselContainer'>  
             <Carousel
            responsive={responsive}
@@ -79,14 +90,14 @@ export default function ParkDetails(props) {
            infinite={true}
            transitionDuration={1500}
             >
-            <div className='carouselImageContainer'>
-            <img src={parksInfo[id]?.images[0].url} className="carouselImage" alt={parksInfo[id]?.fullName} />
+            <div className='carouselImageContainer' 
+              style={{backgroundImage: `url(${parksInfo[id]?.images[0].url})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
             </div>
-            <div className='carouselImageContainer'>
-            <img src={parksInfo[id]?.images[1].url} className="carouselImage" alt={parksInfo[id]?.fullName} />
+            <div className='carouselImageContainer' 
+              style={{backgroundImage: `url(${parksInfo[id]?.images[1].url})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
             </div>
-            <div className='carouselImageContainer'>
-            <img src={parksInfo[id]?.images[2].url} className="carouselImage" alt={parksInfo[id]?.fullName} />
+            <div className='carouselImageContainer' 
+              style={{backgroundImage: `url(${parksInfo[id]?.images[2].url})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
             </div>
             </Carousel>
           </div>

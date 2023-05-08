@@ -24,6 +24,14 @@ const ParkContainer = styled.div`
     }
 `;
 
+const ButtonsContainer = styled.div`
+    display: flex;
+
+    @media (max-width: 480px) {
+        flex-direction: column;
+    }
+`;
+
 const RemoveButton = styled.button`
     border: none;
     background-color: #b56576;
@@ -32,14 +40,6 @@ const RemoveButton = styled.button`
     padding: 0.25rem 0.5rem;
     margin: .5rem;
     border-radius: 4px;
-`;
-
-const ButtonsContainer = styled.div`
-    display: flex;
-
-    @media (max-width: 480px) {
-        flex-direction: column;
-    }
 `;
 
 const ExperienceButton = styled.button`
@@ -156,7 +156,6 @@ const DestinationsPage = (props) => {
         return (
             <ParkContainer>
 
-
                 <Link to={`/parks/${park?.fullName}/${originalIndex}`} key={`${park?.id}-${originalIndex}`}>
 
                     <div>
@@ -164,6 +163,7 @@ const DestinationsPage = (props) => {
                             src={park?.images[0].url}
                             alt={park?.fullName}
                         />
+
                     </div>
                     <ButtonsContainer>
                         <RemoveButton
@@ -171,12 +171,14 @@ const DestinationsPage = (props) => {
                         >
                             Remove
                         </RemoveButton>
+
                         <ExperienceButton
                             onClick={() => handleAddExperienceClick(park)}
                         >
                             Add
                         </ExperienceButton>
                     </ButtonsContainer>
+                    
                     <ParkText>
                         <h3>{park?.fullName}</h3>
                         <div>

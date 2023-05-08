@@ -3,7 +3,10 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 export default function ParkDetails(props) {
-  const { parksInfo, currentUser } = props
+  const { parksInfo, 
+          currentUser,
+          removeDestination,
+          userDestinations } = props
   const { name, id } = useParams()
   const navigate = useNavigate()
 
@@ -14,6 +17,10 @@ export default function ParkDetails(props) {
       return
     }
   }
+
+  const compareId = (parkId) => {
+        return userDestinations.find((id) => id === parkId)
+    }
 
   const responsive = {
     desktop: {
@@ -45,9 +52,13 @@ export default function ParkDetails(props) {
         </p>
         </div>
         <div className='selectorBox'>
+          {(!compareId(parksInfo[id].id))? 
           <button onClick={() => {checkLoginStatusAndRedirect()
           if(currentUser) {props.handleAddDestinationClick(parksInfo[id])}
-          }} className="tileAddDestination"></button>
+          }} className="tileAddDestination"></button> :
+          <button 
+              onClick={() => removeDestination(parksInfo[id].id)} className="tileRemoveDestination">         
+              </button>}
           <button onClick={() => {checkLoginStatusAndRedirect()
           if(currentUser) {props.handleAddExperienceClick(parksInfo[id])}
           }}className="tileAddExperience"></button>

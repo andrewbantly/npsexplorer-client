@@ -145,6 +145,7 @@ function App() {
                 handleAddDestinationClick={handleAddDestinationClick}
                 userDestinations={userDestinations}
                 removeDestination={removeDestination}
+                currentUser={currentUser}
                 />}
               />
               <Route
@@ -154,6 +155,7 @@ function App() {
                   handleAddDestinationClick={handleAddDestinationClick}
                   handleAddExperienceClick={handleAddExperienceClick}
                   setUserDestinations={setUserDestinations}
+                  currentUser={currentUser}
                 />}
               />
               <Route

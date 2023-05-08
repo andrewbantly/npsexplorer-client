@@ -15,12 +15,13 @@ export default function Home(props) {
           handleAddDestinationClick,
           userDestinations,
           setUserDestinations,
-          removeDestination 
+          removeDestination,
+          currentUser 
         } = props;
 
 //   const [foundParks, setFoundParks] = useState([]);
   const [displayedParks, setDisplayedParks] = useState([]);
-//   const navigate = useNavigate();
+  const navigate = useNavigate();
 
 useEffect(() => {
     if (!parksInfo || parksInfo.length === 0) return;
@@ -51,7 +52,8 @@ useEffect(() => {
       return acc;
     }, []);
     // setFoundParks(searchPark);
-    setDisplayedParks(searchPark); // Updated this line
+    setDisplayedParks(searchPark);
+    console.log(currentUser) // Updated this line
   };
   
   const debouncedHandleSearch = debounce(handleSearch, 400);
@@ -100,6 +102,15 @@ const handleActivity = (activityName) => {
     }
   
 
+    // this is a functino to check if the user is on or not
+    const checkLoginStatusAndRedirect = () => {
+        console.log(currentUser)
+        if (currentUser === null) {
+          navigate('/users/login')
+          return
+        }
+      }
+
     const renderDisplayedParks = () => {
         if (!parksInfo || parksInfo.length === 0) {
             return <div>Loading...</div>;
@@ -120,9 +131,16 @@ const handleActivity = (activityName) => {
              }}>
               <div>
             {(!compareId(park.id))?  
-              <button 
-              onClick={() => handleAddDestinationClick(park)} className="tileAddDestination">         
-              </button> :
+              <button
+              onClick={() => {
+                checkLoginStatusAndRedirect();
+                if (currentUser) {
+                    handleAddDestinationClick(park);
+                }
+              }}
+              className="tileAddDestination"
+            >
+            </button> :
               <button 
               onClick={() => removeDestination(park.id)} className="tileRemoveDestination">         
               </button>}

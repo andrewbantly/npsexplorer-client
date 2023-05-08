@@ -17,8 +17,8 @@ export default function Profile({ currentUser, handleLogout }) {
     const navigate = useNavigate()
 
     // If has an existing profile image, load it 
-    useEffect(
-        async () => {
+    useEffect(() => {
+        const fetchUserPhoto = async () => {
             const token = localStorage.getItem('jwt')
             const options = {
                 headers: {
@@ -29,7 +29,10 @@ export default function Profile({ currentUser, handleLogout }) {
             if (userPhoto.data.msg) {
                 setUserImage(userPhoto.data.msg)
             }
-        }, []);
+        };
+    
+        fetchUserPhoto();
+    }, []);
 
     // edited the upload care function to be a named function and binds it to the event listener, so when the file is uploaded the event is triggered and the file is passed.  The fileInfo.cdnUrl contains the uploaded file's URL. and the image is set to the state
     const initUploadcareWidget = () => {
@@ -87,10 +90,10 @@ export default function Profile({ currentUser, handleLogout }) {
     }
 
     useEffect(() => {
-        // this mounts the widget and waits for a timeout incase it doesnt load on mount
         setTimeout(() => {
             initUploadcareWidget();
         }, 0);
+    
         const fetchData = async () => {
             try {
                 const token = localStorage.getItem('jwt')
@@ -100,7 +103,7 @@ export default function Profile({ currentUser, handleLogout }) {
                     }
                 }
                 const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/auth-locked`, options)
-
+    
                 const findExperiences = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${currentUser._id}`, options)
                 if (findExperiences.data.length > 0) {
                     setHeader(false)
@@ -115,9 +118,10 @@ export default function Profile({ currentUser, handleLogout }) {
                     }
                 }
             }
-        }
-        fetchData()
-    }, [handleLogout, navigate])
+        };
+    
+        fetchData();
+    }, [handleLogout, navigate]);
 
     const experiencesExistHeader = (
         <div className='experienceHeader'>

@@ -1,10 +1,19 @@
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 export default function ParkDetails(props) {
-  const { parksInfo } = props
+  const { parksInfo, currentUser } = props
   const { name, id } = useParams()
+  const navigate = useNavigate()
+
+  const checkLoginStatusAndRedirect = () => {
+    console.log(currentUser)
+    if (currentUser === null) {
+      navigate('/users/login')
+      return
+    }
+  }
 
   const responsive = {
     desktop: {
@@ -36,8 +45,12 @@ export default function ParkDetails(props) {
         </p>
         </div>
         <div className='selectorBox'>
-          <button onClick={() => props.handleAddDestinationClick(parksInfo[id])}className="tileAddDestination"></button>
-          <button onClick={() => props.handleAddExperienceClick(parksInfo[id])}className="tileAddExperience"></button>
+          <button onClick={() => {checkLoginStatusAndRedirect()
+          if(currentUser) {props.handleAddDestinationClick(parksInfo[id])}
+          }} className="tileAddDestination"></button>
+          <button onClick={() => {checkLoginStatusAndRedirect()
+          if(currentUser) {props.handleAddExperienceClick(parksInfo[id])}
+          }}className="tileAddExperience"></button>
           </div>
         </div>  
         <div className="parkDetails" key={parksInfo[id]?.id}>

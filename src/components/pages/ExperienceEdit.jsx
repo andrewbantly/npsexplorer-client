@@ -2,7 +2,6 @@ import { useState } from "react"
 import experienceEdit from "../../styles/experienceEdit.css"
 
 export default function ExperienceEdit(props) {
-    console.log("edit form exp: ", props.experienceDetails)
     const [experienceForm, setExperiencesForm] = useState(props.experienceDetails)
     return (
         <>

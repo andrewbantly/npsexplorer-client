@@ -16,7 +16,7 @@ export default function Profile({ currentUser, handleLogout }) {
     const [destinationsCount, setDestinationsCount] = useState(0);
     const [header, setHeader] = useState(true);
     const [userImage, setUserImage] = useState(require("../../media/defaultAvatar.png")) // IMPORT AVATAR FROM SRC/MEDIA dir
-    const [imageUpload, setImageUpload] = useState(false)
+    const [imageUpload, setImageUpload] = useState(false);
     const navigate = useNavigate()
 
     // If has an existing profile image, load it 
@@ -128,7 +128,7 @@ export default function Profile({ currentUser, handleLogout }) {
         };
 
         fetchData();
-    }, [handleLogout, navigate]);
+    }, [handleLogout, navigate, experiencesList]);
 
     const experiencesExistHeader = (
         <div className='experienceHeader'>
@@ -209,6 +209,9 @@ export default function Profile({ currentUser, handleLogout }) {
             currentUser={currentUser}
             handleDeleteClick={handleDeleteClick}
             setExperiencesList={setExperiencesList}
+            experiencesList={experiencesList}
+            setReRender={setReRender}
+            reRender={reRender}
         />
     )
 

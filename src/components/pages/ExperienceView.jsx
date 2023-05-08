@@ -23,7 +23,9 @@ export default function ExperienceView(props) {
             setExperienceDetails(updatedExperience.data[0])
 
             const updatedExperiencesList = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${props.currentUser._id}`, options)
+            console.log("previous exps? ", props.experiencesList)
             props.setExperiencesList(updatedExperiencesList.data)
+            console.log("updated exps: ", updatedExperiencesList.data)
             
             setShowEditForm(false)
         } catch (err) {
@@ -35,7 +37,7 @@ export default function ExperienceView(props) {
 
     const showExperience = (
         <>
-            <div onClick={() => props.setShowExperience(false)} className="backButton">
+            <div onClick={() => {props.setShowExperience(false)}} className="backButton">
                 <img src={require("../../media/backButton.png")}
                     className='backButtonImg'></img>
             </div>

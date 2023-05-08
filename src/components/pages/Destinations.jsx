@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom"
 import styled from 'styled-components';
@@ -16,26 +16,17 @@ const ParkContainer = styled.div`
     height: auto;
     border-radius: 10px;
     position: relative;
+    background-color: #f0f0f0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
     @media (max-width: 480px) {
         width: 90vw;
     }
 `;
 
-
 const RemoveButton = styled.button`
     border: none;
-    background-color: #656D4A;
-    color: white;
-    font-weight: 500;
-    padding: 0.25rem 0.5rem;
-    margin: .5rem;
-    border-radius: 4px;
-`;
-
-const ExperienceButton = styled.button`
-    border: none;
-    background-color: #B6AD90;
+    background-color: #b56576;
     color: white;
     font-weight: 500;
     padding: 0.25rem 0.5rem;
@@ -45,17 +36,20 @@ const ExperienceButton = styled.button`
 
 const ButtonsContainer = styled.div`
     display: flex;
-    position: absolute;
-    top: 0;
-    right: 0;
 
     @media (max-width: 480px) {
         flex-direction: column;
-        top: 50%;
-        transform: translateY(-50%);
-        right: unset;
-        left: 0;
     }
+`;
+
+const ExperienceButton = styled.button`
+    border: none;
+    background-color: #88b04b;
+    color: white;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    margin: .5rem;
+    border-radius: 4px;
 `;
 
 const ParkImage = styled.img`
@@ -77,6 +71,8 @@ const ParkText = styled.div`
     text-align: center;
     width: 100%;
     padding: 1rem 0;
+    color: #556b2f;
+  font-family: 'Arial', sans-serif;
 `;
 
 const ParkGrid = styled.div`
@@ -93,7 +89,12 @@ const ParkGrid = styled.div`
   }
 `;
 
-
+const NoDestinationsMessage = styled.p`
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #556b2f;
+  font-family: 'Arial', sans-serif;
+`;
 
 
 const DestinationsPage = (props) => {
@@ -154,18 +155,7 @@ const DestinationsPage = (props) => {
         const { park, originalIndex } = findParkById(destination);
         return (
             <ParkContainer>
-                <ButtonsContainer>
-                    <RemoveButton
-                        onClick={() => removeDestination(destination, park)}
-                    >
-                        Remove
-                    </RemoveButton>
-                    <ExperienceButton
-                        onClick={() => handleAddExperienceClick(park)}
-                    >
-                        Add
-                    </ExperienceButton>
-                </ButtonsContainer>
+
 
                 <Link to={`/parks/${park?.fullName}/${originalIndex}`} key={`${park?.id}-${originalIndex}`}>
 
@@ -175,6 +165,18 @@ const DestinationsPage = (props) => {
                             alt={park?.fullName}
                         />
                     </div>
+                    <ButtonsContainer>
+                        <RemoveButton
+                            onClick={() => removeDestination(destination, park)}
+                        >
+                            Remove
+                        </RemoveButton>
+                        <ExperienceButton
+                            onClick={() => handleAddExperienceClick(park)}
+                        >
+                            Add
+                        </ExperienceButton>
+                    </ButtonsContainer>
                     <ParkText>
                         <h3>{park?.fullName}</h3>
                         <div>
@@ -196,14 +198,15 @@ const DestinationsPage = (props) => {
     return (
         <div>
             <h2>User Destinations</h2>
-            {userDestinations.length === 0 && <h3>You have no destinations! Go and explore!</h3>}
+            {userDestinations.length === 0 && (
+                <NoDestinationsMessage>You have no Destinations! Go and explore!</NoDestinationsMessage>
+            )}
             <ul>
                 <p>{message}</p>
                 <ParkGrid>{userDestinationsList}</ParkGrid>
             </ul>
         </div>
     );
-
 };
 
 

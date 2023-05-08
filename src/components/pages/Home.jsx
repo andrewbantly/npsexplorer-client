@@ -15,12 +15,13 @@ export default function Home(props) {
           handleAddDestinationClick,
           userDestinations,
           setUserDestinations,
-          removeDestination 
+          removeDestination,
+          currentUser 
         } = props;
 
 //   const [foundParks, setFoundParks] = useState([]);
   const [displayedParks, setDisplayedParks] = useState([]);
-//   const navigate = useNavigate();
+  const navigate = useNavigate();
 
 useEffect(() => {
     if (!parksInfo || parksInfo.length === 0) return;
@@ -51,7 +52,8 @@ useEffect(() => {
       return acc;
     }, []);
     // setFoundParks(searchPark);
-    setDisplayedParks(searchPark); // Updated this line
+    setDisplayedParks(searchPark);
+    console.log(currentUser) // Updated this line
   };
   
   const debouncedHandleSearch = debounce(handleSearch, 400);
@@ -100,6 +102,15 @@ const handleActivity = (activityName) => {
     }
   
 
+    // this is a functino to check if the user is on or not
+    const checkLoginStatusAndRedirect = () => {
+        console.log(currentUser)
+        if (currentUser === null) {
+          navigate('/users/login')
+          return
+        }
+      }
+
     const renderDisplayedParks = () => {
         if (!parksInfo || parksInfo.length === 0) {
             return <div>Loading...</div>;
@@ -108,33 +119,41 @@ const handleActivity = (activityName) => {
             return <p>No parks found matching your search criteria.</p>;
           }
         return displayedParks.map(({ park, originalIndex }) => (
-            <Link 
-            to={`/parks/${park?.fullName}/${originalIndex}`} 
-            key={`${park?.id}-${originalIndex}`} 
-            className='parkLink'>
-                <div className="parkContainer"
-                style={{
-                backgroundImage: `url(${park?.images[0].url})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
+            <div className="parkContainer"
+              style={{
+              backgroundImage: `url(${park?.images[0].url})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
              }}>
               <div>
             {(!compareId(park.id))?  
-              <button 
-              onClick={() => handleAddDestinationClick(park)} className="tileAddDestination">         
-              </button> :
+              <button
+              onClick={() => {
+                checkLoginStatusAndRedirect();
+                if (currentUser) {
+                    handleAddDestinationClick(park);
+                }
+              }}
+              className="tileAddDestination"
+            >
+            </button> :
               <button 
               onClick={() => removeDestination(park.id)} className="tileRemoveDestination">         
               </button>}
               </div>
+              <Link 
+            to={`/parks/${park?.fullName}/${originalIndex}`} 
+            key={`${park?.id}-${originalIndex}`} 
+            className='parkLink'></Link>
+              {/* <div className="tapBox"> */}
               <div className="parkText">
                 <p className='parkName'>{park?.fullName}</p>
                 <p className='parkLocation'>
                   {park?.addresses[0]?.city}, {park?.addresses[0]?.stateCode}
                 </p>
               </div>
+              {/* </div> */}
             </div>
-          </Link>
         ));
       };
 

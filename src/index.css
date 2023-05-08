@@ -70,8 +70,8 @@ code {
 .imageCarousel {
   display: flex;
   align-content: center;
+  justify-content: center;
   width: 100%;
-
 }
 
 .stateButton {
@@ -84,7 +84,7 @@ code {
 }
 
 .parkImage {
-  width: 18rem
+  width: 18rem;
 }
 
 .parkBox {
@@ -94,6 +94,13 @@ code {
   width: 100vw
 }
 
+.tapBox {
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+  width: 100%;
+}
+
 .parkText {
   display: flex;
   flex-direction: column;
@@ -101,6 +108,7 @@ code {
   justify-content: flex-end;
   text-align: left;
   width: 100%;
+  max-height: 40%;
   background-color: rgba(0, 0, 0, .5);
   border-bottom-left-radius: 7% 35%;
   border-bottom-right-radius: 7% 35%;
@@ -120,6 +128,9 @@ code {
 
 .parkLink {
   text-decoration: none;
+  height: 100%;
+  width: 100%;
+  bottom: 1rem
 }
 
 .parkContainer {
@@ -169,7 +180,7 @@ code {
   bottom: 0;
   width: 100%;
   background-color: #f8f9fa; 
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .footer > footer {
@@ -249,7 +260,9 @@ code {
 }
 
 .carouselImage {
-  max-height: 30rem
+  display: flex;
+  justify-items: flex-end;
+  max-height: 30rem;
 }
 
 .detailCarousel {
@@ -264,12 +277,11 @@ code {
 
 /* media queries for the parks home page */
 
-@media (min-width: 391) {
+/* @media (min-width: 391) {
 
   .container {
-    border: solid blue;
     flex-direction: row;
   
   }
 
-}
+} */

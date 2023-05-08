@@ -1,10 +1,26 @@
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 export default function ParkDetails(props) {
-  const { parksInfo } = props
+  const { parksInfo, 
+          currentUser,
+          removeDestination,
+          userDestinations } = props
   const { name, id } = useParams()
+  const navigate = useNavigate()
+
+  const checkLoginStatusAndRedirect = () => {
+    console.log(currentUser)
+    if (currentUser === null) {
+      navigate('/users/login')
+      return
+    }
+  }
+
+  const compareId = (parkId) => {
+        return userDestinations.find((id) => id === parkId)
+    }
 
   const responsive = {
     desktop: {
@@ -36,8 +52,16 @@ export default function ParkDetails(props) {
         </p>
         </div>
         <div className='selectorBox'>
-          <button onClick={() => props.handleAddDestinationClick(parksInfo[id])}className="tileAddDestination"></button>
-          <button onClick={() => props.handleAddExperienceClick(parksInfo[id])}className="tileAddExperience"></button>
+          {(!compareId(parksInfo[id]?.id))? 
+          <button onClick={() => {checkLoginStatusAndRedirect()
+          if(currentUser) {props.handleAddDestinationClick(parksInfo[id])}
+          }} className="tileAddDestination"></button> :
+          <button 
+              onClick={() => removeDestination(parksInfo[id].id)} className="tileRemoveDestination">         
+              </button>}
+          <button onClick={() => {checkLoginStatusAndRedirect()
+          if(currentUser) {props.handleAddExperienceClick(parksInfo[id])}
+          }}className="tileAddExperience"></button>
           </div>
         </div>  
         <div className="parkDetails" key={parksInfo[id]?.id}>
@@ -49,7 +73,9 @@ export default function ParkDetails(props) {
            containerClass="detailCarousel"
         //    className="park-details-carousel"
            autoPlay={true}
+           interval={6000}
            infinite={true}
+           transitionDuration={1500}
             >
             <div className='imageCarousel'>
             <img src={parksInfo[id]?.images[0].url} className="carouselImage" alt={parksInfo[id]?.fullName} />

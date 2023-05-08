@@ -55,6 +55,7 @@ function App() {
   }, [])
 
   // pings mongoDB to set state of usersDestinations
+  // ****** i think this one needs to be rewritten to move the async into a named function. i think this is the one causing the error
   useEffect(async () => {
     try {
       const token = localStorage.getItem('jwt')
@@ -114,6 +115,7 @@ function App() {
     await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${currentUser._id}`, newExperience, options);
   }
 
+  // remove destination function
   const removeDestination = async (destinationId) => {
     try {
         const token = localStorage.getItem('jwt');
@@ -145,6 +147,7 @@ function App() {
                 handleAddDestinationClick={handleAddDestinationClick}
                 userDestinations={userDestinations}
                 removeDestination={removeDestination}
+                currentUser={currentUser}
                 />}
               />
               <Route
@@ -154,6 +157,9 @@ function App() {
                   handleAddDestinationClick={handleAddDestinationClick}
                   handleAddExperienceClick={handleAddExperienceClick}
                   setUserDestinations={setUserDestinations}
+                  userDestinations={userDestinations}
+                  removeDestination={removeDestination}
+                  currentUser={currentUser}
                 />}
               />
               <Route

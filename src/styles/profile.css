@@ -7,7 +7,7 @@ body {
 
 .profileHeader {
     display: flex;
-    margin: 2rem 2rem;
+    margin: 3rem 2rem 2rem;
     background-color: rgb(101, 109, 74);
     border-radius: 10px;
     border: 2px solid rgb(13, 16, 10);
@@ -29,7 +29,10 @@ body {
 }
 
 .profileImg {
-    height: 100px;
+    height: 6.5rem;
+    aspect-ratio: 1/1; 
+    object-fit: cover;
+    overflow: hidden;
     border-radius: 50%;
     border: 2px solid rgb(164, 172, 134);
 }
@@ -62,14 +65,14 @@ body {
 }
 
 .logoutImg {
-    height: 1.2rem;
+    height: 2rem;
     opacity: 0.7;
 }
 
 .logoutText {
     color: rgba(51, 61, 41, 0.8);
     margin: 0;
-    font-size: 0.5rem;
+    font-size: 1rem;
     font-weight: 600;
 }
 
@@ -114,8 +117,19 @@ body {
 .experienceImg {
     height: 5.2rem
 }
+.editProfileImageTxt {
+    color: rgb(194, 197, 170);
+    margin: 0;
+    padding: 0.4em 1em;
+    font-weight: 500;
+}
 
-.uploadcare--widget__button {
+.uploadcare--widget__button, .uploadcare--widget__button_type_open, .uploadcare--button, .uploadcare--button_size_big, .uploadcare--button_primary, .uploadcare--tab__action-button, .needsclick, .uploadcare--dragging__hide, .uploadcare--widget__button:focus, .uploadcare--widget__button:hover, .uploadcare--widget__button_type_open:focus, .uploadcare--widget__button_type_open:hover {
     background-color: rgb(101, 109, 74);
-    color: rgb(194, 197, 170)
+    color: rgb(194, 197, 170);
+    border: none;
+}
+.uploadcare--link.uploadcare--widget__file-name,
+.uploadcare--widget__file-size {
+  display: none;
 }

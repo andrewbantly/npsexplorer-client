@@ -187,10 +187,10 @@ export default function Profile({ currentUser, handleLogout }) {
                     <h1 className='profileName'>{currentUser?.name}</h1>
                 </div>
                 <div className='profileHeaderRight'>
-                    <h3 className='noMargin leftAligin vistType'>{destinationsCount}</h3>
+                    <h3 className='noMargin leftAligin vistCount'>{destinationsCount}</h3>
                     <p className='noMargin vistType'>Destinations</p>
                     <hr className='lineBreak'></hr>
-                    <h3 className='noMargin leftAligin vistType'>{experiencesCount}</h3>
+                    <h3 className='noMargin leftAligin vistCount'>{experiencesCount}</h3>
                     <p className='noMargin vistType'>Experiences</p>
                 </div>
             </div>
@@ -210,8 +210,6 @@ export default function Profile({ currentUser, handleLogout }) {
             handleDeleteClick={handleDeleteClick}
             setExperiencesList={setExperiencesList}
             experiencesList={experiencesList}
-            setReRender={setReRender}
-            reRender={reRender}
         />
     )
 

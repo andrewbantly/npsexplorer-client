@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ExperienceEdit from "./ExperienceEdit";
 import axios from "axios"
 import experienceView from "../../styles/experienceView.css"
@@ -6,6 +6,13 @@ import experienceView from "../../styles/experienceView.css"
 export default function ExperienceView(props) {
     const [experienceDetails, setExperienceDetails] = useState(props.experienceView)
     const [showEditForm, setShowEditForm] = useState(false);
+    const [showExperienceDescription, setShowExperienceDescription] = useState(false)
+
+    useEffect(() => {
+        if (experienceDetails.description !== "") {
+            setShowExperienceDescription(true)
+        }
+    }, [experienceDetails])
 
     const handleSubmit = async (e, form) => {
         e.preventDefault()
@@ -35,6 +42,13 @@ export default function ExperienceView(props) {
         }
     }
 
+    const experienceDescription = (
+        <p className="experienceViewDescription">{experienceDetails.description}</p>
+    )
+    const noExperienceDescription = (
+        <p className="experienceViewDescription">Add some memories to your experience visiting {experienceDetails.location}!</p>
+    )
+
     const showExperience = (
         <>
             <div onClick={() => {props.setShowExperience(false)}} className="backButton">
@@ -44,7 +58,7 @@ export default function ExperienceView(props) {
             <h1 className="experienceViewHeader">{experienceDetails.location}</h1>
             <img className="experienceViewImg" src={experienceDetails.image}
             />
-            <p className="experienceViewDescription">{experienceDetails.description}</p>
+            {showExperienceDescription ? experienceDescription : noExperienceDescription}
             <div className="experienceViewButtonsContainer">
                 <div className="editButton" onClick={() => setShowEditForm(true)}>
                     <img className="editButtonImg" src={require("../../media/edit.png")}></img>
@@ -62,6 +76,7 @@ export default function ExperienceView(props) {
             experienceDetails={experienceDetails}
             setShowEditForm={setShowEditForm}
             handleSubmit={handleSubmit}
+            setExperienceDetails={setExperienceDetails}
         />
     )
 

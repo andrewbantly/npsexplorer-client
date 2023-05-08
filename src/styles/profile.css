@@ -133,11 +133,21 @@ body {
     font-weight: 500;
 }
 
-.uploadcare--widget__button, .uploadcare--widget__button_type_open, .uploadcare--button, .uploadcare--button_size_big, .uploadcare--button_primary, .uploadcare--tab__action-button, .needsclick, .uploadcare--dragging__hide, .uploadcare--widget__button:focus, .uploadcare--widget__button:hover, .uploadcare--widget__button_type_open:focus, .uploadcare--widget__button_type_open:hover {
+.uploadcare--widget__button, .uploadcare--widget__button_type_open, .uploadcare--button, .uploadcare--button_size_big, .uploadcare--button_primary, .uploadcare--tab__action-button, .needsclick, .uploadcare--widget__button:focus, .uploadcare--widget__button:hover, .uploadcare--widget__button_type_open:focus, .uploadcare--widget__button_type_open:hover {
     background-color: rgb(101, 109, 74);
     color: rgb(194, 197, 170);
     border: none;
 }
+
+.uploadcare--text .uploadcare--text_size_extra-large {
+    font-size: 0.5rem;
+}
+
+.uploadcare--menu, .uploadcare--panel__menu, .uploadcare--tab, .uploadcare--tab_name_file, .uploadcare--tab_current, .uploadcare--draganddrop__supported, .uploadcare--dragging__hide, .uploadcare--draganddrop__title {
+    background-color: rgb(101, 109, 74);
+    border: none;
+} 
+
 .uploadcare--link.uploadcare--widget__file-name,
 .uploadcare--widget__file-size {
   display: none;

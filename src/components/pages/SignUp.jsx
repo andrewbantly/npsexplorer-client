@@ -62,7 +62,7 @@ font-size: 16px;
 const SubmitButton = styled.button`
 font-size: 16px;
 font-weight: 600;
-background-color: #ff5a5f;
+background-color: #333D29;
 color: #fff;
 padding: 12px 16px;
 border: none;
@@ -70,7 +70,7 @@ border-radius: 4px;
 cursor: pointer;
 transition: background-color 0.2s ease-in-out;
 &:hover {
-	background-color: #ff3d48;
+	background-color: #414833;
 }
 `;
 

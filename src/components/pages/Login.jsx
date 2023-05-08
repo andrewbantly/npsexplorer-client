@@ -81,7 +81,7 @@ const Input = styled.input`
 const SubmitButton = styled.button`
   font-size: 16px;
   font-weight: 600;
-  background-color: #ff5a5f;
+  background-color: #333D29;
   color: #fff;
   padding: 12px 16px;
   border: none;
@@ -89,7 +89,7 @@ const SubmitButton = styled.button`
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
   &:hover {
-    background-color: #ff3d48;
+    background-color: #414833;
   }
 `;
 
@@ -172,6 +172,7 @@ export default function Login({ currentUser, setCurrentUser }) {
           />
 
           <SubmitButton type='submit'>Login</SubmitButton>
+          <>______________________</>
           <RegisterLink to='/users/register'>New? Register here</RegisterLink>
         </Form>
       </ContentWrapper>

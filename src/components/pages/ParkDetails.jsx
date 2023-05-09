@@ -58,6 +58,7 @@ export default function ParkDetails(props) {
   return (
     <>
       <div className='parkDetailsContainer'>
+        <div className='sizingBox'>
         <div className='detailsHeader'>
         <div className='detailName'>   
         <p className='parkTitle'>{parksInfo[id]?.fullName}</p>
@@ -65,19 +66,6 @@ export default function ParkDetails(props) {
             {parksInfo[id]?.addresses[0]?.city}, {parksInfo[id]?.addresses[0]?.stateCode}
         </p>
         </div>
-        <div className='selectorBox'>
-          {(!compareId(parksInfo[id]?.id))? 
-          <button onClick={() => {checkLoginStatusAndRedirect()
-          if(currentUser) {props.handleAddDestinationClick(parksInfo[id])}
-          }} className="tileAddDestination"></button> :
-          <button 
-              onClick={() => removeDestination(parksInfo[id].id)} className="tileRemoveDestination">         
-              </button>}
-              <button onClick={handleClick} className="tileAddExperience">
-          </button>
-          </div>
-          {showText && <p>Experience added</p>}
-          </div>
         <div className='carouselContainer'>  
             <Carousel
            responsive={responsive}
@@ -101,6 +89,23 @@ export default function ParkDetails(props) {
             </div>
             </Carousel>
           </div>
+          </div>
+          <div className='iconBox'>
+          {!showText && (
+          <div className='selectorBox'>
+          {(!compareId(parksInfo[id]?.id))? 
+          <button onClick={() => {checkLoginStatusAndRedirect()
+          if(currentUser) {props.handleAddDestinationClick(parksInfo[id])}
+          }} className="tileAddDestination"></button> :
+          <button 
+              onClick={() => removeDestination(parksInfo[id].id)} className="tileRemoveDestination">         
+              </button>}
+              {!showText && (
+              <button onClick={handleClick} className="tileAddExperience">
+          </button> )}
+          </div>)}
+          {showText && <p className='addedText'>Experience added to profile</p>}
+          </div>
           <div className="parkDetails" key={parksInfo[id]?.id}>
           <div className="parkDetailText">
             <h4>Activities:</h4>
@@ -110,6 +115,7 @@ export default function ParkDetails(props) {
             <p>{parksInfo[id]?.operatingHours[0]?.description}</p>
             <p>{parksInfo[id]?.entranceFees[0]?.description}</p>
           </div>
+        </div>
         </div>
       </div>
     </>

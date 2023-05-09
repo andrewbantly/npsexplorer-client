@@ -76,7 +76,6 @@ export default function ParkDetails(props) {
               <button onClick={handleClick} className="tileAddExperience">
           </button>
           </div>
-          {showText && <p>Experience added</p>}
           </div>
         <div className='carouselContainer'>  
             <Carousel
@@ -101,6 +100,7 @@ export default function ParkDetails(props) {
             </div>
             </Carousel>
           </div>
+          {showText && <p>Experience added to profile</p>}
           <div className="parkDetails" key={parksInfo[id]?.id}>
           <div className="parkDetailText">
             <h4>Activities:</h4>

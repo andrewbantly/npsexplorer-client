@@ -32,8 +32,13 @@ function App() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://developer.nps.gov/api/v1/parks?limit=469&api_key=${process.env.REACT_APP_NPS_API_KEY}`
+          `${process.env.REACT_APP_SERVER_URL}/api-v1/users/nps`
         );
+        // const response = await axios.get(
+        //   `https://developer.nps.gov/api/v1/parks?limit=469&api_key=${process.env.REACT_APP_NPS_API_KEY}`
+        // );
+
+
         console.log(response.data);
         setParksInfo(response.data.data);
       } catch (error) {

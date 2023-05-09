@@ -8,15 +8,15 @@ const ParkContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   border: 7px solid #ccc;
   margin: 1rem;
   padding: 0;
-  width: 10rem;
+  width: 90%;
   height: auto;
   border-radius: 10px;
-  background-color: #f0f0f0;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  border: 0.1rem solid rgb(51, 61, 41);
+  background-color: rgb(181 179 145) ;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 
   @media (max-width: 480px) {
     width: 80vw;
@@ -24,7 +24,7 @@ const ParkContainer = styled.div`
 `;
 
 const DestinationsTitle = styled.h2`
-  margin-bottom: -2rem;
+  margin-bottom: -2.5rem;
   text-align: center;
 `;
 
@@ -53,8 +53,8 @@ const RemoveButton = styled.button`
   &::before {
     content: "";
     display: block;
-    width: 100%;
-    height: 100%;
+    width: 1.5rem;
+    height: 1.5rem;
     background-image: url('https://ucarecdn.com/70eb6013-f9b9-4377-9c48-4ded6a690e9f/');
     background-repeat: no-repeat;
     background-position: center;
@@ -63,35 +63,38 @@ const RemoveButton = styled.button`
 `;
 
 const ExperienceButton = styled.button`
-  border: none;
-  background-color: transparent;
-  width: 30px;
-  height: 70px;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
+    border: none;
+    background-color: transparent;
+    width: 30px;
+    height: 70px;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
 
-  &::before {
+    &::before {
     content: "";
     display: block;
-    width: 100%;
-    height: 100%;
+    width: 1.5rem;
+    height: 1.5rem;
     background-image: url('https://ucarecdn.com/e8ede673-cced-4a2a-a020-941e395828ff/');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-  }
+    }
 `;
 
 const ParkImage = styled.img`
-    width: 100%;
+    width: 92%;
     object-fit: cover;
-    margin-bottom: 0.1rem; 
-    border-radius: 5px;
+    margin-bottom: 1rem; 
+    border-radius: 20px;
+    border: 1.5px solid rgb(51, 61, 41);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); 
+
 
     @media (max-width: 480px) {
-        height: 60vw;
-        object-fit: cover;
+    height: 60vw;
+    object-fit: cover;
     }
 `;
 
@@ -101,45 +104,72 @@ const ParkText = styled.div`
     align-items: center;
     justify-content: space-between;
     text-align: left;
-    width: 100%;
-    padding: 1rem 0;
+    width: 92%;
+    padding: 0.1rem 0;
     color: black;
-  font-family: 'Arial', sans-serif;
+    font-family: 'Baloo 2', sans-serif;
+    margin: 0.1rem 0.5rem;
+
 `;
 
 const ParkGrid = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-  padding: 1rem;
-  margin: 0 auto;
-  max-width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.2rem;
+    max-width: 90%;
 
-  @media (max-width: 480px) {
-    gap: 0.5rem;
+    @media (max-width: 480px) {
+        gap: 0.5rem;
   }
 `;
 
 const NoDestinationsMessage = styled.p`
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #556b2f;
-  font-family: 'Arial', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #556b2f;
+    font-family: 'Arial', sans-serif;
 `;
 
 const ImageAndButtons = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
 const DestinationsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 0.1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    margin: 0.5rem auto 0;
+    max-width: 90%;
+
 `;
+
+const HeaderLocationContainer = styled.div`
+    text-align: center;
+    line-height: 1;
+    width: 90%;
+    padding: 0.3rem 0;
+    background: #936639;
+    border-radius: 8%/30%;
+    color: white;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+
+  h3 { 
+    font-weight: bold;
+    margin: 0.5rem;
+  }
+  p {
+    font-size: 16px;
+  }
+`;
+
+
 
 
 const DestinationsPage = (props) => {
@@ -219,6 +249,13 @@ const DestinationsPage = (props) => {
 
         return (
             <ParkContainer key={`${park?.id}-${originalIndex}`}>
+                <HeaderLocationContainer>
+                    <h3>{park?.fullName}</h3>
+                    <p>
+                        {park?.addresses[0]?.city}, {park?.addresses[0]?.stateCode}
+                    </p>
+                </HeaderLocationContainer>
+
                 <ImageAndButtons>
                     <Link to={`/parks/${park?.fullName}/${originalIndex}`}>
                         <ParkImage
@@ -237,19 +274,17 @@ const DestinationsPage = (props) => {
                         </ExperienceButton>
                     </ButtonsContainer>
                 </ImageAndButtons>
-
                 <ParkText>
-                    <h3>{park?.fullName}</h3>
-                    <div>
-                        <p>
-                            {park?.addresses[0]?.city}, {park?.addresses[0]?.stateCode}
-                        </p>
-                        <p>
-                            Activities: {park?.activities[0]?.name},{" "}
-                            {park?.activities[1]?.name}, {park?.activities[2]?.name},{" "}
-                            {park?.activities[3]?.name}, {park?.activities[4]?.name}
-                        </p>
-                    </div>
+                    <p>
+                        Activities: {park?.activities[0]?.name},{" "}
+                        {park?.activities[1]?.name}, {park?.activities[2]?.name},{" "}
+                        {park?.activities[3]?.name}, {park?.activities[4]?.name}
+                    </p>
+                </ParkText>
+                <ParkText>
+                    {/* <p>
+                        {park?.addresses[0]?.city}, {park?.addresses[0]?.stateCode}
+                    </p> */}
                 </ParkText>
             </ParkContainer>
         );
@@ -263,11 +298,11 @@ const DestinationsPage = (props) => {
                     You have no Destinations! Go and explore!
                 </NoDestinationsMessage>
             )}
-            <ul>
+            
                 <p>{message}</p>
                 <p>{experienceMessage}</p>
                 <ParkGrid>{userDestinationsList}</ParkGrid>
-            </ul>
+           
         </DestinationsContainer>
     );
 };

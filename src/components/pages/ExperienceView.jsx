@@ -60,12 +60,12 @@ export default function ExperienceView(props) {
             />
             {showExperienceDescription ? experienceDescription : noExperienceDescription}
             <div className="experienceViewButtonsContainer">
-                <div className="editButton" onClick={() => setShowEditForm(true)}>
-                    <img className="editButtonImg" src={require("../../media/edit.png")}></img>
-                </div>
                 <div className="deleteButton" onClick={() => props.handleDeleteClick(experienceDetails)}>
                     <img src={require("../../media/delete.png")}
                         className='deleteButtonImg'></img>
+                </div>
+                <div className="editButton" onClick={() => setShowEditForm(true)}>
+                    <img className="editButtonImg" src={require("../../media/edit.png")}></img>
                 </div>
             </div>
         </>

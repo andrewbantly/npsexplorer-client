@@ -1,8 +1,8 @@
-
-
 .experienceViewButtonsContainer {
     display: flex;
-    justify-content: space-around;
+    flex-direction: row-reverse;
+    /* justify-content: space-between; */
+    width: 90%;
 }
 
 .backButton {
@@ -11,13 +11,18 @@
     width: 2.5rem;
     margin: 0.5rem 0 0 0.5rem;
 }
-.deleteButton, .editButton {
+
+.deleteButton,
+.editButton {
     justify-self: center;
     width: 2.5rem;
     right: 2rem;
-    margin-top: 2.5rem;
+    margin-top: 3rem;
 }
-.backButtonImg, .deleteButtonImg, .editButtonImg {
+
+.backButtonImg,
+.deleteButtonImg,
+.editButtonImg {
     opacity: 0.7;
     height: 100%;
     width: 100%;
@@ -26,9 +31,15 @@
 .experienceViewHeader {
     margin: 0 auto;
     color: rgb(1, 29, 4);
-    width: 90%;
+    width: 82%;
     line-height: 2rem;
     font-size: 1.8rem;
+    padding: .2rem 1rem;
+    background-color: #936639dc;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    font-weight: 600;
 }
 
 .experienceViewImg {
@@ -38,6 +49,7 @@
     border: 0.5px solid rgb(1, 29, 4);
     margin-top: 1rem;
 }
+
 .experienceViewDescription {
     color: rgb(1, 29, 4);
     width: 90%;

@@ -87,13 +87,13 @@ export default function ParkDetails(props) {
            transitionDuration={1500}
             >
             <div className='carouselImageContainer' 
-              style={{backgroundImage: `url(${parksInfo[id]?.images[0]?.url})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+              style={{backgroundImage: `url(${parksInfo[id]?.images[0]?.url || 'https://ucarecdn.com/f8de35d1-470c-4e0d-a341-949fb45e1bbc/'})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
             </div>
             <div className='carouselImageContainer' 
-              style={{backgroundImage: `url(${parksInfo[id]?.images[1]?.url})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+              style={{backgroundImage: `url(${parksInfo[id]?.images[1]?.url || 'https://ucarecdn.com/f8de35d1-470c-4e0d-a341-949fb45e1bbc/'})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
             </div>
             <div className='carouselImageContainer' 
-              style={{backgroundImage: `url(${parksInfo[id]?.images[2]?.url})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+             style={{backgroundImage: `url(${parksInfo[id]?.images[2]?.url || 'https://ucarecdn.com/f8de35d1-470c-4e0d-a341-949fb45e1bbc/'})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
             </div>
             </Carousel>
           </div>

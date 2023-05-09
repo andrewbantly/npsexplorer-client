@@ -122,7 +122,7 @@ const handleActivity = (activityName) => {
         return displayedParks.map(({ park, originalIndex }) => (
             <div className="parkContainer"
               style={{
-              backgroundImage: `url(${park?.images[0].url})`,
+              backgroundImage: `url(${park?.images[0]?.url})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
              }}>

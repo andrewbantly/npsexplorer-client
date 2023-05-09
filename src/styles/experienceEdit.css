@@ -1,5 +1,5 @@
 h2 {
-    margin: 0.5rem 0 0.3rem 0;
+    margin: 0.4rem 0 1rem 0;
     color: rgb(51, 61, 41);
 }
 .formContainer {
@@ -35,7 +35,7 @@ form {
     background-color: rgb(194, 197, 170);
     color: rgb(1, 29, 4);
     width: 100%;
-    height: 15rem;
+    height: 14rem;
     border-radius: 10px;
     box-shadow: 0 0 1px black;
     border: 0.5px solid rgb(1, 29, 4);

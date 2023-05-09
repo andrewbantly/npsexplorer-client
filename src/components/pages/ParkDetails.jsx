@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -11,6 +11,14 @@ export default function ParkDetails(props) {
   const { name, id } = useParams()
   const navigate = useNavigate()
   const [showText, setShowText] = useState(false);
+
+  function NewScreen() {
+    useEffect(() => {
+      window.scrollTo(0, 0); 
+    }, [])
+  }
+
+  NewScreen()
 
   const checkLoginStatusAndRedirect = () => {
     console.log(currentUser)

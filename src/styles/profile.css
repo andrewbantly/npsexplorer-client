@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(164, 172, 134, 0.9);
+    background-color: rgba(164, 172, 134, 0.9);
     font-family: 'Baloo 2', sans-serif;
     /* font-family: 'Itim', cursive; */
     /* font-family: 'Lilita One', cursive; */
@@ -7,12 +7,13 @@ body {
 
 .profileHeader {
     display: flex;
-    margin: 2rem 2rem;
+    margin: 3rem auto 1.5rem;
     background-color: rgb(101, 109, 74);
     border-radius: 10px;
-    border: 2px solid rgb(13, 16, 10);
+    border: 2px solid rgb(51, 61, 41);
     box-shadow: 0 0 3px rgb(13, 16, 10);
     align-items: center;
+    width: 90%;
 }
 
 .profileHeaderLeft {
@@ -25,19 +26,27 @@ body {
 }
 
 .profileHeaderRight {
-    margin: 1rem;
+    padding: 0 1rem;
+    width: 100%;
 }
 
 .profileImg {
-    height: 100px;
+    height: 7rem;
+    aspect-ratio: 1/1; 
+    object-fit: cover;
+    overflow: hidden;
     border-radius: 50%;
     border: 2px solid rgb(164, 172, 134);
 }
 
 .vistType {
-    /* color: rgb(51, 61, 41); */
-    color: rgb(194, 197, 170)
-    /* color: rgb(164, 172, 134) */
+    color: rgb(194, 197, 170);
+    font-size: 1.5rem;
+}
+.vistCount {
+    color: rgb(194, 197, 170);
+    font-size: 2rem;
+
 }
 
 .noMargin {
@@ -51,6 +60,7 @@ body {
 .lineBreak {
     border: 1px solid rgb(51, 61, 41, 0.7);
     border-radius: 3px;
+    width: 100%;
 }
 
 .logoutContainer {
@@ -62,19 +72,20 @@ body {
 }
 
 .logoutImg {
-    height: 1.2rem;
+    height: 2rem;
     opacity: 0.7;
 }
 
 .logoutText {
     color: rgba(51, 61, 41, 0.8);
     margin: 0;
-    font-size: 0.5rem;
+    font-size: 1rem;
     font-weight: 600;
 }
 
 .experienceHeader {
-    margin: 1rem 2rem;
+    margin: 0 auto;
+    width: 90%;
 }
 
 .experienceHeaderText {
@@ -83,7 +94,7 @@ body {
 }
 
 .experienceCard {
-    margin: 1rem 2rem;
+    margin: 1rem auto;
     /* background-color: rgb(200, 194, 172); */
     background-color: rgb(182, 173, 144);
     border-radius: 10px;
@@ -91,6 +102,7 @@ body {
     box-shadow: 0 0 3px rgb(51, 61, 41);
     display: flex;
     align-items: center;
+    width: 90%;
 }
 
 .experienceText {
@@ -114,8 +126,29 @@ body {
 .experienceImg {
     height: 5.2rem
 }
+.editProfileImageTxt {
+    color: rgb(194, 197, 170);
+    margin: 0;
+    padding: 0.4em 0;
+    font-weight: 500;
+}
 
-.uploadcare--widget__button {
+.uploadcare--widget__button, .uploadcare--widget__button_type_open, .uploadcare--button, .uploadcare--button_size_big, .uploadcare--button_primary, .uploadcare--tab__action-button, .needsclick, .uploadcare--widget__button:focus, .uploadcare--widget__button:hover, .uploadcare--widget__button_type_open:focus, .uploadcare--widget__button_type_open:hover {
     background-color: rgb(101, 109, 74);
-    color: rgb(194, 197, 170)
+    color: rgb(194, 197, 170);
+    border: none;
+}
+
+.uploadcare--text .uploadcare--text_size_extra-large {
+    font-size: 0.5rem;
+}
+
+.uploadcare--menu, .uploadcare--panel__menu, .uploadcare--tab, .uploadcare--tab_name_file, .uploadcare--tab_current, .uploadcare--draganddrop__supported, .uploadcare--dragging__hide, .uploadcare--draganddrop__title {
+    background-color: rgb(101, 109, 74);
+    border: none;
+} 
+
+.uploadcare--link.uploadcare--widget__file-name,
+.uploadcare--widget__file-size {
+  display: none;
 }

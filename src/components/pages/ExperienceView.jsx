@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ExperienceEdit from "./ExperienceEdit";
 import axios from "axios"
 import experienceView from "../../styles/experienceView.css"
@@ -6,6 +6,13 @@ import experienceView from "../../styles/experienceView.css"
 export default function ExperienceView(props) {
     const [experienceDetails, setExperienceDetails] = useState(props.experienceView)
     const [showEditForm, setShowEditForm] = useState(false);
+    const [showExperienceDescription, setShowExperienceDescription] = useState(false)
+
+    useEffect(() => {
+        if (experienceDetails.description !== "") {
+            setShowExperienceDescription(true)
+        }
+    }, [experienceDetails])
 
     const handleSubmit = async (e, form) => {
         e.preventDefault()
@@ -23,7 +30,9 @@ export default function ExperienceView(props) {
             setExperienceDetails(updatedExperience.data[0])
 
             const updatedExperiencesList = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${props.currentUser._id}`, options)
+            console.log("previous exps? ", props.experiencesList)
             props.setExperiencesList(updatedExperiencesList.data)
+            console.log("updated exps: ", updatedExperiencesList.data)
             
             setShowEditForm(false)
         } catch (err) {
@@ -33,16 +42,23 @@ export default function ExperienceView(props) {
         }
     }
 
+    const experienceDescription = (
+        <p className="experienceViewDescription">{experienceDetails.description}</p>
+    )
+    const noExperienceDescription = (
+        <p className="experienceViewDescription">Add some memories to your experience visiting {experienceDetails.location}!</p>
+    )
+
     const showExperience = (
         <>
-            <div onClick={() => props.setShowExperience(false)} className="backButton">
+            <div onClick={() => {props.setShowExperience(false)}} className="backButton">
                 <img src={require("../../media/backButton.png")}
                     className='backButtonImg'></img>
             </div>
             <h1 className="experienceViewHeader">{experienceDetails.location}</h1>
             <img className="experienceViewImg" src={experienceDetails.image}
             />
-            <p className="experienceViewDescription">{experienceDetails.description}</p>
+            {showExperienceDescription ? experienceDescription : noExperienceDescription}
             <div className="experienceViewButtonsContainer">
                 <div className="editButton" onClick={() => setShowEditForm(true)}>
                     <img className="editButtonImg" src={require("../../media/edit.png")}></img>
@@ -60,6 +76,7 @@ export default function ExperienceView(props) {
             experienceDetails={experienceDetails}
             setShowEditForm={setShowEditForm}
             handleSubmit={handleSubmit}
+            setExperienceDetails={setExperienceDetails}
         />
     )
 

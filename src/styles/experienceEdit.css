@@ -1,19 +1,46 @@
+h2 {
+    margin: 0.5rem 0 0.3rem 0;
+    color: rgb(51, 61, 41);
+}
+.formContainer {
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
+}
+form {
+    width: 100%;
+}
+.flex {
+    display: flex;
+}
+.wrap {
+    flex-wrap: wrap;
+}
+.descriptionContainer, .imageUploadContainer {
+    width: 100%;
+}
+.descriptionContainer {
+    margin-top: 1rem;
+}
 .tripMemories{
         font-size: 1rem;
         color: rgb(51, 61, 41);
         font-weight: 500;
+        display: block;
+        text-align: left;
+        width: 100%;
 }
 .experienceTextInput {
     font-family: 'Baloo 2', sans-serif;
     background-color: rgb(194, 197, 170);
     color: rgb(1, 29, 4);
-    width: 85%;
-    height: 10rem;
+    width: 100%;
+    height: 15rem;
     border-radius: 10px;
     box-shadow: 0 0 1px black;
     border: 0.5px solid rgb(1, 29, 4);
     margin: 0 auto;
-    display: inline;
+    display: block;
     resize: none;
     padding: 0.5rem;
 }
@@ -21,10 +48,13 @@
 .confirmButton {
     border: none;
     background-color: rgb(0, 0, 0, 0);
-    width: 4rem;
+    width: 6rem;
 }
 
 .confirmButtonImg {
     opacity: 0.7;
     width: 100%;
+}
+.uploadcare--widget__button, .uploadcare--widget__button_type_open, .uploadcare--button, .uploadcare--button_size_big, .uploadcare--button_primary, .uploadcare--tab__action-button, .needsclick, .uploadcare--dragging__hide, .uploadcare--widget__button:focus, .uploadcare--widget__button:hover, .uploadcare--widget__button_type_open:focus, .uploadcare--widget__button_type_open:hover {
+    display: block;
 }

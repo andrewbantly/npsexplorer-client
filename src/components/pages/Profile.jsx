@@ -13,9 +13,10 @@ export default function Profile({ currentUser, handleLogout }) {
     const [showExperience, setShowExperience] = useState(false);
     const [experienceView, setExperiencesView] = useState({});
     const [experiencesCount, setExperiencesCount] = useState(0);
-    const [destinationsCount, setDestinationsCount] =useState(0);
+    const [destinationsCount, setDestinationsCount] = useState(0);
     const [header, setHeader] = useState(true);
     const [userImage, setUserImage] = useState(require("../../media/defaultAvatar.png")) // IMPORT AVATAR FROM SRC/MEDIA dir
+    const [imageUpload, setImageUpload] = useState(false);
     const navigate = useNavigate()
 
     // If has an existing profile image, load it 
@@ -32,12 +33,13 @@ export default function Profile({ currentUser, handleLogout }) {
                 setUserImage(userPhoto.data.msg)
             }
         };
-    
+
         fetchUserPhoto();
     }, []);
 
     // edited the upload care function to be a named function and binds it to the event listener, so when the file is uploaded the event is triggered and the file is passed.  The fileInfo.cdnUrl contains the uploaded file's URL. and the image is set to the state
     const initUploadcareWidget = () => {
+        console.log("widget")
         const widget = uploadcare.SingleWidget('#uploadcare-uploader');
         widget.onUploadComplete(async (fileInfo) => {
             console.log('File uploaded:', fileInfo.cdnUrl);
@@ -53,6 +55,7 @@ export default function Profile({ currentUser, handleLogout }) {
             const updateUserPhoto = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/auth-locked`, userPhoto, options)
             const updatedUserPhoto = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/auth-locked`, options)
             setUserImage(updatedUserPhoto.data.msg);
+            setImageUpload(false)
         });
     };
 
@@ -93,10 +96,6 @@ export default function Profile({ currentUser, handleLogout }) {
     }
 
     useEffect(() => {
-        setTimeout(() => {
-            initUploadcareWidget();
-        }, 0);
-    
         const fetchData = async () => {
             try {
                 const token = localStorage.getItem('jwt')
@@ -106,7 +105,7 @@ export default function Profile({ currentUser, handleLogout }) {
                     }
                 }
                 const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/auth-locked`, options)
-    
+
                 const findExperiences = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${currentUser._id}`, options)
                 if (findExperiences.data.length > 0) {
                     setHeader(false)
@@ -127,9 +126,9 @@ export default function Profile({ currentUser, handleLogout }) {
                 }
             }
         };
-    
+
         fetchData();
-    }, [handleLogout, navigate]);
+    }, [handleLogout, navigate, experiencesList]);
 
     const experiencesExistHeader = (
         <div className='experienceHeader'>
@@ -144,15 +143,33 @@ export default function Profile({ currentUser, handleLogout }) {
     const experiences = experiencesList.data?.map((experience, i) => {
         return (
             <div onClick={() => handleClick(experience)} key={`experience-${i}`}
-            className='experienceCard'>
+                className='experienceCard'>
                 <div className='experienceImgContainer'>
-                <img className='experienceImg' src={experience.image}/>
+                    <img className='experienceImg' src={experience.image} />
                 </div>
                 <p className='experienceText noMargin'>{experience.location}</p>
             </div>
         )
     })
 
+    const loadUploadImageWidget = () => {
+        setTimeout(() => {
+            initUploadcareWidget();
+        }, 0);
+    }
+
+
+    const showImageUploadWidget = (
+        <div>
+            <input
+                id="uploadcare-uploader"
+                type="hidden"
+                role="uploadcare-uploader"
+                data-public-key="e667ec242e718125294d"
+                data-tabs="file facebook gphotos instagram"
+            />
+        </div>
+    );
 
     const profileView = (
         <div className='profileView'>
@@ -164,13 +181,16 @@ export default function Profile({ currentUser, handleLogout }) {
             <div className='profileHeader'>
                 <div className='profileHeaderLeft'>
                     <img src={userImage} className='profileImg'></img>
+                    <div onClick={() => { setImageUpload(true); loadUploadImageWidget() }}>
+                        {imageUpload ? showImageUploadWidget : <p className='editProfileImageTxt'>Edit profile image</p>}
+                    </div>
                     <h1 className='profileName'>{currentUser?.name}</h1>
                 </div>
                 <div className='profileHeaderRight'>
-                    <h3 className='noMargin leftAligin vistType'>{destinationsCount}</h3>
+                    <h3 className='noMargin leftAligin vistCount'>{destinationsCount}</h3>
                     <p className='noMargin vistType'>Destinations</p>
                     <hr className='lineBreak'></hr>
-                    <h3 className='noMargin leftAligin vistType'>{experiencesCount}</h3>
+                    <h3 className='noMargin leftAligin vistCount'>{experiencesCount}</h3>
                     <p className='noMargin vistType'>Experiences</p>
                 </div>
             </div>
@@ -189,19 +209,14 @@ export default function Profile({ currentUser, handleLogout }) {
             currentUser={currentUser}
             handleDeleteClick={handleDeleteClick}
             setExperiencesList={setExperiencesList}
+            experiencesList={experiencesList}
         />
     )
+
 
     return (
         <div>
             {showExperience ? showExperienceView : profileView}
-            <input
-                id="uploadcare-uploader"
-                type="hidden"
-                role="uploadcare-uploader"
-                data-public-key="e667ec242e718125294d"
-                data-tabs="file facebook gphotos instagram"
-            />
         </div>
     )
 }

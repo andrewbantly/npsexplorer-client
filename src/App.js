@@ -56,7 +56,8 @@ function App() {
 
   // pings mongoDB to set state of usersDestinations
   // ****** i think this one needs to be rewritten to move the async into a named function. i think this is the one causing the error
-  useEffect(async () => {
+  useEffect(() => {
+    const findDestination = async () => {
     try {
       const token = localStorage.getItem('jwt')
       const options = {
@@ -69,6 +70,8 @@ function App() {
     } catch (error) {
       console.log(error)
     }
+  }
+  findDestination()
   }, [])
 
   // event handler to log the user out when needed

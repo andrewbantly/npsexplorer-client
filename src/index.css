@@ -39,6 +39,8 @@ code {
 
 .searchBar input {
   text-align: center;
+  border-radius: 2%/20%;
+  border: none;
 }
 
 .searchInput {
@@ -51,20 +53,41 @@ code {
   display: flex;
   justify-content: center;
   width: 100vw;
-  height: 3rem
+  height: 3rem; 
 }
 
 .activityIcon {
-  margin: .5rem
+  margin: .5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.activityButton {
+  border: none; 
+  background-color: rgba(173, 180, 147, 0);
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .activityIcon img {
-  height: 1rem
+  height: 1.7rem;
+  background-color: none;
+}
+
+.activityText {
+  font-size: .6rem;
+  margin:0;
+  margin-bottom: .2rem;
 }
 
 .carousel {
-  max-width: 95vw;
-  margin: 0 2.5vw 0 2.5vw
+  max-width: 80vw;
+  margin: 0 10vw 0 10vw;
+  box-shadow: inset -5px 0 5px -5px rgba(0, 0, 0, 0.1),
+              inset 5px 0 5px -5px rgba(0, 0, 0, 0.1);
+  /* border-radius: 5%/15%; */
+  padding-bottom: 0
 }
 
 .imageCarousel {
@@ -76,11 +99,12 @@ code {
 
 .stateButton {
   border: none;
-  background-color: #656D4A;
+  background-color: #8B4513;
   color: white;
   font-weight: 500;
   width: 2rem;
-  margin: .5
+  margin: 0;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6)
 }
 
 .parkImage {
@@ -144,6 +168,7 @@ code {
   width: 18rem;
   height: 11rem;
   border-radius: 6%/10%;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9)
 }
 
 .tileAddDestination {
@@ -203,20 +228,10 @@ code {
 
 .parkDetailsContainer {
   display: flex;
-  justify-content: center;
-  background-color: #B6AD90;
-  height: 100vh;
-}
-
-.infoContainer {
-  display: flex;
   flex-direction: column;
-  width: 50vw;
   align-items: center;
-  background-color: white;
-  border-top-left-radius: 10%;
-  border-top-right-radius: 10%;
-  margin-top: 1rem;
+  height: 100%;
+  margin-bottom: 1.5rem;
 }
 
 .detailsHeader {
@@ -225,19 +240,29 @@ code {
   justify-content: space-around;
   align-items: center;
   margin-top: 1rem;
+  width: 90vw;
 }
 
-.detailsHeader h2,
+.parkTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1;
+  margin-top: .3rem;
+  margin-bottom: 0
+}
+
+
 .detailsHeader p,
 .detailsHeader button {
-  margin: .2rem
+  margin: .1rem
 }
 
 .detailName {
   padding: .2rem 1rem;
-  background-color: #656D4A;
+  background-color: #936639;
   color: white;
-  border-radius: 5%/30%;
+  border-radius: 8%/30%;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7)
 }
 
 
@@ -257,22 +282,49 @@ code {
   display: flex;
   align-items: center;
   flex-direction: column;
+  background-color: none;
 }
 
-.carouselImage {
+.carouselContainer {
   display: flex;
-  justify-items: flex-end;
-  max-height: 30rem;
+  flex-direction: column;
+  width: 90vw;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  margin-top: 0;
+  height: 15rem;
+  border: 2px solid #8B4513;
+  border-radius: 20px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7); 
 }
+
+.carouselImageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 20rem;
+ 
+}
+
+/* .carouselImage {
+  max-height: 30rem;
+  width: 100%;
+  object-fit: fill;
+  object-position: top; 
+} */
 
 .detailCarousel {
-  width: 50vw;
+  width: 90vw;
+  border-radius: 5%/8%;
 }
 
 .parkDetailText {
   text-align: left;
   margin: 1rem;
 }
+
 
 
 /* media queries for the parks home page */

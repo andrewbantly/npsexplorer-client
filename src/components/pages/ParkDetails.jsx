@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom'
+import {useState} from 'react'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -9,6 +10,7 @@ export default function ParkDetails(props) {
           userDestinations } = props
   const { name, id } = useParams()
   const navigate = useNavigate()
+  const [showText, setShowText] = useState(false);
 
   const checkLoginStatusAndRedirect = () => {
     console.log(currentUser)
@@ -21,6 +23,19 @@ export default function ParkDetails(props) {
   const compareId = (parkId) => {
         return userDestinations.find((id) => id === parkId)
     }
+
+  const activityNames = parksInfo[id]?.activities.map(activity => activity.name).join(', ')
+
+  const handleClick = () => {
+    checkLoginStatusAndRedirect();
+    if (currentUser) {
+      props.handleAddExperienceClick(parksInfo[id]);
+      setShowText(true);
+      setTimeout(() => {
+        setShowText(false);
+      }, 3000);
+    }
+  };
 
   const responsive = {
     desktop: {
@@ -43,10 +58,9 @@ export default function ParkDetails(props) {
   return (
     <>
       <div className='parkDetailsContainer'>
-        <div className='infoContainer'>
         <div className='detailsHeader'>
         <div className='detailName'>   
-        <h2>{parksInfo[id]?.fullName}</h2>
+        <p className='parkTitle'>{parksInfo[id]?.fullName}</p>
         <p>
             {parksInfo[id]?.addresses[0]?.city}, {parksInfo[id]?.addresses[0]?.stateCode}
         </p>
@@ -59,13 +73,12 @@ export default function ParkDetails(props) {
           <button 
               onClick={() => removeDestination(parksInfo[id].id)} className="tileRemoveDestination">         
               </button>}
-          <button onClick={() => {checkLoginStatusAndRedirect()
-          if(currentUser) {props.handleAddExperienceClick(parksInfo[id])}
-          }}className="tileAddExperience"></button>
+              <button onClick={handleClick} className="tileAddExperience">
+          </button>
           </div>
-        </div>  
-        <div className="parkDetails" key={parksInfo[id]?.id}>
-          <div>
+          {showText && <p>Experience added</p>}
+          </div>
+        <div className='carouselContainer'>  
             <Carousel
            responsive={responsive}
            centerMode={false}
@@ -77,23 +90,26 @@ export default function ParkDetails(props) {
            infinite={true}
            transitionDuration={1500}
             >
-            <div className='imageCarousel'>
-            <img src={parksInfo[id]?.images[0].url} className="carouselImage" alt={parksInfo[id]?.fullName} />
+            <div className='carouselImageContainer' 
+              style={{backgroundImage: `url(${parksInfo[id]?.images[0].url})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
             </div>
-            <div className='imageCarousel'>
-            <img src={parksInfo[id]?.images[1].url} className="carouselImage" alt={parksInfo[id]?.fullName} />
+            <div className='carouselImageContainer' 
+              style={{backgroundImage: `url(${parksInfo[id]?.images[1].url})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
             </div>
-            <div className='imageCarousel'>
-            <img src={parksInfo[id]?.images[2].url} className="carouselImage" alt={parksInfo[id]?.fullName} />
+            <div className='carouselImageContainer' 
+              style={{backgroundImage: `url(${parksInfo[id]?.images[2].url})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
             </div>
             </Carousel>
           </div>
+          <div className="parkDetails" key={parksInfo[id]?.id}>
           <div className="parkDetailText">
+            <h4>Activities:</h4>
+            <p>{activityNames}</p>
+            <h4>Description:</h4>
             <p>{parksInfo[id]?.description}</p>
             <p>{parksInfo[id]?.operatingHours[0]?.description}</p>
             <p>{parksInfo[id]?.entranceFees[0]?.description}</p>
           </div>
-        </div>
         </div>
       </div>
     </>

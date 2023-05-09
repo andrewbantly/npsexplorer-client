@@ -22,6 +22,7 @@ export default function Home(props) {
 //   const [foundParks, setFoundParks] = useState([]);
   const [displayedParks, setDisplayedParks] = useState([]);
   const navigate = useNavigate();
+  
 
 useEffect(() => {
     if (!parksInfo || parksInfo.length === 0) return;
@@ -178,9 +179,11 @@ const handleActivity = (activityName) => {
             <button
               onClick={() => debouncedHandleActivity(`${act.key}`)}
               disabled={!parksInfo || parksInfo.length === 0}
+              className='activityButton'
             >
               <img src={act.img} />
             </button>
+            <p className='activityText'>{act.icon}</p>
           </div>
         );
       });
@@ -190,17 +193,17 @@ const handleActivity = (activityName) => {
       const responsiveStates = {
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
-          items: 40,
+          items: 20,
           slidesToSlide: 3 // optional, default to 1.
         },
         tablet: {
           breakpoint: { max: 1024, min: 464 },
-          items: 20,
+          items: 10,
           slidesToSlide: 2 // optional, default to 1.
         },
         mobile: {
           breakpoint: { max: 464, min: 0 },
-          items: 10,
+          items: 5,
           slidesToSlide: 1 // optional, default to 1.
         }
       };

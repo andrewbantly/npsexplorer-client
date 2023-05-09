@@ -222,6 +222,7 @@ const handleActivity = (activityName) => {
                 onChange={debouncedHandleSearch}
               />
             </form>
+            <div className='carouselHead'>
             <Carousel
               responsive={responsiveStates}
               centerMode={true}
@@ -243,6 +244,7 @@ const handleActivity = (activityName) => {
               >
               {listActivities}
             </Carousel>
+          </div>
           </div>
         </div>
         <div className="parkBox">

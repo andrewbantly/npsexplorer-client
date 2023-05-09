@@ -34,18 +34,20 @@ code {
   display: flex;
   flex-direction: column;
   margin: .5rem 1rem 0 1rem;
-  width: 100vw;
+  width: 90%;
 }
 
 .searchBar input {
   text-align: center;
+  height: 1.5rem;
+  border: 1px solid;
   border-radius: 2%/20%;
-  border: none;
+  width: 99%;
 }
 
-.searchInput {
-  width:18rem
-}
+/* .searchInput {
+  width:90%
+} */
 
 .activityBar {
   border-top: .2rem solid black;
@@ -81,14 +83,15 @@ code {
   margin-bottom: .2rem;
 }
 
-.carousel {
-  max-width: 80vw;
-  margin: 0 10vw 0 10vw;
-  box-shadow: inset -5px 0 5px -5px rgba(0, 0, 0, 0.1),
-              inset 5px 0 5px -5px rgba(0, 0, 0, 0.1);
-  /* border-radius: 5%/15%; */
-  padding-bottom: 0
+.carouselHead {
+  width: 100%;
+  border: .1rem solid;
+  border-radius: 5%/12%;
+  box-shadow: inset -10px 0 5px -5px rgba(0, 0, 0, 0.5),
+              inset 10px 0 5px -5px rgba(0, 0, 0, 0.5);
+  margin: .5rem 0;
 }
+
 
 .imageCarousel {
   display: flex;
@@ -99,7 +102,7 @@ code {
 
 .stateButton {
   border: none;
-  background-color: #8B4513;
+  background-color: #936639dc;
   color: white;
   font-weight: 500;
   width: 2rem;
@@ -135,8 +138,8 @@ code {
   width: 100%;
   max-height: 40%;
   background-color: rgba(0, 0, 0, .5);
-  border-bottom-left-radius: 7% 35%;
-  border-bottom-right-radius: 7% 35%;
+  border-bottom-left-radius: 6% 35%;
+  border-bottom-right-radius: 6% 35%;
 }
 
 .parkName {
@@ -155,7 +158,7 @@ code {
   text-decoration: none;
   height: 100%;
   width: 100%;
-  bottom: 1rem
+  bottom: 1rem;
 }
 
 .parkContainer {
@@ -166,8 +169,8 @@ code {
   border:  none;
   margin: .25rem;
   padding: 0;
-  width: 18rem;
-  height: 11rem;
+  width: 90%;
+  height: 15rem;
   border-radius: 6%/10%;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9)
 }
@@ -179,7 +182,7 @@ code {
   background-color: rgba(255, 255, 255, 0);
   height: 1.5rem;
   width: 1.5rem;
-  margin: .3rem .3rem;
+  margin: .7rem .7rem;
 }
 .tileRemoveDestination {
   border: none;
@@ -188,7 +191,7 @@ code {
   background-color: rgba(255, 255, 255, 0);
   height: 1.5rem;
   width: 1.5rem;
-  margin: .3rem .3rem;
+  margin: .7rem .7rem;
 }
 
 .tileAddExperience{
@@ -265,13 +268,19 @@ code {
 
 .detailName {
   padding: .4rem 0;
-  background-color: #936639;
+  background-color: #936639dc;
   color: white;
   border-radius: 3%/13%;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   width: 100%;
 }
 
+.iconBox {
+  display: flex;
+  justify-content: flex-end;
+  width:90%;
+  margin-top: 1rem;
+}
 
 .selectorBox {
   display: flex;
@@ -285,7 +294,7 @@ code {
 
 .addedText {
   height: 1.5rem;
-  padding: .4rem;
+  padding: .1rem;
 }
 
 .parkDetails {
@@ -302,7 +311,7 @@ code {
   align-items: center;
   justify-content: center;
   background-color: white;
-  margin-top: 3rem auto 1.5rem;
+  margin-top: 1rem;
   height: 15rem;
   border: none;
   border-radius: 3%/5%;
@@ -352,7 +361,7 @@ code {
   }
 
   .carouselContainer {
-    width: 90%;
+    width: 100%;
   }
 
   .parkDetailText {
@@ -368,6 +377,37 @@ code {
 
   .detailName {
     padding: 1rem 0
+  }
+
+}
+
+@media (min-width: 32rem) {
+
+  .parkContainer {
+    width: 30rem; 
+  }
+
+  .searchBar input {
+    width: 30rem;
+  }
+
+.carousel {
+    border-radius: 1%/20%;
+    width: 99%;
+    margin: 0 .5%;
+  }
+
+  .carouselHead {
+    width: 85%;
+    margin: .5rem 7.5%;
+    border-radius: 2%/25%;
+  }
+
+  .tileAddDestination {
+    margin: .7rem 1rem;
+  }
+  .tileRemoveDestination {
+    margin: .7rem 1rem;
   }
 
 }

@@ -66,21 +66,6 @@ export default function ParkDetails(props) {
             {parksInfo[id]?.addresses[0]?.city}, {parksInfo[id]?.addresses[0]?.stateCode}
         </p>
         </div>
-        {!showText && (
-        <div className='selectorBox'>
-          {(!compareId(parksInfo[id]?.id))? 
-          <button onClick={() => {checkLoginStatusAndRedirect()
-          if(currentUser) {props.handleAddDestinationClick(parksInfo[id])}
-          }} className="tileAddDestination"></button> :
-          <button 
-              onClick={() => removeDestination(parksInfo[id].id)} className="tileRemoveDestination">         
-              </button>}
-              {!showText && (
-              <button onClick={handleClick} className="tileAddExperience">
-          </button> )}
-          </div>)}
-          {showText && <p className='addedText'>Experience added to profile</p>}
-          </div>
         <div className='carouselContainer'>  
             <Carousel
            responsive={responsive}
@@ -103,6 +88,23 @@ export default function ParkDetails(props) {
               style={{backgroundImage: `url(${parksInfo[id]?.images[2].url})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
             </div>
             </Carousel>
+          </div>
+          </div>
+          <div className='iconBox'>
+          {!showText && (
+          <div className='selectorBox'>
+          {(!compareId(parksInfo[id]?.id))? 
+          <button onClick={() => {checkLoginStatusAndRedirect()
+          if(currentUser) {props.handleAddDestinationClick(parksInfo[id])}
+          }} className="tileAddDestination"></button> :
+          <button 
+              onClick={() => removeDestination(parksInfo[id].id)} className="tileRemoveDestination">         
+              </button>}
+              {!showText && (
+              <button onClick={handleClick} className="tileAddExperience">
+          </button> )}
+          </div>)}
+          {showText && <p className='addedText'>Experience added to profile</p>}
           </div>
           <div className="parkDetails" key={parksInfo[id]?.id}>
           <div className="parkDetailText">

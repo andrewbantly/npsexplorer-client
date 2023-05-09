@@ -106,12 +106,12 @@ code {
 
 .stateButton {
   border: none;
-  background-color: #936639dc;
+  background-color: rgb(51, 61, 41);
   color: white;
   font-weight: 500;
   width: 2rem;
   margin: 0;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6); 
+  /* box-shadow: 1px 1px 5px rgba(254, 254, 254, 0.5);  */
   border-radius: 10%/20%;
 }
 
@@ -148,13 +148,13 @@ code {
 }
 
 .parkName {
-  margin: .2rem .5rem 0 .7rem; 
+  margin: .2rem .7rem 0 .9rem; 
   font-size: .8rem; 
   color: white;
   font-weight: 500;
 }
 .parkLocation {
-  margin: 0 .5rem .3rem .7rem; 
+  margin: 0 .5rem .3rem .9rem; 
   font-size: .7rem; 
   color: white;
 }
@@ -274,7 +274,7 @@ code {
 
 .detailName {
   padding: .4rem 0;
-  background-color: #936639dc;
+  background-color:  rgb(51, 61, 41);
   color: white;
   border-radius: 3%/13%;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
@@ -368,7 +368,7 @@ code {
   .sizingBox {
     width: 35rem;
     border: .1rem solid black;
-    background-color: rgb(181 179 145);
+    background-color: rgb(240, 239, 225);
     border-radius: 5%/3%;
     margin: 1rem;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7); 

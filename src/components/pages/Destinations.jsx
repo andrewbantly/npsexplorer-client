@@ -15,7 +15,7 @@ const ParkContainer = styled.div`
   height: auto;
   border-radius: 10px;
   border: 0.1rem solid rgb(51, 61, 41);
-  background-color: rgb(181 179 145) ;
+  background-color: rgb(240, 239, 225) ;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 
   @media (max-width: 480px) {
@@ -97,10 +97,14 @@ const ExperienceButton = styled.button`
 
 const ExperienceMessage = styled.div`
   height: 30px;
+  width: 97%;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #eb4034; 
+  color: black;
+  font: 15px; 
+  font-weight: bold;
+  margin: 1rem;
 `;
 
 const ParkImage = styled.img`
@@ -110,6 +114,8 @@ const ParkImage = styled.img`
     border-radius: 20px;
     border: 1.5px solid rgb(51, 61, 41);
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); 
+    // border: 10px solid red;
+
 
 
     @media (max-width: 480px) {
@@ -129,6 +135,8 @@ const ParkText = styled.div`
     color: black;
     font-family: 'Baloo 2', sans-serif;
     margin: 0.1rem 0.5rem;
+    // border: 10px solid gray;
+
 
 `;
 
@@ -138,6 +146,8 @@ const ParkGrid = styled.div`
     justify-content: center;
     padding: 0.1rem;
     max-width: 100%;
+    // border: 10px solid orange;
+
 
     @media (max-width: 480px) {
         gap: 0.5rem;
@@ -160,6 +170,8 @@ const ImageAndButtons = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    // border: 10px solid purple;
+
 `;
 
 const DestinationsContainer = styled.div`
@@ -168,7 +180,9 @@ const DestinationsContainer = styled.div`
     align-items: center;
     justify-items: center;
     margin: 0.5rem auto 0;
-    width: 97%;
+    width: 95%;
+    // border: 10px solid lime;
+
 
 `;
 
@@ -177,12 +191,14 @@ const HeaderLocationContainer = styled.div`
     line-height: 1;
     width: 97%;
     padding: 0.3rem 0;
-    background: #936639;
+    background: rgb(51, 61, 41);
     border-radius: 8%/30%;
     color: white;
     margin-bottom: 1.5rem;
     margin-top: 1.5rem;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    // border: 10px solid white;
+
 
   h3 { 
     font-weight: bold;
@@ -310,7 +326,11 @@ const DestinationsPage = (props) => {
                         />
                     </Link>
                     <ButtonsContainer>
-                        {!showText && (
+                        {showText ? (
+                            <ExperienceMessage>
+                                {experienceMessage}
+                            </ExperienceMessage>
+                        ) : (
                             <>
                                 <RemoveButton
                                     onClick={(event) => removeDestination(event, destination, park)}
@@ -331,10 +351,6 @@ const DestinationsPage = (props) => {
                         )}
                     </ButtonsContainer>
                 </ImageAndButtons>
-
-                <ExperienceMessage>
-                    {showText && experienceMessage}
-                </ExperienceMessage>
 
                 <ParkText>
                     <p>

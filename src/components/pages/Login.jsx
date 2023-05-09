@@ -172,7 +172,7 @@ export default function Login({ currentUser, setCurrentUser }) {
           />
 
           <SubmitButton type='submit'>Login</SubmitButton>
-          <>______________________</>
+          <hr></hr>
           <RegisterLink to='/users/register'>New? Register here</RegisterLink>
         </Form>
       </ContentWrapper>

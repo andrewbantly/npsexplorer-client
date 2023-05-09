@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom"
 import styled from 'styled-components';
@@ -21,16 +21,18 @@ const ParkContainer = styled.div`
   @media (max-width: 480px) {
     width: 80vw;
   }
+  @media (min-width: 768px) {
+    max-width: 350px;  
 `;
 
 const DestinationsTitle = styled.h2`
-  margin-bottom: -2.5rem;
+  margin-bottom: -0.4rem;
   text-align: center;
 `;
 
 const ButtonsContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   width: 100%;
   margin-top: -25px;
   margin-bottom: -30px;
@@ -47,7 +49,7 @@ const RemoveButton = styled.button`
   height: 70px;
   padding: 0;
   margin: 0;
-  margin-right: 16px; 
+  margin-right: 0.2rem; 
   cursor: pointer;
 
   &::before {
@@ -60,6 +62,16 @@ const RemoveButton = styled.button`
     background-position: center;
     background-size: contain;
   }
+`;
+
+const MessageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  font-weight: bold;
+  color: maroon;
 `;
 
 const ExperienceButton = styled.button`
@@ -83,8 +95,16 @@ const ExperienceButton = styled.button`
     }
 `;
 
+const ExperienceMessage = styled.div`
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #eb4034; 
+`;
+
 const ParkImage = styled.img`
-    width: 92%;
+    width: 97%;
     object-fit: cover;
     margin-bottom: 1rem; 
     border-radius: 20px;
@@ -104,7 +124,7 @@ const ParkText = styled.div`
     align-items: center;
     justify-content: space-between;
     text-align: left;
-    width: 92%;
+    width: 97%;
     padding: 0.1rem 0;
     color: black;
     font-family: 'Baloo 2', sans-serif;
@@ -116,13 +136,17 @@ const ParkGrid = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
-    padding: 0.2rem;
-    max-width: 90%;
+    padding: 0.1rem;
+    max-width: 100%;
 
     @media (max-width: 480px) {
         gap: 0.5rem;
   }
+  @media (min-width: 32rem) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 30rem;
+}
 `;
 
 const NoDestinationsMessage = styled.p`
@@ -144,14 +168,14 @@ const DestinationsContainer = styled.div`
     align-items: center;
     justify-items: center;
     margin: 0.5rem auto 0;
-    max-width: 90%;
+    width: 97%;
 
 `;
 
 const HeaderLocationContainer = styled.div`
     text-align: center;
     line-height: 1;
-    width: 90%;
+    width: 97%;
     padding: 0.3rem 0;
     background: #936639;
     border-radius: 8%/30%;
@@ -162,12 +186,16 @@ const HeaderLocationContainer = styled.div`
 
   h3 { 
     font-weight: bold;
-    margin: 0.5rem;
+    margin: 0.3rem;
   }
   p {
     font-size: 16px;
+    margin: 0.3rem
   }
 `;
+
+
+
 
 
 
@@ -175,11 +203,21 @@ const HeaderLocationContainer = styled.div`
 const DestinationsPage = (props) => {
     const [message, setMessage] = useState('');
     const [experienceMessage, setExperienceMessage] = useState('');
+    const [showText, setShowText] = useState(false);
+    const [showRemoveText, setShowRemoveText] = useState(false);
     const { parksInfo,
         userDestinations,
         handleRemoveDestination,
         handleAddExperienceClick,
         setUserDestinations } = props
+
+    function NewScreen() {
+        useEffect(() => {
+            window.scrollTo(0, 0);
+        }, [])
+    }
+
+    NewScreen()
 
     //const removeDestination = async (destinationId, park) => { ... }: This line defines an asynchronous function called removeDestination. This function takes two arguments: destinationId (the ID of the destination to be removed) and park (an object containing the details of the park associated with the destination).
 
@@ -203,14 +241,19 @@ const DestinationsPage = (props) => {
             const foundDestinations = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations`, options)
             setUserDestinations(foundDestinations.data)
 
-            // console.log(foundDestinations)
-
             setMessage(`${park.fullName} was removed from favorites`);
+            setShowRemoveText(true);
+            setTimeout(() => {
+                setShowRemoveText(false);
+            }, 3000);
         } catch (error) {
             setMessage(`Error removing ${park.fullName} from favorites`);
+            setShowRemoveText(true);
+            setTimeout(() => {
+                setShowRemoveText(false);
+            }, 3000);
         }
     };
-
     //event: The event object that is automatically passed when the function is called from an event listener (onClick in this case). The event object contains information about the event that occurred, such as the target element and the type of event.
 
     // event.stopPropagation(); is used to prevent the parent element from reciving the click
@@ -219,8 +262,11 @@ const DestinationsPage = (props) => {
         event.stopPropagation();
         handleAddExperienceClick(park);
         setExperienceMessage(`${park.fullName} was added to experience`);
+        setShowText(true);
+        setTimeout(() => {
+            setShowText(false);
+        }, 3000);
     };
-
 
     // the findParkById function takes destinationId as an argument, destionsIs is the Id of the park we want to find
 
@@ -248,7 +294,7 @@ const DestinationsPage = (props) => {
         const { park, originalIndex } = findParkById(destination);
 
         return (
-            <ParkContainer key={`${park?.id}-${originalIndex}`}>
+            <ParkContainer key={destination}>
                 <HeaderLocationContainer>
                     <h3>{park?.fullName}</h3>
                     <p>
@@ -264,27 +310,38 @@ const DestinationsPage = (props) => {
                         />
                     </Link>
                     <ButtonsContainer>
-                        <RemoveButton
-                            onClick={(event) => removeDestination(event, destination, park)}
-                        >
-                        </RemoveButton>
-                        <ExperienceButton
-                            onClick={(event) => handleExperienceButtonClick(event, park)}
-                        >
-                        </ExperienceButton>
+                        {!showText && (
+                            <>
+                                <RemoveButton
+                                    onClick={(event) => removeDestination(event, destination, park)}
+                                >
+                                </RemoveButton>
+                                <ExperienceButton
+                                    onClick={(event) => {
+                                        // Check if showText is false before adding an experience.
+                                        // If showText is true, it means the user has recently clicked the button,
+                                        // so we should ignore the click.
+                                        if (!showText) {
+                                            handleExperienceButtonClick(event, park);
+                                        }
+                                    }}
+                                >
+                                </ExperienceButton>
+                            </>
+                        )}
                     </ButtonsContainer>
                 </ImageAndButtons>
+
+                <ExperienceMessage>
+                    {showText && experienceMessage}
+                </ExperienceMessage>
+
                 <ParkText>
                     <p>
                         Activities: {park?.activities[0]?.name},{" "}
                         {park?.activities[1]?.name}, {park?.activities[2]?.name},{" "}
                         {park?.activities[3]?.name}, {park?.activities[4]?.name}
                     </p>
-                </ParkText>
-                <ParkText>
-                    {/* <p>
-                        {park?.addresses[0]?.city}, {park?.addresses[0]?.stateCode}
-                    </p> */}
                 </ParkText>
             </ParkContainer>
         );
@@ -298,11 +355,12 @@ const DestinationsPage = (props) => {
                     You have no Destinations! Go and explore!
                 </NoDestinationsMessage>
             )}
-            
-                <p>{message}</p>
-                <p>{experienceMessage}</p>
-                <ParkGrid>{userDestinationsList}</ParkGrid>
-           
+            {showRemoveText && (
+                <MessageContainer>
+                    <p>{message}</p>
+                </MessageContainer>
+            )}
+            <ParkGrid>{userDestinationsList}</ParkGrid>
         </DestinationsContainer>
     );
 };

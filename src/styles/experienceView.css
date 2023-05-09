@@ -19,6 +19,7 @@
     width: 2.5rem;
     right: 2rem;
     margin-top: 3rem;
+    margin-left: 1rem;
 }
 
 .backButtonImg,
@@ -64,8 +65,18 @@
     }
 
     .experienceViewButtonsContainer,
-    .experienceViewImg, .experienceViewDescription {
+    .experienceViewImg,
+    .experienceViewDescription {
         width: 35rem;
     }
 
+    .backButton {
+    margin: 0 auto;
+    width: 35rem;
+    height: 2.5rem;
+    }
+    .backButtonImg {
+        width: auto;
+        height: auto;
+    }
 }

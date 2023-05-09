@@ -12,6 +12,7 @@ export default function ExperienceView(props) {
         if (experienceDetails.description !== "") {
             setShowExperienceDescription(true)
         }
+        window.scrollTo(0, 0)
     }, [experienceDetails])
 
     const handleSubmit = async (e, form) => {

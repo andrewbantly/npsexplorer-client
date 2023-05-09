@@ -7,7 +7,7 @@ body {
 
 .profileHeader {
     display: flex;
-    margin: 3rem auto 1.5rem;
+    margin: 1rem auto 1rem;
     background-color: rgb(101, 109, 74);
     border-radius: 10px;
     border: 2px solid rgb(51, 61, 41);
@@ -32,7 +32,7 @@ body {
 
 .profileImg {
     height: 7rem;
-    aspect-ratio: 1/1; 
+    aspect-ratio: 1/1;
     object-fit: cover;
     overflow: hidden;
     border-radius: 50%;
@@ -42,7 +42,9 @@ body {
 .vistType {
     color: rgb(194, 197, 170);
     font-size: 1.5rem;
+    text-align: left;
 }
+
 .vistCount {
     color: rgb(194, 197, 170);
     font-size: 2rem;
@@ -64,9 +66,10 @@ body {
 }
 
 .logoutContainer {
-    position: absolute;
-    right: 0.5rem;
-    top: 0.5rem;
+    position: relative;
+    width: 90%;
+    margin: 0.5rem auto 0;
+    flex-direction: row-reverse;
     display: flex;
     align-items: center;
 }
@@ -126,6 +129,7 @@ body {
 .experienceImg {
     height: 5.2rem
 }
+
 .editProfileImageTxt {
     color: rgb(194, 197, 170);
     margin: 0;
@@ -133,7 +137,17 @@ body {
     font-weight: 500;
 }
 
-.uploadcare--widget__button, .uploadcare--widget__button_type_open, .uploadcare--button, .uploadcare--button_size_big, .uploadcare--button_primary, .uploadcare--tab__action-button, .needsclick, .uploadcare--widget__button:focus, .uploadcare--widget__button:hover, .uploadcare--widget__button_type_open:focus, .uploadcare--widget__button_type_open:hover {
+.uploadcare--widget__button,
+.uploadcare--widget__button_type_open,
+.uploadcare--button,
+.uploadcare--button_size_big,
+.uploadcare--button_primary,
+.uploadcare--tab__action-button,
+.needsclick,
+.uploadcare--widget__button:focus,
+.uploadcare--widget__button:hover,
+.uploadcare--widget__button_type_open:focus,
+.uploadcare--widget__button_type_open:hover {
     background-color: rgb(101, 109, 74);
     color: rgb(194, 197, 170);
     border: none;
@@ -143,12 +157,40 @@ body {
     font-size: 0.5rem;
 }
 
-.uploadcare--menu, .uploadcare--panel__menu, .uploadcare--tab, .uploadcare--tab_name_file, .uploadcare--tab_current, .uploadcare--draganddrop__supported, .uploadcare--dragging__hide, .uploadcare--draganddrop__title {
+.uploadcare--menu,
+.uploadcare--panel__menu,
+.uploadcare--tab,
+.uploadcare--tab_name_file,
+.uploadcare--tab_current,
+.uploadcare--draganddrop__supported,
+.uploadcare--dragging__hide,
+.uploadcare--draganddrop__title {
     background-color: rgb(101, 109, 74);
     border: none;
-} 
+}
 
 .uploadcare--link.uploadcare--widget__file-name,
 .uploadcare--widget__file-size {
-  display: none;
+    display: none;
+}
+
+@media (min-width: 35rem) {
+    .profileHeader, .experienceCard, .experienceHeader, .logoutContainer {
+        width: 35rem;
+    }
+    .vistType {
+        display: inline-block;
+        width: fit-content;
+        text-align: left;
+    }
+    .vistCount {
+        display: inline-block;
+        width: fit-content;
+        margin-right: 0.5rem;
+        text-align: left;
+    }
+    .lineBreak {
+        margin: 1rem 0;
+    }
+
 }

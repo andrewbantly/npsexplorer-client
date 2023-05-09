@@ -174,9 +174,9 @@ export default function Profile({ currentUser, handleLogout }) {
     const profileView = (
         <div className='profileView'>
             <div onClick={() => handleLogout()} className='logoutContainer'>
-                <p className='logoutText'>Logout</p>
                 <img src={require("../../media/logout.png")}
                     className='logoutImg'></img>
+                <p className='logoutText'>Logout</p>
             </div>
             <div className='profileHeader'>
                 <div className='profileHeaderLeft'>

@@ -21,7 +21,9 @@ code {
 .navIcon {
   margin: 1rem;
   text-decoration: none;
-  color: rgb(1, 29, 4);
+  color: white;
+  /* color: rgb(166, 138, 100); */
+  /* color: rgb(1, 29, 4); */
   font-weight: 500;
 }
 
@@ -138,7 +140,8 @@ code {
   text-align: left;
   width: 100%;
   max-height: 40%;
-  background-color: rgba(0, 0, 0, .5);
+  /* background-color: rgba(0, 0, 0, .5); */
+  background-color: rgba(101, 109, 74, 0.5);
   border-bottom-left-radius: 6% 35%;
   border-bottom-right-radius: 6% 35%;
 }
@@ -178,7 +181,7 @@ code {
 
 .tileAddDestination {
   border: none;
-  background-image: url('https://ucarecdn.com/ba670d08-4776-4edc-9528-7db89f14bda8/');
+  background-image: url(./media/heart-unclicked.png);
   background-size: cover;
   background-color: rgba(255, 255, 255, 0);
   height: 1.5rem;
@@ -187,7 +190,7 @@ code {
 }
 .tileRemoveDestination {
   border: none;
-  background-image: url('https://ucarecdn.com/70eb6013-f9b9-4377-9c48-4ded6a690e9f/');
+  background-image: url(./media/heart-clicked.png);
   background-size: cover;
   background-color: rgba(255, 255, 255, 0);
   height: 1.5rem;
@@ -209,7 +212,8 @@ code {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: rgb(194, 197, 170); 
+  background-color: rgb(51, 61, 41); 
+  /* background-color: rgb(194, 197, 170);  */
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
 }
 

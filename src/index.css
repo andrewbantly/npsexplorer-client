@@ -279,8 +279,10 @@ code {
 .iconBox {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   width:90%;
-  margin-top: 1rem;
+  height: 4rem;
+  margin: 0 auto
 }
 
 .selectorBox {
@@ -294,8 +296,8 @@ code {
 }
 
 .addedText {
-  height: 1.5rem;
-  padding: .1rem;
+  padding:0;
+  margin: .48rem
 }
 
 .parkDetails {
@@ -303,7 +305,13 @@ code {
   align-items: center;
   flex-direction: column;
   background-color: none;
+  margin-top: 0;
 }
+
+/* .parkDetailText {
+  margin-top: 0;
+  padding-top: 0;
+} */
 
 .carouselContainer {
   display: flex;

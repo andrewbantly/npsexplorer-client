@@ -65,6 +65,7 @@ export default function ParkDetails(props) {
             {parksInfo[id]?.addresses[0]?.city}, {parksInfo[id]?.addresses[0]?.stateCode}
         </p>
         </div>
+        {!showText && (
         <div className='selectorBox'>
           {(!compareId(parksInfo[id]?.id))? 
           <button onClick={() => {checkLoginStatusAndRedirect()
@@ -73,9 +74,11 @@ export default function ParkDetails(props) {
           <button 
               onClick={() => removeDestination(parksInfo[id].id)} className="tileRemoveDestination">         
               </button>}
+              {!showText && (
               <button onClick={handleClick} className="tileAddExperience">
-          </button>
-          </div>
+          </button> )}
+          </div>)}
+          {showText && <p className='addedText'>Experience added to profile</p>}
           </div>
         <div className='carouselContainer'>  
             <Carousel
@@ -100,7 +103,6 @@ export default function ParkDetails(props) {
             </div>
             </Carousel>
           </div>
-          {showText && <p>Experience added to profile</p>}
           <div className="parkDetails" key={parksInfo[id]?.id}>
           <div className="parkDetailText">
             <h4>Activities:</h4>

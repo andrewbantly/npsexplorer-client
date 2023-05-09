@@ -104,7 +104,8 @@ code {
   font-weight: 500;
   width: 2rem;
   margin: 0;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6)
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6); 
+  border-radius: 10%/20%;
 }
 
 .parkImage {
@@ -239,16 +240,15 @@ code {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  margin-top: 1rem;
-  width: 90vw;
+  margin-top: 2rem;
+  width: 90%;
 }
 
 .parkTitle {
   font-size: 1.5rem;
   font-weight: bold;
   line-height: 1;
-  margin-top: .3rem;
-  margin-bottom: 0
+  margin: 0 5rem;
 }
 
 
@@ -258,11 +258,12 @@ code {
 }
 
 .detailName {
-  padding: .2rem 1rem;
+  padding: .4rem 0;
   background-color: #936639;
   color: white;
-  border-radius: 8%/30%;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7)
+  border-radius: 3%/13%;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  width: 100%;
 }
 
 
@@ -276,7 +277,10 @@ code {
   margin: 0 1rem;
 }
 
-
+.addedText {
+  height: 1.5rem;
+  padding: .4rem;
+}
 
 .parkDetails {
   display: flex;
@@ -292,10 +296,10 @@ code {
   align-items: center;
   justify-content: center;
   background-color: white;
-  margin-top: 0;
+  margin-top: 3rem auto 1.5rem;
   height: 15rem;
-  border: 2px solid #8B4513;
-  border-radius: 20px;
+  border: none;
+  border-radius: 3%/5%;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7); 
 }
 
@@ -316,8 +320,8 @@ code {
 } */
 
 .detailCarousel {
-  width: 90vw;
-  border-radius: 5%/8%;
+  width: 100%;
+  border-radius: 3%/5%;
 }
 
 .parkDetailText {

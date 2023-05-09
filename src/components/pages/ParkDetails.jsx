@@ -58,6 +58,7 @@ export default function ParkDetails(props) {
   return (
     <>
       <div className='parkDetailsContainer'>
+        <div className='sizingBox'>
         <div className='detailsHeader'>
         <div className='detailName'>   
         <p className='parkTitle'>{parksInfo[id]?.fullName}</p>
@@ -112,6 +113,7 @@ export default function ParkDetails(props) {
             <p>{parksInfo[id]?.operatingHours[0]?.description}</p>
             <p>{parksInfo[id]?.entranceFees[0]?.description}</p>
           </div>
+        </div>
         </div>
       </div>
     </>

@@ -235,6 +235,12 @@ code {
   margin-bottom: 1.5rem;
 }
 
+.sizingBox{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .detailsHeader {
   display: flex;
   flex-direction: column;
@@ -327,17 +333,41 @@ code {
 .parkDetailText {
   text-align: left;
   margin: 1rem;
+  width: 90vw
 }
 
 
 
 /* media queries for the parks home page */
 
-/* @media (min-width: 391) {
+@media (min-width: 35rem) {
 
-  .container {
-    flex-direction: row;
-  
+  .sizingBox {
+    width: 35rem;
+    border: .1rem solid black;
+    background-color: rgb(181 179 145);
+    border-radius: 5%/3%;
+    margin: 1rem;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7); 
   }
 
-} */
+  .carouselContainer {
+    width: 90%;
+  }
+
+  .parkDetailText {
+    width: 90%
+  }
+
+  .carouselContainer {
+    
+    height: 20rem;
+    border: none;
+    
+  }
+
+  .detailName {
+    padding: 1rem 0
+  }
+
+}

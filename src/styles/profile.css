@@ -69,9 +69,13 @@ body {
     position: relative;
     width: 90%;
     margin: 0.5rem auto 0;
-    flex-direction: row-reverse;
     display: flex;
+    flex-direction: row-reverse;
+}
+.logoutElementsContainer {
     align-items: center;
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 .logoutImg {

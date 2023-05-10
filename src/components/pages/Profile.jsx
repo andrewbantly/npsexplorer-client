@@ -15,7 +15,7 @@ export default function Profile({ currentUser, handleLogout }) {
     const [experiencesCount, setExperiencesCount] = useState(0);
     const [destinationsCount, setDestinationsCount] = useState(0);
     const [header, setHeader] = useState(true);
-    const [userImage, setUserImage] = useState(require("../../media/defaultAvatar.png")) // IMPORT AVATAR FROM SRC/MEDIA dir
+    const [userImage, setUserImage] = useState(require("../../media/defaultAvatar.png"))
     const [imageUpload, setImageUpload] = useState(false);
     const navigate = useNavigate()
 
@@ -39,10 +39,8 @@ export default function Profile({ currentUser, handleLogout }) {
 
     // edited the upload care function to be a named function and binds it to the event listener, so when the file is uploaded the event is triggered and the file is passed.  The fileInfo.cdnUrl contains the uploaded file's URL. and the image is set to the state
     const initUploadcareWidget = () => {
-        console.log("widget")
         const widget = uploadcare.SingleWidget('#uploadcare-uploader');
         widget.onUploadComplete(async (fileInfo) => {
-            console.log('File uploaded:', fileInfo.cdnUrl);
             const userPhoto = {
                 image: fileInfo.cdnUrl
             }
@@ -65,8 +63,6 @@ export default function Profile({ currentUser, handleLogout }) {
     }
 
     const handleDeleteClick = async (experience) => {
-        console.log(experience)
-        console.log("delete button clicked")
         try {
             const token = localStorage.getItem('jwt')
             const options = {
@@ -77,7 +73,6 @@ export default function Profile({ currentUser, handleLogout }) {
             const deleteExperience = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${experience._id}`, options);
 
             const updatedExperiences = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/experiences/${currentUser._id}`, options)
-            console.log("found exps: ", updatedExperiences.data.length)
             setExperiencesList(updatedExperiences)
             setExperiencesCount(updatedExperiences.data.length)
             if (updatedExperiences.data.length === 0) {
@@ -173,10 +168,12 @@ export default function Profile({ currentUser, handleLogout }) {
 
     const profileView = (
         <div className='profileView'>
-            <div onClick={() => handleLogout()} className='logoutContainer'>
+            <div className='logoutContainer'>
+                <div className='logoutElementsContainer' onClick={() => handleLogout()} >
                 <img src={require("../../media/logout.png")}
                     className='logoutImg'></img>
                 <p className='logoutText'>Logout</p>
+                </div>
             </div>
             <div className='profileHeader'>
                 <div className='profileHeaderLeft'>

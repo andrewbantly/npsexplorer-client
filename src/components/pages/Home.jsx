@@ -204,7 +204,7 @@ const handleActivity = (activityName) => {
         mobile: {
           breakpoint: { max: 464, min: 0 },
           items: 5,
-          slidesToSlide: 1 // optional, default to 1.
+          slidesToSlide: 5 // optional, default to 1.
         }
       };
 
@@ -229,6 +229,7 @@ const handleActivity = (activityName) => {
               arrows={false}
               containerClass="carousel"
               infinite={true}
+              showDotsOutside={true}
               >
               {usState}
             </Carousel>

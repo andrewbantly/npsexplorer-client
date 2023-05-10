@@ -214,7 +214,7 @@ const handleActivity = (activityName) => {
         <div className="container">
           {/* Carousel for states */}
           <div className="searchBar">
-          <form>
+          <form onSubmit={(e) => e.preventDefault()}>
               <input
                 className="searchInput"
                 id="name"

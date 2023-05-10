@@ -201,7 +201,7 @@ code {
 
 .tileAddExperience{
   border: none;
-  background-image: url('https://ucarecdn.com/e8ede673-cced-4a2a-a020-941e395828ff/');
+  background-image: url(https://ucarecdn.com/e8ede673-cced-4a2a-a020-941e395828ff/);
   background-size: cover;
   background-color: rgba(255, 255, 255, 0);
   height: 1.5rem;

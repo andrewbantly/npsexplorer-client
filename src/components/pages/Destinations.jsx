@@ -95,7 +95,7 @@ const ExperienceButton = styled.button`
     }
 `;
 
-const ExperienceMessage = styled.div`
+const ExperienceMessage = styled.p`
   height: 30px;
   width: 97%;
   display: flex;
@@ -103,20 +103,16 @@ const ExperienceMessage = styled.div`
   align-items: center;
   color: black;
   font: 15px; 
-  font-weight: bold;
-  margin: 1rem;
+  margin: 1.55rem 1rem;
 `;
 
 const ParkImage = styled.img`
-    width: 97%;
+    width: 90%;
     object-fit: cover;
     margin-bottom: 1rem; 
     border-radius: 20px;
     border: 1.5px solid rgb(51, 61, 41);
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); 
-    // border: 10px solid red;
-
-
 
     @media (max-width: 480px) {
     height: 60vw;
@@ -130,7 +126,7 @@ const ParkText = styled.div`
     align-items: center;
     justify-content: space-between;
     text-align: left;
-    width: 97%;
+    width: 90%;
     padding: 0.1rem 0;
     color: black;
     font-family: 'Baloo 2', sans-serif;
@@ -180,7 +176,7 @@ const DestinationsContainer = styled.div`
     align-items: center;
     justify-items: center;
     margin: 0.5rem auto 0;
-    width: 95%;
+    width: 90%;
     // border: 10px solid lime;
 
 
@@ -189,7 +185,7 @@ const DestinationsContainer = styled.div`
 const HeaderLocationContainer = styled.div`
     text-align: center;
     line-height: 1;
-    width: 97%;
+    width: 90%;
     padding: 0.3rem 0;
     background: rgb(51, 61, 41);
     border-radius: 8%/30%;
@@ -201,7 +197,6 @@ const HeaderLocationContainer = styled.div`
 
 
   h3 { 
-    font-weight: bold;
     margin: 0.3rem;
   }
   p {
@@ -384,10 +379,10 @@ const DestinationsPage = (props) => {
 
     return (
         <DestinationsContainer>
-            <DestinationsTitle>User Destinations:</DestinationsTitle>
+            <DestinationsTitle>User Destinations</DestinationsTitle>
             {userDestinations.length === 0 && (
                 <NoDestinationsMessage>
-                    You have no Destinations! Go and explore!
+                    You have no destinations! Go and explore!
                 </NoDestinationsMessage>
             )}
             {showRemoveText && (

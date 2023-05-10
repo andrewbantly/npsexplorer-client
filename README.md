@@ -18,6 +18,18 @@ Working in a small team, we are challenged to develop a beautiful, mobile-first 
 * Node.js
 * External API
 
+## Installation Instructions
+
+* Create a node project
+* Create a react project
+* Install MongoDB
+* Create a react project for client in git hub
+* Create a express project for server in git hub
+* npm i in both projects
+* signup for a national parks service api key
+* signup for an upload care account
+
+
 ## National Park Service API
 [API documentation](https://www.nps.gov/subjects/developer/api-documentation.htm)
 ![Example](./readMedia/NPS-API-example.png)

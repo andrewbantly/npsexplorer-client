@@ -9,14 +9,14 @@
 .backButton {
     display: flex;
     justify-self: center;
-    width: 2.5rem;
+    width: 3rem;
     margin: 0.5rem 0 0 0.5rem;
 }
 
 .deleteButton,
 .editButton {
     justify-self: center;
-    width: 2.5rem;
+    width: 2rem;
     right: 2rem;
     margin-top: 3rem;
     margin-left: 1rem;
@@ -37,7 +37,7 @@
     line-height: 2rem;
     font-size: 1.8rem;
     padding: .2rem 1rem;
-    background-color: #936639dc;
+    background-color:  rgb(51, 61, 41);
     color: white;
     border-radius: 10px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);

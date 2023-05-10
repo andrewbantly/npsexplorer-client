@@ -37,6 +37,7 @@ code {
 .searchBar {
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin: .5rem 1rem 0 1rem;
   width: 90%;
 }
@@ -90,7 +91,7 @@ code {
 .carouselHead {
   width: 100%;
   border: .1rem solid;
-  border-radius: 5%/12%;
+  border-radius: 5%/20%;
   box-shadow: inset -10px 0 5px -5px rgba(0, 0, 0, 0.5),
               inset 10px 0 5px -5px rgba(0, 0, 0, 0.5);
   margin: .5rem 0;
@@ -362,6 +363,13 @@ code {
 
 
 /* media queries for the parks home page */
+@media (min-width: 33rem) {
+
+  .carouselHead {
+    width: 30rem;
+  }
+
+}
 
 @media (min-width: 35rem) {
 
@@ -376,18 +384,14 @@ code {
 
   .carouselContainer {
     width: 100%;
+    height: 20rem;
+    border: none;
   }
 
   .parkDetailText {
     width: 90%
   }
 
-  .carouselContainer {
-    
-    height: 20rem;
-    border: none;
-    
-  }
 
   .detailName {
     padding: 1rem 0
@@ -411,12 +415,6 @@ code {
     margin: 0 .5%;
   }
 
-  .carouselHead {
-    width: 85%;
-    margin: .5rem 7.5%;
-    border-radius: 2%/25%;
-  }
-
   .tileAddDestination {
     margin: .7rem 1rem;
   }
@@ -425,3 +423,35 @@ code {
   }
 
 }
+
+
+/* carousel */
+
+.react-multiple-carousel__arrow.react-multiple-carousel__arrow--left { 
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  left: .01rem 
+}
+
+.react-multiple-carousel__arrow.react-multiple-carousel__arrow--right {
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  right: .01rem 
+}
+
+
+
+
+/* -webkit-font-smoothing: antialiased;
+position: absolute;
+outline: 0;
+transition: all .5s;
+border-radius: 35px;
+z-index: 1000;
+background: rgba(0,0,0,0.5);
+min-width: 43px;
+min-height: 43px;
+opacity: 1;
+cursor: pointer;
+left: calc(4% + 1px);
+border: solid red; */

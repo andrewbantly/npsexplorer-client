@@ -193,7 +193,7 @@ const handleActivity = (activityName) => {
       const responsiveStates = {
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
-          items: 20,
+          items: 10,
           slidesToSlide: 3 // optional, default to 1.
         },
         tablet: {
@@ -204,7 +204,7 @@ const handleActivity = (activityName) => {
         mobile: {
           breakpoint: { max: 464, min: 0 },
           items: 5,
-          slidesToSlide: 5 // optional, default to 1.
+          slidesToSlide: 1 // optional, default to 1.
         }
       };
 
@@ -226,10 +226,10 @@ const handleActivity = (activityName) => {
             <Carousel
               responsive={responsiveStates}
               centerMode={true}
-              arrows={false}
+              arrows={true}
               containerClass="carousel"
               infinite={true}
-              showDotsOutside={true}
+              swipeable={true}
               >
               {usState}
             </Carousel>
@@ -239,9 +239,10 @@ const handleActivity = (activityName) => {
             <Carousel
               responsive={responsiveStates}
               centerMode={true}
-              arrows={false}
+              arrows={true}
               containerClass="carousel"
               infinite={true}
+              swipeable={true}
               >
               {listActivities}
             </Carousel>

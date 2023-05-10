@@ -204,7 +204,7 @@ const handleActivity = (activityName) => {
         mobile: {
           breakpoint: { max: 464, min: 0 },
           items: 5,
-          slidesToSlide: 1 // optional, default to 1.
+          slidesToSlide: 3 // optional, default to 1.
         }
       };
 
@@ -214,7 +214,7 @@ const handleActivity = (activityName) => {
         <div className="container">
           {/* Carousel for states */}
           <div className="searchBar">
-          <form>
+          <form onSubmit={(e) => e.preventDefault()}>
               <input
                 className="searchInput"
                 id="name"
@@ -223,24 +223,29 @@ const handleActivity = (activityName) => {
               />
             </form>
             <div className='carouselHead'>
+            <div>  
             <Carousel
               responsive={responsiveStates}
               centerMode={true}
-              arrows={false}
+              arrows={true}
               containerClass="carousel"
               infinite={true}
+              swipeable={true}
+              removeArrowOnDeviceType="mobile"
               >
               {usState}
             </Carousel>
-    
+            </div>
           {/* Carousel for activities */}
           <div>
             <Carousel
               responsive={responsiveStates}
               centerMode={true}
-              arrows={false}
+              arrows={true}
               containerClass="carousel"
               infinite={true}
+              swipeable={true}
+              removeArrowOnDeviceType='mobile'
               >
               {listActivities}
             </Carousel>

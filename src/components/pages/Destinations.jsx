@@ -227,6 +227,24 @@ const DestinationsPage = (props) => {
         handleAddExperienceClick,
         setUserDestinations } = props
 
+        useEffect(() => {
+            const token = localStorage.getItem('jwt');
+            if (token) {
+              axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations`, {
+                headers: {
+                  Authorization: token,
+                },
+              })
+              .then((response) => {
+                setUserDestinations(response.data);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+            }
+          }, []);
+
+
     function NewScreen() {
         useEffect(() => {
             window.scrollTo(0, 0);
@@ -308,6 +326,7 @@ const DestinationsPage = (props) => {
 
     const userDestinationsList = userDestinations.map((destination) => {
         const { park, originalIndex } = findParkById(destination);
+
 
         return (
             <ParkContainer key={destination}>

@@ -77,6 +77,10 @@ code {
   margin-bottom: 0;
 }
 
+.activityButton:active {
+  transform: scale(0.9); 
+}
+
 .activityIcon img {
   height: 1.7rem;
   background-color: none;
@@ -111,6 +115,10 @@ code {
   /* box-shadow: 1px 1px 5px rgba(254, 254, 254, 0.5);  */
   border-radius: 10%/20%;
   text-align: center;
+}
+
+.stateButton:active {
+  transform: scale(0.9); 
 }
 
 .parkImage {

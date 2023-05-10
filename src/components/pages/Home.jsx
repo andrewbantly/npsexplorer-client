@@ -223,6 +223,7 @@ const handleActivity = (activityName) => {
               />
             </form>
             <div className='carouselHead'>
+            <div>  
             <Carousel
               responsive={responsiveStates}
               centerMode={true}
@@ -234,7 +235,7 @@ const handleActivity = (activityName) => {
               >
               {usState}
             </Carousel>
-    
+            </div>
           {/* Carousel for activities */}
           <div>
             <Carousel

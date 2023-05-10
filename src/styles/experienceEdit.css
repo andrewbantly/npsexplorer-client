@@ -48,7 +48,8 @@ form {
 .confirmButton {
     border: none;
     background-color: rgb(0, 0, 0, 0);
-    width: 6rem;
+    width: 3.5rem;
+    margin-top: 1rem;
 }
 
 .confirmButtonImg {

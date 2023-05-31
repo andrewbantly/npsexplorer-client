@@ -25,7 +25,7 @@ export default function Header(props) {
             Profile
           </Link>
           {currentUser?
-          <Link to="/users/login" className="navIcon" onClick={()=> {handleLogout(); setOpen(false)}}>Log out</Link> :
+          <Link to="/users/login" className="navIcon" onClick={()=> {handleLogout(); setOpen(false)}}>Logout</Link> :
           <Link to="/users/register" className="navIcon" onClick={()=> setOpen(false)}>Sign up</Link>}
         </div>
       )}

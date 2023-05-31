@@ -545,13 +545,9 @@ code {
     }
   
     .searchBar input {
-      width: 15rem;
+      width: 13rem;
     }
-  
-    .searchBar > input {
-      width: 20rem;
-    }
-  
+      
     .tileAddDestination {
       margin: .7rem 1rem;
     }

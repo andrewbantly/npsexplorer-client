@@ -58,6 +58,8 @@ code {
 
 
 .searchBar input {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1.5rem;
   text-align: center;
   width: 25rem;
   height: 1.8rem;
@@ -68,6 +70,7 @@ code {
 }
 .searchBar input::placeholder {
   color: rgba(164, 172, 134, 0.9);
+  font-size: 1.3rem;
 }
 
 .hideSorting {

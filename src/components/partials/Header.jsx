@@ -11,7 +11,7 @@ export default function Header(props) {
   return (
     <div className="header">
       <div className='bar'>
-      {!isOpen && <Link to='/' className="navIcon"><p>NPS Explorer</p></Link>}
+      {!isOpen && <Link to='/' className="navIcon"><p>National Parks Explorer</p></Link>}
       <Hamburger toggled={isOpen} toggle={setOpen} direction="left"/>
       {isOpen && (
         <div className="menu">
@@ -26,13 +26,13 @@ export default function Header(props) {
           </Link>
           {currentUser?
           <Link to="/users/login" className="navIcon" onClick={()=> {handleLogout(); setOpen(false)}}>Log out</Link> :
-          <Link to="/users/login" className="navIcon" onClick={()=> setOpen(false)}>Login</Link>}
+          <Link to="/users/register" className="navIcon" onClick={()=> setOpen(false)}>Sign up</Link>}
         </div>
       )}
       </div>
       <div className='largeHeader'>
-        <div>
-        <Link to='/' className="logo"><p>NPS Explorer</p></Link>
+        <div className='logoContainer'>
+        <Link to='/' className="logo"><p>National Parks Explorer</p></Link>
         </div>
         <div className="menu">
           <Link to="/" className="navIcon" >
@@ -46,7 +46,7 @@ export default function Header(props) {
           </Link>
           {currentUser?
           <Link to="/users/login" className="navIcon" onClick={()=> handleLogout()}>Logout</Link> :
-          <Link to="/users/login" className="navIcon">Log in</Link>}
+          <Link to="/users/register" className="navIcon">Sign up</Link>}
         </div>
       </div>
     </div>

@@ -20,22 +20,20 @@ code {
 }
 
 .navIcon {
-  margin: 1rem .3rem;
+  margin: 1rem 0 1rem 1rem;
   text-decoration: none;
-  color:  rgb(51, 61, 41);
-  /* color: rgb(166, 138, 100); */
-  /* color: rgb(1, 29, 4); */
+  color: rgb(51, 61, 41);
   font-weight: 500;
 }
 
 .logo {
-  display:flex;
+  display: flex;
   flex-direction: row;
-  width: 20rem;
+  width: 100%;
   padding: 0;
   margin: .3rem;
   text-decoration: none;
-  color:  rgb(51, 61, 41);
+  color: rgb(51, 61, 41);
   font-weight: 500;
 }
 
@@ -47,30 +45,41 @@ code {
 
 .searchBar {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  margin: 5rem 1rem 0 1rem;
-  width: 90%;
+  margin: 4.5rem 0 0;
+  width: 80vw;
+  flex-direction: row-reverse;
+  justify-content: center;
 }
+
+.searchBar>form {
+  width: fit-content;
+}
+
 
 .searchBar input {
   text-align: center;
-  height: 1.5rem;
-  border: 1px solid;
-  border-radius: 2%/20%;
-  width: 99%;
+  width: 25rem;
+  height: 1.8rem;
+  border: .1rem solid rgb(1, 29, 4);
+  border-radius: 5px;
+  color: rgb(240, 239, 225);
+  background-color: rgb(51, 61, 41);
+}
+.searchBar input::placeholder {
+  color: rgba(164, 172, 134, 0.9);
 }
 
 .hideSorting {
-    margin: .5rem;
-    border: .1rem solid;
-    border-radius: 3% / 20%;
-    color: rgb(51, 61, 41);
-  }
-
-/* .searchInput {
-  width:90%
-} */
+  font-family: 'Baloo 2', sans-serif;
+  align-items: center;
+  font-size: 1rem;
+  margin: .5rem;
+  border: .1rem solid rgb(1, 29, 4);
+  border-radius: 5px;
+  color: rgb(240, 239, 225);
+  background-color: rgb(51, 61, 41);
+}
 
 .activityBar {
   border-top: .2rem solid black;
@@ -78,7 +87,7 @@ code {
   display: flex;
   justify-content: center;
   width: 100vw;
-  height: 3rem; 
+  height: 3rem;
 }
 
 .activityIcon {
@@ -89,14 +98,14 @@ code {
 }
 
 .activityButton {
-  border: none; 
+  border: none;
   background-color: rgba(173, 180, 147, 0);
   margin-top: 0;
   margin-bottom: 0;
 }
 
 .activityButton:active {
-  transform: scale(0.9); 
+  transform: scale(0.9);
 }
 
 .activityIcon img {
@@ -106,7 +115,7 @@ code {
 
 .activityText {
   font-size: .6rem;
-  margin:0;
+  margin: 0;
   margin-bottom: .2rem;
 }
 
@@ -130,13 +139,12 @@ code {
   font-weight: 500;
   width: 2rem;
   margin: 0;
-  /* box-shadow: 1px 1px 5px rgba(254, 254, 254, 0.5);  */
   border-radius: 10%/20%;
   text-align: center;
 }
 
 .stateButton:active {
-  transform: scale(0.9); 
+  transform: scale(0.9);
 }
 
 .parkImage {
@@ -165,21 +173,21 @@ code {
   text-align: left;
   width: 100%;
   max-height: 40%;
-  /* background-color: rgba(0, 0, 0, .5); */
   background-color: rgba(101, 109, 74, 0.5);
   border-bottom-left-radius: 6% 35%;
   border-bottom-right-radius: 6% 35%;
 }
 
 .parkName {
-  margin: .2rem .7rem 0 .9rem; 
-  font-size: .8rem; 
+  margin: .2rem .7rem 0 .9rem;
+  font-size: .8rem;
   color: white;
   font-weight: 500;
 }
+
 .parkLocation {
-  margin: 0 .5rem .3rem .9rem; 
-  font-size: .7rem; 
+  margin: 0 .5rem .3rem .9rem;
+  font-size: .7rem;
   color: white;
 }
 
@@ -195,7 +203,7 @@ code {
   align-items: flex-end;
   justify-content: space-between;
   display: flex;
-  border:  none;
+  border: none;
   margin: .4rem 0.25rem;
   padding: 0;
   width: 90%;
@@ -213,6 +221,7 @@ code {
   width: 1.5rem;
   margin: .7rem .7rem;
 }
+
 .tileRemoveDestination {
   border: none;
   background-image: url(./media/heart-clicked.png);
@@ -223,7 +232,7 @@ code {
   margin: .7rem .7rem;
 }
 
-.tileAddExperience{
+.tileAddExperience {
   border: none;
   background-image: url(https://ucarecdn.com/e8ede673-cced-4a2a-a020-941e395828ff/Untitleddesign9.svg);
   background-size: cover;
@@ -243,7 +252,7 @@ code {
   border-bottom: .1rem solid;
   position: fixed;
   z-index: 10;
-  background-color: rgba(164, 172, 134, 1) ;
+  background-color: rgba(164, 172, 134, 1);
 }
 
 .bar {
@@ -254,9 +263,9 @@ code {
 }
 
 .header p {
-  font-size: 2rem; 
-  font-weight: bold; 
-  color:  rgb(51, 61, 41);
+  font-size: 2rem;
+  font-weight: bold;
+  color: rgb(51, 61, 41);
   padding: 0;
   margin: 0;
 }
@@ -265,16 +274,19 @@ code {
   display: none
 }
 
+.logoContainer {
+  width: 50%;
+}
 
 
-.footer > footer {
+.footer>footer {
   display: flex;
   justify-content: space-around;
 }
 
 .main-content {
   margin-bottom: 4rem;
- 
+
 }
 
 
@@ -293,7 +305,7 @@ code {
   margin-bottom: 1.5rem;
 }
 
-.sizingBox{
+.sizingBox {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -324,7 +336,7 @@ code {
 
 .detailName {
   padding: .4rem 0;
-  background-color:  rgb(51, 61, 41);
+  background-color: rgb(51, 61, 41);
   color: white;
   border-radius: 3%/13%;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
@@ -335,7 +347,7 @@ code {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width:90%;
+  width: 90%;
   height: 4rem;
   margin: 0 auto
 }
@@ -351,7 +363,7 @@ code {
 }
 
 .addedText {
-  padding:0;
+  padding: 0;
   margin: .48rem
 }
 
@@ -379,7 +391,7 @@ code {
   height: 15rem;
   border: none;
   border-radius: 3%/5%;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7); 
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
 }
 
 .carouselImageContainer {
@@ -388,7 +400,7 @@ code {
   justify-content: center;
   width: 100%;
   height: 20rem;
- 
+
 }
 
 /* .carouselImage {
@@ -414,7 +426,7 @@ code {
 
 
 /* media queries for the parks home page */
-@media (min-width: 91.8rem){
+@media (min-width: 91.8rem) {
 
   .carouselHead {
     width: 90rem;
@@ -425,22 +437,17 @@ code {
   }
 
   .largeHeader {
-    display:flex;
+    display: flex;
     justify-content: space-between;
     width: 90rem;
     height: 4rem;
   }
 
   .menu {
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: flex-end;
-    width:50%
-  }
-
-  .navIcon {
-    margin: 1rem 1rem;
-    font-size: 1.2rem;
+    width: 50%
   }
 
 }
@@ -452,7 +459,7 @@ code {
   }
 
   .bar {
-    display:none
+    display: none
   }
 
   .largeHeader {
@@ -463,16 +470,11 @@ code {
   }
 
   .menu {
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: flex-end;
-    width:50%
+    width: 50%
   }
-
-  /* .navIcon {
-    margin: 1rem 1rem;
-    font-size: 1.2rem;
-  } */
 
 }
 
@@ -499,7 +501,7 @@ code {
     background-color: rgb(240, 239, 225);
     border-radius: 5%/3%;
     margin: 1rem;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7); 
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
   }
 
   .carouselContainer {
@@ -523,21 +525,26 @@ code {
 @media (min-width: 32rem) {
 
   .parkContainer {
-    width: 30rem; 
+    width: 30rem;
   }
 
   .searchBar input {
     width: 30rem;
   }
 
+  .searchBar>form>input {
+    width: 24rem;
+  }
+
   .tileAddDestination {
     margin: .7rem 1rem;
   }
+
   .tileRemoveDestination {
     margin: .7rem 1rem;
   }
 
-  .sizingBox{
+  .sizingBox {
     margin-top: 5.5rem;
   }
 
@@ -546,10 +553,10 @@ code {
 
 /* carousel */
 
-.react-multiple-carousel__arrow.react-multiple-carousel__arrow--left { 
+.react-multiple-carousel__arrow.react-multiple-carousel__arrow--left {
   min-width: 1.5rem;
   min-height: 1.5rem;
-  left: .01rem; 
+  left: .01rem;
   z-index: 1;
 }
 
@@ -559,22 +566,6 @@ code {
   right: .01rem;
   z-index: 1;
 }
-
-
-/* -webkit-font-smoothing: antialiased;
-position: absolute;
-outline: 0;
-transition: all .5s;
-border-radius: 35px;
-z-index: 1000;
-background: rgba(0,0,0,0.5);
-min-width: 43px;
-min-height: 43px;
-opacity: 1;
-cursor: pointer;
-left: calc(4% + 1px);
-border: solid red; */
-
 
 /* hamburger */
 .hamburger-react {

@@ -70,7 +70,7 @@ code {
 }
 .searchBar input::placeholder {
   color: rgba(164, 172, 134, 0.9);
-  font-size: 1.3rem;
+  font-size: 1rem;
 }
 
 .hideSorting {

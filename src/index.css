@@ -375,11 +375,6 @@ code {
   margin-top: 0;
 }
 
-/* .parkDetailText {
-  margin-top: 0;
-  padding-top: 0;
-} */
-
 .carouselContainer {
   display: flex;
   flex-direction: column;
@@ -403,13 +398,6 @@ code {
 
 }
 
-/* .carouselImage {
-  max-height: 30rem;
-  width: 100%;
-  object-fit: fill;
-  object-position: top; 
-} */
-
 .detailCarousel {
   width: 100%;
   border-radius: 3%/5%;
@@ -421,13 +409,10 @@ code {
   width: 90vw
 }
 
-/* Destintion styles */
-
-
+/* Destination styles */
 
 /* media queries for the parks home page */
 @media (min-width: 91.8rem) {
-
   .carouselHead {
     width: 90rem;
   }
@@ -449,7 +434,6 @@ code {
     justify-content: flex-end;
     width: 50%
   }
-
 }
 
 @media (min-width: 60rem) and (max-width: 92rem) {
@@ -468,17 +452,14 @@ code {
     width: 60rem;
     height: 4rem;
   }
-
+  
   .menu {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     width: 50%
-  }
-
+  }  
 }
-
-
 @media (min-width: 33rem) and (max-width: 61rem) {
 
   .carouselHead {
@@ -489,10 +470,10 @@ code {
     width: 30rem;
     height: 4rem;
   }
-
+  .searchBar {
+  flex-direction: column-reverse;
+  }  
 }
-
-
 @media (min-width: 35rem) {
 
   .sizingBox {
@@ -513,13 +494,9 @@ code {
   .parkDetailText {
     width: 90%
   }
-
-
   .detailName {
     padding: 1rem 0
   }
-
-
 }
 
 @media (min-width: 32rem) {
@@ -529,7 +506,7 @@ code {
   }
 
   .searchBar input {
-    width: 30rem;
+    width: 20rem;
   }
 
   .searchBar>form>input {
@@ -547,9 +524,39 @@ code {
   .sizingBox {
     margin-top: 5.5rem;
   }
-
 }
 
+@media (max-width: 530px) {
+  .searchBar {
+    flex-direction: column-reverse;
+    }  
+    .parkContainer {
+      width: 20rem;
+    }
+  
+    .searchBar input {
+      width: 15rem;
+    }
+  
+    .searchBar>form>input {
+      width: 20rem;
+    }
+  
+    .tileAddDestination {
+      margin: .7rem 1rem;
+    }
+  
+    .tileRemoveDestination {
+      margin: .7rem 1rem;
+    }
+  
+    .sizingBox {
+      margin-top: 5.5rem;
+    }
+    .navIcon > p{
+      font-size: 1.5rem;
+    }
+}
 
 /* carousel */
 

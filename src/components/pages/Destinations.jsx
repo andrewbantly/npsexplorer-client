@@ -8,35 +8,38 @@ const ParkContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   border: 7px solid #ccc;
-  margin: 1rem;
   padding: 0;
-  width: 90%;
+  margin: .5rem 1rem;
+  width: 100%;
   height: auto;
-  border-radius: 10px;
+  border-radius: 7%/5%;
   border: 0.1rem solid rgb(51, 61, 41);
   background-color: rgb(240, 239, 225) ;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 
   @media (max-width: 480px) {
-    width: 80vw;
+    width: 20rem;
   }
-  @media (min-width: 768px) {
-    max-width: 350px;  
+  @media (min-width: 480px) {
+    max-width: 20rem;  
 `;
 
 const DestinationsTitle = styled.h2`
-  margin-bottom: -0.4rem;
+  margin-top: 5.5rem;
+  margin-bottom: 1rem;
   text-align: center;
 `;
 
 const ButtonsContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-  width: 100%;
+  width: 90%;
   margin-top: -25px;
   margin-bottom: -30px;
-
+  background-color: grey
+  padding: 0;
   @media (max-width: 480px) {
     flex-direction: row;
   }
@@ -70,6 +73,7 @@ const MessageContainer = styled.div`
   align-items: center;
   flex-direction: column;
   height: 100%;
+  padding: 0
   font-weight: bold;
   color: maroon;
 `;
@@ -101,23 +105,23 @@ const ExperienceMessage = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: black;
   font: 15px; 
-  margin: 1.55rem 1rem;
+  margin: 1.25rem 1rem;
+
 `;
 
 const ParkImage = styled.img`
-    width: 90%;
+    width: 18rem;
+    height: 12rem;
     object-fit: cover;
     margin-bottom: 1rem; 
-    border-radius: 20px;
-    border: 1.5px solid rgb(51, 61, 41);
+    border-radius: 5%/7%;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); 
-
     @media (max-width: 480px) {
-    height: 60vw;
+    width: 90%;
     object-fit: cover;
     }
+  
 `;
 
 const ParkText = styled.div`
@@ -127,11 +131,10 @@ const ParkText = styled.div`
     justify-content: space-between;
     text-align: left;
     width: 90%;
-    padding: 0.1rem 0;
-    color: black;
+    height: 5rem;
+    padding: 0;
     font-family: 'Baloo 2', sans-serif;
-    margin: 0.1rem 0.5rem;
-    // border: 10px solid gray;
+    margin: 2rem 0.5rem;
 
 
 `;
@@ -140,7 +143,6 @@ const ParkGrid = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 0.1rem;
     max-width: 100%;
     // border: 10px solid orange;
 
@@ -149,9 +151,9 @@ const ParkGrid = styled.div`
         gap: 0.5rem;
   }
   @media (min-width: 32rem) {
-    flex-direction: row;
+    justify-content:space-between
     flex-wrap: wrap;
-    width: 30rem;
+    width: 100%;
 }
 `;
 
@@ -166,7 +168,6 @@ const ImageAndButtons = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    // border: 10px solid purple;
 
 `;
 
@@ -175,29 +176,33 @@ const DestinationsContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-items: center;
-    margin: 0.5rem auto 0;
+    margin: 0 auto 0;
     width: 90%;
-    // border: 10px solid lime;
+    
 
 
 `;
 
 const HeaderLocationContainer = styled.div`
-    text-align: center;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
     line-height: 1;
     width: 90%;
+    height: 4rem;
     padding: 0.3rem 0;
     background: rgb(51, 61, 41);
-    border-radius: 8%/30%;
+    border-radius: 4%/15%;
     color: white;
     margin-bottom: 1.5rem;
     margin-top: 1.5rem;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    // border: 10px solid white;
+    border: solid red
 
 
-  h3 { 
-    margin: 0.3rem;
+  p { 
+    margin: 0.3rem .5rem 0 .5rem;
+ 
   }
   p {
     font-size: 16px;
@@ -290,7 +295,7 @@ const DestinationsPage = (props) => {
     const handleExperienceButtonClick = (event, park) => {
         event.stopPropagation();
         handleAddExperienceClick(park);
-        setExperienceMessage(`${park.fullName} was added to experience`);
+        setExperienceMessage(`An experience was added to your profile`);
         setShowText(true);
         setTimeout(() => {
             setShowText(false);
@@ -326,7 +331,7 @@ const DestinationsPage = (props) => {
         return (
             <ParkContainer key={destination}>
                 <HeaderLocationContainer>
-                    <h3>{park?.fullName}</h3>
+                    <p className='parkTitle'>{park?.fullName}</p>
                     <p>
                         {park?.addresses[0]?.city}, {park?.addresses[0]?.stateCode}
                     </p>
@@ -379,7 +384,7 @@ const DestinationsPage = (props) => {
 
     return (
         <DestinationsContainer>
-            <DestinationsTitle>User Destinations</DestinationsTitle>
+            <DestinationsTitle>Your Saved Destinations</DestinationsTitle>
             {userDestinations.length === 0 && (
                 <NoDestinationsMessage>
                     You have no destinations! Go and explore!

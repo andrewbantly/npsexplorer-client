@@ -10,21 +10,19 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: calc(100vh - 2rem);
+  height: 100vh;
   background-image: url("https://www.nps.gov/common/uploads/structured_data/49F34094-B893-7DD6-5AE0F0220724B0EF.jpg");
   background-size: cover;
   background-position: center;
-  padding: 1rem;
-  box-sizing: border-box;
-  position: relative;
+  
+
+
 `;
 
 const Title = styled.h1`
   font-size: 32px;
   font-weight: 700;
   color: #484848;
-  position: absolute;
-  top: 1rem;
 `;
 
 const ErrorMessage = styled.p`
@@ -79,6 +77,7 @@ const ContentWrapper = styled.div`
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.9);
+  width: 20rem
 `;
 
 const LoginLink = styled(Link)`
@@ -147,7 +146,6 @@ export default function SignUp({ currentUser, setCurrentUser }) {
 					<Input
 						type="text"
 						id="name"
-						placeholder='Enter your username...'
 						onChange={e => setName(e.target.value)}
 						value={name}
 					/>
@@ -156,7 +154,6 @@ export default function SignUp({ currentUser, setCurrentUser }) {
 					<Input
 						type="email"
 						id="email"
-						placeholder='Enter your email...'
 						onChange={e => setEmail(e.target.value)}
 						value={email}
 					/>
@@ -165,7 +162,6 @@ export default function SignUp({ currentUser, setCurrentUser }) {
 					<Input
 						type="password"
 						id="password"
-						placeholder='Enter your password...'
 						onChange={e => setPassword(e.target.value)}
 						value={password}
 					/>

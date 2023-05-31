@@ -9,14 +9,16 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: spaced-evenly;
+  justify-content: center;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   background-image: url("https://www.nps.gov/common/uploads/structured_data/68BFC1AC-BF96-629F-89D261D78F181C64.jpg");
   background-size: cover;
   background-position: center;
   padding: 1rem;
   box-sizing: border-box;
+
+ 
 
   @media screen and (max-width: 60rem) {
     padding: 1rem;
@@ -71,7 +73,7 @@ const Input = styled.input`
   padding: 12px 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin-bottom: 30px;
+  margin-bottom: 1rem;
   outline: none;
   &:focus {
     border-color: #008489;
@@ -99,6 +101,7 @@ const ContentWrapper = styled.div`
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.9);
+  width:20rem;
 `;
 
 const RegisterLink = styled(Link)`
@@ -158,7 +161,6 @@ export default function Login({ currentUser, setCurrentUser }) {
           <Input
             type='email'
             id='email'
-            placeholder='Enter your email...'
             onChange={e => setEmail(e.target.value)}
             value={email}
           />
@@ -166,7 +168,6 @@ export default function Login({ currentUser, setCurrentUser }) {
           <Input
             type='password'
             id='password'
-            placeholder='Enter your password...'
             onChange={e => setPassword(e.target.value)}
             value={password}
           />

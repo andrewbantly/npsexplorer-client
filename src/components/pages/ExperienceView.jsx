@@ -51,7 +51,7 @@ export default function ExperienceView(props) {
     )
 
     const showExperience = (
-        <>
+        <div className="experienceViewContainer">
             <div onClick={() => {props.setShowExperience(false)}} className="backButton">
                 <img src={require("../../media/backButton.png")}
                     className='backButtonImg'></img>
@@ -61,6 +61,7 @@ export default function ExperienceView(props) {
             />
             {showExperienceDescription ? experienceDescription : noExperienceDescription}
             <div className="experienceViewButtonsContainer">
+                <div className="buttons">
                 <div className="deleteButton" onClick={() => props.handleDeleteClick(experienceDetails)}>
                     <img src={require("../../media/delete.png")}
                         className='deleteButtonImg'></img>
@@ -68,8 +69,13 @@ export default function ExperienceView(props) {
                 <div className="editButton" onClick={() => setShowEditForm(true)}>
                     <img className="editButtonImg" src={require("../../media/edit.png")}></img>
                 </div>
+                </div>
+                <div onClick={() => {props.setShowExperience(false)}} className="editButton">
+                <img src={require("../../media/backButton.png")}
+                    className='backButtonImg'></img>
+                </div>
             </div>
-        </>
+        </div>
     )
 
     const editExperience = (

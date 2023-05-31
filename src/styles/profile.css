@@ -5,13 +5,17 @@ body {
     /* font-family: 'Lilita One', cursive; */
 }
 
+.profileView {
+    margin-top: 0;
+    border: solid rgba(164, 172, 134, 0.9)
+}
+
 .profileHeader {
     display: flex;
-    margin: 1rem auto 1rem;
-    background-color: rgb(101, 109, 74);
+    margin: 6rem auto 1rem;
+    background-color: rgb(240, 239, 225);
     border-radius: 10px;
-    border: 2px solid rgb(51, 61, 41);
-    box-shadow: 0 0 3px rgb(13, 16, 10);
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, .9);
     align-items: center;
     width: 90%;
 }
@@ -22,7 +26,7 @@ body {
 
 .profileName {
     margin: 0 1rem;
-    color: rgb(194, 197, 170)
+    color: rgb(51, 61, 41)
 }
 
 .profileHeaderRight {
@@ -40,13 +44,13 @@ body {
 }
 
 .vistType {
-    color: rgb(194, 197, 170);
+    color: rgb(51, 61, 41);
     font-size: 1.5rem;
     text-align: left;
 }
 
 .vistCount {
-    color: rgb(194, 197, 170);
+    color: rgb(51, 61, 41);
     font-size: 2rem;
 
 }
@@ -60,7 +64,7 @@ body {
 }
 
 .lineBreak {
-    border: 1px solid rgb(51, 61, 41, 0.7);
+    border: 1px solid rgb(51, 61, 41);
     border-radius: 3px;
     width: 100%;
 }
@@ -68,7 +72,7 @@ body {
 .logoutContainer {
     position: relative;
     width: 90%;
-    margin: 0.5rem auto 0;
+    margin: 1rem ;
     display: flex;
     flex-direction: row-reverse;
 }
@@ -85,7 +89,7 @@ body {
 }
 
 .logoutText {
-    color: rgba(51, 61, 41, 0.8);
+    color: rgb(51, 61, 41);
     margin: 0;
     font-size: 1rem;
     font-weight: 600;
@@ -104,7 +108,7 @@ body {
 .experienceCard {
     margin: 1rem auto;
     /* background-color: rgb(200, 194, 172); */
-    background-color: rgb(182, 173, 144);
+    background-color: rgb(240, 239, 225);
     border-radius: 10px;
     border: 1.5px solid rgb(51, 61, 41);
     box-shadow: 0 0 3px rgb(51, 61, 41);
@@ -114,7 +118,7 @@ body {
 }
 
 .experienceText {
-    color: rgb(1, 29, 4);
+    color: rgb(51, 61, 41);
     font-weight: 600;
     margin: 0 auto;
     width: 70%;
@@ -136,7 +140,7 @@ body {
 }
 
 .editProfileImageTxt {
-    color: rgb(194, 197, 170);
+    color: rgb(51, 61, 41);
     margin: 0;
     padding: 0.4em 0;
     font-weight: 500;

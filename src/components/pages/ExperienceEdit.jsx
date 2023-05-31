@@ -25,7 +25,7 @@ export default function ExperienceEdit(props) {
     }, [])
 
     return (
-        <>
+        <div className="experienceViewContainer">
             <div onClick={() => props.setShowEditForm(false)} className="backButton">
                 <img src={require("../../media/backButton.png")}
                     className='backButtonImg'></img>
@@ -60,6 +60,6 @@ export default function ExperienceEdit(props) {
             </div>
             <div>
             </div>
-        </>
+        </div>
     )
 }

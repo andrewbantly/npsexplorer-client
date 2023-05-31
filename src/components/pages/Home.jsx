@@ -11,6 +11,7 @@ import usStateCodes from "../../usStatesArray";
 
 export default function Home(props) {
   const [message, setMessage] = useState('');
+  const [hideCarousel, setHideCarousel] = useState(false)
   const { parksInfo, 
           handleAddDestinationClick,
           userDestinations,
@@ -218,10 +219,12 @@ const handleActivity = (activityName) => {
               <input
                 className="searchInput"
                 id="name"
-                placeholder="Search for a park or sort by state/activity"
+                placeholder="Search for a park by name"
                 onChange={debouncedHandleSearch}
               />
             </form>
+            <button onClick={() =>!hideCarousel ? setHideCarousel(!hideCarousel): setHideCarousel(!hideCarousel)} className='hideSorting'>{!hideCarousel ? "Sort by state or activity" : "Hide Filter"}</button>
+            {!hideCarousel?  <></> :
             <div className='carouselHead'>
             <div>  
             <Carousel
@@ -250,7 +253,7 @@ const handleActivity = (activityName) => {
               {listActivities}
             </Carousel>
           </div>
-          </div>
+          </div> }
         </div>
         <div className="parkBox">
           {renderDisplayedParks()}

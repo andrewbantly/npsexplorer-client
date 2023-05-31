@@ -12,6 +12,7 @@ import usStateCodes from "../../usStatesArray";
 export default function Home(props) {
   const [message, setMessage] = useState('');
   const [hideCarousel, setHideCarousel] = useState(false)
+  const [clearSearch, setClearSearch] = useState(false)
   const { parksInfo,
     handleAddDestinationClick,
     userDestinations,
@@ -46,6 +47,7 @@ export default function Home(props) {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    setClearSearch(true)
     const input = e.target.value;
     const searchPark = parksInfo.reduce((acc, park, index) => {
       if (park.fullName.toLowerCase().includes(input.toLowerCase())) {
@@ -55,11 +57,10 @@ export default function Home(props) {
     }, []);
     // setFoundParks(searchPark);
     setDisplayedParks(searchPark);
-    console.log(currentUser) // Updated this line
   };
 
   const debouncedHandleSearch = debounce(handleSearch, 400);
-  // when the usewr clicks the search button this sends the user to the search results page along with an object that we use to reference and render a response. to use this on the next page we need to install the useLocation hook. Note state IS NOT taco
+  // when the user clicks the search button this sends the user to the search results page along with an object that we use to reference and render a response. to use this on the next page we need to install the useLocation hook. Note state IS NOT taco
 
   const handleActivity = (activityName) => {
     // Filter the parks that have the specified activity
@@ -209,51 +210,74 @@ export default function Home(props) {
     }
   };
 
+  const clearSearchClick = clearSearch => {
+    if (clearSearch === true) {
+      setClearSearch(!clearSearch);
+      const formInput = document.querySelector("#name");
+      formInput.value = "";
+    }
+    if (!parksInfo || parksInfo.length === 0) return;
+    // creates a random array from parks info with a max length of 24
+    const generateRandomParks = () => {
+      return Array.from({ length: 25 }, () => {
+        const random = Math.floor(Math.random() * 469);
+        return { park: parksInfo[random], originalIndex: random };
+      });
+    };
+
+    setDisplayedParks(generateRandomParks());
+  }
+
 
 
   return (
     <div className="container">
       {/* Carousel for states */}
       <div className="searchBar">
-        <button onClick={() => !hideCarousel ? setHideCarousel(!hideCarousel) : setHideCarousel(!hideCarousel)} className='hideSorting'>{!hideCarousel ? "Find Parks" : "Hide Filter"}</button>
-        <form onSubmit={(e) => e.preventDefault()}>
-          <input
-            className="searchInput"
-            id="name"
-            placeholder="Search for a National Park or activity"
-            onChange={debouncedHandleSearch}
-          />
-        </form>
-        {!hideCarousel ? <></> :
-          <div className='carouselHead'>
-            <div>
-              <Carousel
-                responsive={responsiveStates}
-                centerMode={true}
-                arrows={true}
-                containerClass="carousel"
-                infinite={true}
-                swipeable={true}
-                removeArrowOnDeviceType="mobile"
-              >
-                {usState}
-              </Carousel>
-            </div>
-            {/* Carousel for activities */}
-            <div>
-              <Carousel
-                responsive={responsiveStates}
-                centerMode={true}
-                arrows={true}
-                containerClass="carousel"
-                infinite={true}
-                swipeable={true}
-                removeArrowOnDeviceType='mobile'
-              >
-                {listActivities}
-              </Carousel>
-            </div>
-          </div>}
+        <div className="filterSearch">
+          {!hideCarousel ? <></> :
+            <div className='carouselHead'>
+              <div>
+                <Carousel
+                  responsive={responsiveStates}
+                  centerMode={true}
+                  arrows={true}
+                  containerClass="carousel"
+                  infinite={true}
+                  swipeable={true}
+                  removeArrowOnDeviceType="mobile"
+                >
+                  {usState}
+                </Carousel>
+              </div>
+              {/* Carousel for activities */}
+              <div>
+                <Carousel
+                  responsive={responsiveStates}
+                  centerMode={true}
+                  arrows={true}
+                  containerClass="carousel"
+                  infinite={true}
+                  swipeable={true}
+                  removeArrowOnDeviceType='mobile'
+                >
+                  {listActivities}
+                </Carousel>
+              </div>
+            </div>}
+          <button onClick={() => !hideCarousel ? setHideCarousel(!hideCarousel) : setHideCarousel(!hideCarousel)} className='hideSorting'>{!hideCarousel ? "Filter Parks by State or Activty" : "Hide Filter"}</button>
+        </div>
+        <div className="parkSearch">
+          <button onClick={() => clearSearchClick(clearSearch)} className='hideSorting'>{!clearSearch ? "Explore" : "Reset"}</button>
+          <form onSubmit={(e) => e.preventDefault()}>
+            <input
+              className="searchInput"
+              id="name"
+              placeholder="Search for a National Park"
+              onChange={debouncedHandleSearch}
+            />
+          </form>
+        </div>
       </div>
       <div className="parkBox">
         {renderDisplayedParks()}

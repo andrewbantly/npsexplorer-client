@@ -40,6 +40,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
+margin-top:0;
   font-size: 35px;
   font-weight: 700;
   color: #484848;
@@ -151,12 +152,12 @@ export default function Login({ currentUser, setCurrentUser }) {
   return (
     <Container>
 
-      <Title>Login</Title>
 
       <ContentWrapper>
         <ErrorMessage>{msg}</ErrorMessage>
 
         <Form onSubmit={handleSubmit}>
+          <Title>Login</Title>
           <Label htmlFor='email'>Email</Label>
           <Input
             type='email'

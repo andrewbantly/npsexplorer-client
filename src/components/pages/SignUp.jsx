@@ -20,6 +20,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
+  margin-top: 0;
   font-size: 32px;
   font-weight: 700;
   color: #484848;
@@ -135,13 +136,13 @@ export default function SignUp({ currentUser, setCurrentUser }) {
 
 	return (
 		<Container>
-			
-			<Title>Register</Title>
+
 
 			<ContentWrapper>
 				<ErrorMessage>{msg}</ErrorMessage>
 
 				<Form onSubmit={handleSubmit}>
+					<Title>Register</Title>
 					<Label htmlFor='name'>Name</Label>
 					<Input
 						type="text"

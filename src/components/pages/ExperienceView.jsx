@@ -89,7 +89,7 @@ export default function ExperienceView(props) {
 
     return (
         <div>
-            {!showEditForm ? showExperience : editExperience}
+            {showEditForm ? editExperience: showExperience}
         </div>
     )
 }

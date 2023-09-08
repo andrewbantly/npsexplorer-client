@@ -36,9 +36,7 @@ export default function Profile({ currentUser, handleLogout }) {
 
         fetchUserPhoto();
     }, []);
-
-    console.log(experiencesList)
-
+    
     // edited the upload care function to be a named function and binds it to the event listener, so when the file is uploaded the event is triggered and the file is passed.  The fileInfo.cdnUrl contains the uploaded file's URL. and the image is set to the state
     const initUploadcareWidget = () => {
         const widget = uploadcare.SingleWidget('#uploadcare-uploader');

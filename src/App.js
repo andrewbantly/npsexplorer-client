@@ -32,12 +32,6 @@ function App() {
         const response = await axios.get(
           `${process.env.REACT_APP_SERVER_URL}/api-v1/users/nps`
         );
-        // const response = await axios.get(
-        //   `https://developer.nps.gov/api/v1/parks?limit=469&api_key=${process.env.REACT_APP_NPS_API_KEY}`
-        // );
-
-
-        console.log(response.data);
         setParksInfo(response.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -61,20 +55,20 @@ function App() {
   // ****** i think this one needs to be rewritten to move the async into a named function. i think this is the one causing the error
   useEffect(() => {
     const findDestination = async () => {
-    try {
-      const token = localStorage.getItem('jwt')
-      const options = {
-        headers: {
-          'Authorization': token
+      try {
+        const token = localStorage.getItem('jwt')
+        const options = {
+          headers: {
+            'Authorization': token
+          }
         }
+        const foundDestinations = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations`, options)
+        setUserDestinations(foundDestinations.data)
+      } catch (error) {
+        console.log(error)
       }
-      const foundDestinations = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations`, options)
-      setUserDestinations(foundDestinations.data)
-    } catch (error) {
-      console.log(error)
     }
-  }
-  findDestination()
+    findDestination()
   }, [])
 
   // event handler to log the user out when needed
@@ -91,7 +85,6 @@ function App() {
 
   // ON CLICK ADD TO DESTINATIONS (page details, )
   const handleAddDestinationClick = async (park) => {
-    console.log(park)
     const parkId = { parkId: park.id };
     const token = localStorage.getItem('jwt');
     const options = {
@@ -124,40 +117,39 @@ function App() {
   // remove destination function
   const removeDestination = async (destinationId) => {
     try {
-        const token = localStorage.getItem('jwt');
-        const options = {
-            headers: {
-                'Authorization': token,
-            },
-        };
-        await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations/${destinationId}`, options);
-        console.log(destinationId)
-        const foundDestinations = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations`, options)
-        setUserDestinations(foundDestinations.data)
+      const token = localStorage.getItem('jwt');
+      const options = {
+        headers: {
+          'Authorization': token,
+        },
+      };
+      await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations/${destinationId}`, options);
+      const foundDestinations = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/destinations`, options)
+      setUserDestinations(foundDestinations.data)
 
-        setMessage('Destination removed from favorites');
+      setMessage('Destination removed from favorites');
     } catch (error) {
-        setMessage('Error removing destination from favorites');
+      setMessage('Error removing destination from favorites');
     }
-};
+  };
 
   return (
     <div className="App">
       <div className="content">
         <Router>
           <Layout
-          handleLogout={handleLogout}
-          currentUser={currentUser}
-          setCurrentUser={setCurrentUser}
+            handleLogout={handleLogout}
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
           >
             <Routes>
               <Route
                 path='/'
-                element={<Home parksInfo={parksInfo} 
-                handleAddDestinationClick={handleAddDestinationClick}
-                userDestinations={userDestinations}
-                removeDestination={removeDestination}
-                currentUser={currentUser}
+                element={<Home parksInfo={parksInfo}
+                  handleAddDestinationClick={handleAddDestinationClick}
+                  userDestinations={userDestinations}
+                  removeDestination={removeDestination}
+                  currentUser={currentUser}
                 />}
               />
               <Route
@@ -182,7 +174,8 @@ function App() {
               />
               <Route
                 path='/users/profile'
-                element={<Profile handleLogout={handleLogout} currentUser={currentUser} setCurrentUser={setCurrentUser}
+                element={<Profile handleLogout={handleLogout} currentUser={currentUser} 
+                setCurrentUser={setCurrentUser}
                 />}
               />
               <Route

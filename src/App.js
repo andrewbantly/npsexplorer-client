@@ -10,7 +10,6 @@ import axios from "axios"
 
 import './App.css';
 
-import Header from "./components/partials/Header"
 import Destinations from "./components/pages/Destinations"
 import Home from "./components/pages/Home"
 import Login from "./components/pages/Login"
@@ -18,8 +17,6 @@ import SignUp from "./components/pages/SignUp"
 import ParkDetails from "./components/pages/ParkDetails"
 import Profile from "./components/pages/Profile"
 import Layout from './components/partials/Layout'
-import { set } from 'mongoose';
-
 
 function App() {
   // the currently logged in user will be stored up here in state

@@ -41,10 +41,7 @@ export default function Home(props) {
     // we use parks info array here to have use effect run only once on load. the reason why parksInfo is in there is because incase the state is not ready we can load something
   }, [parksInfo]);
 
-
-
   //this piece watches for the user input on the form, and searches the state for parks related to the search, when it finds the stores the park into acc along with its original index 
-
   const handleSearch = (e) => {
     e.preventDefault();
     setClearSearch(true)
@@ -55,7 +52,6 @@ export default function Home(props) {
       }
       return acc;
     }, []);
-    // setFoundParks(searchPark);
     setDisplayedParks(searchPark);
   };
 
@@ -105,9 +101,8 @@ export default function Home(props) {
   }
 
 
-  // this is a functino to check if the user is on or not
+  // this is a function to check if the user is on or not
   const checkLoginStatusAndRedirect = () => {
-    console.log(currentUser)
     if (currentUser === null) {
       navigate('/users/login')
       return
